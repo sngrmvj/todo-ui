@@ -1,3 +1,7 @@
-<div style="background-color: yellowgreen;align-items: center;display: flex;">
-    <header style="font-size: 70px;display: block;align-items: center;">To-do Planner</header>
+<div class="app-splash-screen" [ngStyle]="{ left: windowWidth }" *ngIf="showSplash">
+    <div class="app-splash-inner">
+        <div class="app-logo"></div>
+        <div class="app-label">To-Do Planner</div>
+        <div class="app-loader"></div>
+    </div>
 </div>

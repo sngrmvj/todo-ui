@@ -1,0 +1,83 @@
+// // .navbar.transparent.navbar-inverse .navbar-inner {
+// //     border-width: 0px;
+// //     -webkit-box-shadow: 0px 0px;
+// //     box-shadow: 0px 0px;
+// //     background-color: rgba(0,0,0,0.0);
+// //     background-image: -webkit-gradient(linear, 50.00% 0.00%, 50.00% 100.00%, color-stop( 0% , rgba(0,0,0,0.00)),color-stop( 100% , rgba(0,0,0,0.00)));
+// //     background-image: -webkit-linear-gradient(270deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+// //     background-image: linear-gradient(180deg,rgba(0,0,0,0.00) 0%,rgba(0,0,0,0.00) 100%);
+// // }
+
+// .navbar{
+//     height: 80px;
+//     background-color: transparent;
+//     border: none;
+//     color: white;
+//     z-index: 100;
+//     transition: background-color 1s ease 0s;
+// }
+
+
+
+// .navbar-default {
+
+//     .navbar-brand {
+//         margin-top: 10px;
+//         color: white;
+            
+//         &:hover {
+//             color: #C57ED3;
+//             border: 1px solid #C57ED3;
+//         } 
+//     }
+    
+//     .navbar-nav {
+        
+//         > li {
+        
+//         > a {
+//             color: white;
+//             margin: 10px 5px 5px 5px;
+            
+//         }
+//         > a:hover, > a:active, > a:focus {
+//             color: #C57ED3;
+//             border: 1px solid #C57ED3;
+//         }
+//         > a:visited {
+//             color: #C57ED3;
+//             text-decoration: none;
+//         }
+    
+//         } //end li
+
+//         > .active {
+
+//             > a, > a:hover, > a:focus {
+//                 background-color: transparent;
+//                 color: #C57ED3;
+//             }    
+
+//         }
+
+//     } //end .navbar-nav
+
+//    //Collapsed styles
+//     .navbar-toggle {
+//         border-color: #C57ED3;
+
+//         &:hover, &:focus {
+//             background-color: #490D40;
+//         }
+//         .icon-bar {
+//             color: #C57ED3;
+//             background-color: #C57ED3;
+    
+//         }
+//     }
+    
+//     .navbar-collapse.collapse.in ul {
+//         background-color: #490D40;
+//     }
+        
+// } //end .navbar-default
