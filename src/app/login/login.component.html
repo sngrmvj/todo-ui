@@ -15,51 +15,107 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
-            <a class="nav-item nav-link active" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Login</a>
-            <a class="nav-item nav-link" [routerLink]="['/experience']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
+            <a class="nav-item nav-link active" style="background-color: #FF6363;color:white;border-radius: 2px;" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                Login
+            </a>
+            <a class="nav-item nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
         </div>
     </div>
 </nav>
 
 
-<!--  -->
-<!-- Login Page -->
-<!--  -->
-<div style="width:100%; display:flex;justify-content: center;">
-    <div style="display: flex;flex-direction: row;padding:40px;padding-top: 60px;">
-        <div>
-            <img src="../../assets/signin.svg" style="height: 500px;width: 500px;">
-        </div>
-    
-        <div style="display: flex;flex-direction: column;padding: 20px;padding-left: 100px;padding-top: 50px;">
-            <div style="font-variant: small-caps;display: block;width: 100%;">
-                <header style="font-size: 20px;">Sign In</header> <br>
-            </div>
-            
-            <form>
-                <div>
-                    <label>Email</label><br>
-                    <input type="email" name="email" ><br>
-                </div><br>
-                
-                <div>
-                    <label>Password</label><br>
-                    <input type="password" name="password" ><br>
-                </div><br>
 
-                <a style="text-decoration: none;" href="">Forgot Password?</a> <br><br>
-                <button type="submit" class="btn draw-border">Sign In</button>
-            </form><br>
+<!--  -->
+<!-- Login & Sign Up -->
+<!--  -->
 
+<div class="container">
+
+    <div [ngClass]="toggleProperty ? 'flipped' : ''"   class="card">
+
+        <!--  -->
+        <!-- Login Page -->
+        <!--  -->
+        <div class="front" style="display: flex;flex-direction: row;padding:40px;padding-top: 60px;">
             <div>
-                <a class="btn draw-border">Create an Account</a>
+                <img src="../../assets/signin.svg" style="height: 500px;width: 500px;">
             </div>
-
+        
+            <div style="display: flex;flex-direction: column;padding: 20px;padding-left: 100px;padding-top: 50px;">
+                <div style="font-variant: small-caps;display: block;width: 100%;">
+                    <header style="font-size: 20px;">Sign In</header> <br>
+                </div>
+                
+                <form>
+                    <div>
+                        <label for="signin-email">Email</label><br>
+                        <input type="email" id="signin-email" name="email" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                    </div><br>
+                    
+                    <div>
+                        <label for="signin-password">Password</label><br>
+                        <input type="password" id="signin-password" name="password" minlength="15" required><br>
+                    </div><br>
+    
+                    <a style="text-decoration: none;" href="">Forgot Password?</a> <br><br>
+                    <button type="submit" class="btn draw-border" *ngIf="toggleProperty === false">Login</button>
+                </form><br>
+    
+                <div>
+                    <label>Don't have an account?</label><br>
+                    <a class="btn draw-border" (click)="toggle()" *ngIf="toggleProperty === false">Create an Account</a>
+                </div>
+    
+            </div>
         </div>
+        <!-- End of Login Page  -->
+
+        <!--  -->
+        <!-- Sign Up -->
+        <!--  -->
+        <div class="back" style="display: flex;flex-direction: row;padding:40px;padding-top: 20px;margin-left: 120px;">
+            <div>
+                <img src="../../assets/signin.svg" style="height: 500px;width: 500px;">
+            </div>
+        
+            <div class="Sign-up">
+                <div style="font-variant: small-caps;display: block;width: 100%;">
+                    <header style="font-size: 20px;">Create Account</header> <br>
+                </div>
+                
+                <form>
+                    <div>
+                        <label for="fname">Firstname <b style="color:red">*</b></label><br>
+                        <input type="text" id="fname" name="Firstname" required autofocus minlength="4"><br>
+                    </div><br>
+                    <div>
+                        <label for="lname">Lastname <b style="color:red">*</b></label><br>
+                        <input type="text" id="lname" name="Lastname" required minlength="2"><br>
+                    </div><br>
+                    <div>
+                        <label for="signup-email">Email <b style="color:red">*</b></label><br>
+                        <input type="email" id="signup-email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                    </div><br>
+                    <div>
+                        <label for="signup-password">Password <b style="color:red">*</b></label><br>
+                        <input type="password" id="signup-password" name="password" required minlength="15"><br>
+                    </div><br>
+                    <div>
+                        <label for="signup-confirm-password">Confirm Password <b style="color:red">*</b></label><br>
+                        <input type="password" id="signup-confirm-password" name="confirm-password" required minlength="15" > <br>
+                    </div><br>
+                    <button type="submit" class="btn draw-border" [disabled]="isPasswordMatch" >Create Account</button>
+                </form><br>
+    
+                <div>
+                    <label>Already have account?</label><br>
+                    <a class="btn draw-border" (click)="toggle()">Sign In</a>
+                </div>
+    
+            </div>
+        </div>
+        <!-- End of Sign Up -->
     </div>
 </div>
 
 
-<!--  -->
-<!-- Sign Up -->
-<!--  -->

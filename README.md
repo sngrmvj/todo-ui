@@ -10,6 +10,7 @@
 
 ### Features
 - Splash screen
+- Password view while typing.
 - Login as it requires to monitor the items based on the user.
 - Page to enter the items for the planner initially. From next time we can use api store the items.
 - Connect to Flask application which stores item planners in the database.

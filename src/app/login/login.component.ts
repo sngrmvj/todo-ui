@@ -8,18 +8,19 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  ismyTextFieldType: boolean = false;
+  toggleProperty: boolean = false;
+  isPasswordMatch: boolean = false;
   
   constructor() { }
 
   ngOnInit(): void {
   }
+  
+  toggle(){
+    this.toggleProperty = !this.toggleProperty
+  }
 
-  signin: FormGroup = new FormGroup({
-    // email: new FormControl('', [Validators.email, Validators.required ]),
-    password: new FormControl('', [Validators.required, Validators.min(3) ])
-  });
+  
 
-  get passwordInput() { return this.signin.get('password'); } 
 
 }

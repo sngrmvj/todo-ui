@@ -1,0 +1,31 @@
+.error{
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background-image: url("../../assets/Error.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100%;
+}
+
+.navigate{
+    display: block;
+    width: fit-content;
+    padding: 10px 20px;
+    border: 1px solid #03989E;
+    color:#03989E;
+    position: absolute;
+    text-decoration: none;
+    border-radius: 2px;
+    margin-top: 495px;
+    margin-left: 157px;
+    transform: rotate(-1.5deg);
+}
+
+.navigate:hover{
+    background-color: #03989E;
+    color: white
+}
