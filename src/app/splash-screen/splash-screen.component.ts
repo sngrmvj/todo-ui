@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-splash-screen',
   templateUrl: './splash-screen.component.html',
-  styleUrls: ['./splash-screen.component.scss']
+  styleUrls: ['./splash-screen.component.scss'],
+  animations:[]
 })
 export class SplashScreenComponent implements OnInit {
 
