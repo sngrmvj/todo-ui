@@ -8,6 +8,7 @@ import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
+import { PlannersComponent } from './planners/planners.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AboutComponent } from './about/about.component';
     ErrorComponent,
     LoginComponent,
     MainComponent,
-    AboutComponent
+    AboutComponent,
+    PlannersComponent
   ],
   imports: [
     BrowserModule,

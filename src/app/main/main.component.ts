@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
+
+
+  isTokenValid: boolean = false
 
   ngOnInit(): void {
+  }
+
+  checkTokenValidity(){
+    return false
+  }
+
+  goTo(){
+
+    this.isTokenValid = this.checkTokenValidity()
+
+    if (this.isTokenValid === false){
+      this.router.navigate(['login'])
+    }
+    else{
+      this.router.navigate(['planners'])
+    }
+
   }
 
 }

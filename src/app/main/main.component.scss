@@ -4,9 +4,37 @@
 }
 
 .nav-item:hover{
-    background-color: dodgerblue;
+    background-color: #6C63FF;
     color: white !important; 
     border-radius: 2px ;
+}
+
+.start-now {
+    border: 2px solid #6C63FF;
+    display: block;
+    padding: 10px 20px;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.start-now:hover{
+    background-color: #6C63FF;
+    color: white;
+}
+
+.intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: start;
+    flex-direction: column;
+}
+
+.image{
+    // -webkit-box-shadow: 0 0 10px #222222;
+    //     box-shadow: 0 0 10px #222222;
+        
 }
 
 
