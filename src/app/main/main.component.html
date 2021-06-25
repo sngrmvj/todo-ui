@@ -1,38 +1,43 @@
 
 
-<!--  -->
-<!-- NAVBAR -->
-<!--  -->
-<nav class="navbar navbar-expand-lg navbar-light">
-    <img src="../../assets/to-do.png" style="margin-right: 10px;width:30px;height:30px;">
-    <a class="navbar-brand" style="font-size: 30px;" [routerLink]="['/to-do']">
-        
-        To Do Planner
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
-            <a class="nav-item nav-link" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Login</a>
-            <a class="nav-item nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
+
+<div class="background-setting">
+
+    <!--  -->
+    <!-- NAVBAR -->
+    <!--  -->
+    <nav class="navbar navbar-expand-lg navbar-light" >
+        <img src="../../assets/to-do-white.png" style="margin-right: 10px;width:30px;height:30px;">
+        <a class="navbar-brand" style="font-size: 30px;color: white;">
+            To Do Planner
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;color: white;">
+                <a style="color: white;" class="nav-item nav-link" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Login</a>
+                <a style="color: white;" class="nav-item nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
+            </div>
+        </div>
+    </nav>
+    
+    
+    <br>
+    <!--  -->
+    <!-- main  -->
+    <!--  -->
+    <div class="main-div">
+        <div class="intro">
+            <label style="font-size: 40px;">Planning made easier with To-Do Planner</label><br>
+            <label>
+                To-Do Planner is a multi-featured planner with daily refreshing to-do lists and general to-do lists. 
+                To-Do lists created under the daily section are refreshed at the start of the day automatically. 
+                While to-do lists created under general are normal and will not be refreshed daily. 
+                With a better User Interface, the tasks in the checklists can be easily managed.
+            </label><br>
+            <button class="start-now" (click)="goTo()">Start now</button>
         </div>
     </div>
-</nav>
 
-
-
-<!--  -->
-<!-- main  -->
-<!--  -->
-<div style="display: flex;flex-wrap: wrap;justify-content: center;flex-direction: row;">
-
-    <div class="intro">
-        <header>To-Do Planner</header>
-        <label>Planning made easier by creating daily tasks and normal tasks</label><br>
-        <button class="start-now" (click)="goTo()">Start now</button>
-    </div>
-    <div class="image">
-        <img src="../../assets/to-do-main.png" alt="to-do" style="width:700px;height:550px" >
-    </div>
 </div>
