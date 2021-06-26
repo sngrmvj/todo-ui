@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
 import { PlannersComponent } from './planners/planners.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { PlannersComponent } from './planners/planners.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatPasswordStrengthModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
