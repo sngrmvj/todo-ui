@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
 
   toggleProperty: boolean = false;
   isPasswordMatch: boolean = false;
+  hide:boolean = true;
   
   constructor() { }
 

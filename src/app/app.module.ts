@@ -10,7 +10,9 @@ import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
 import { PlannersComponent } from './planners/planners.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 @NgModule({
@@ -28,6 +30,8 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatIconModule,
     BrowserAnimationsModule,
     MatPasswordStrengthModule.forRoot()
   ],
