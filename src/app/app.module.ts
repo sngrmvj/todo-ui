@@ -12,6 +12,7 @@ import { PlannersComponent } from './planners/planners.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     BrowserModule,
     AppRoutingModule,
     MatFormFieldModule,
+    MatInputModule,
     MatCheckboxModule,
     MatIconModule,
     BrowserAnimationsModule,

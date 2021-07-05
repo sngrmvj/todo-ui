@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   }
   
   toggle(){
+    console.log(this.toggleProperty);
     this.toggleProperty = !this.toggleProperty
   }
 

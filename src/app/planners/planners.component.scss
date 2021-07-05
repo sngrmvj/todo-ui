@@ -1,0 +1,15 @@
+.nav-link:active {
+    background-color: #FF6363;
+    color: white;
+    border-radius: 2px ;
+}
+
+.nav-item{
+    margin-left: 20px;
+}
+
+.nav-item:hover{
+    background-color: #FF6363;
+    color: white !important; 
+    border-radius: 2px ;
+}

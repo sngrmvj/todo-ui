@@ -18,9 +18,11 @@
 }
 
 .nav-item:hover{
-    background-color: #6C63FF;
+    // background-color: #6C63FF;
     color: white !important; 
     border-radius: 2px ;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
 }
 
 .start-now {
@@ -28,14 +30,15 @@
     display: block;
     padding: 10px 20px;
     background-color: transparent;
-    border-radius: 1px;
+    border-radius: 5px;
     color: white;
 }
 
 .start-now:hover{
     background-color: white;
     color: #6C63FF;
-    border: none;
+    border: 1px solid white;
+    border-radius: 5px;
 }
 
 .intro{
@@ -47,14 +50,23 @@
     flex-direction: column;
 }
 
+.intro-text{
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    text-align: start;
+}
+
 .main-div{
     display: flex;
     flex-wrap: wrap;
-    width: 800px;
+    width: 700px;
     align-items: center;
     color: white;
-    margin-top: 150px;
+    border-radius: 10px;
     padding: 20px;
     margin-left: 20px;
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
 }
-

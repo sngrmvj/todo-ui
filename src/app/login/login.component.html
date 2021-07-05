@@ -52,7 +52,7 @@
                         <input type="email" id="signin-email" name="email" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
                     </div><br>
                     
-                    <div>
+                    <div *ngIf="toggleProperty === false">
                         <label for="signin-password" style="margin-bottom: -5px;">Password</label><br>
                         <mat-form-field [style.width.px]=320>
                             <input matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'" formControlName="password" required style="width: 300px !important;">
