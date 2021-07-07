@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   isPasswordMatch: boolean = false;
   hide:boolean = true;
   
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +23,9 @@ export class LoginComponent implements OnInit {
     this.toggleProperty = !this.toggleProperty
   }
 
+  signMeIn(){
+    this.router.navigate(['planners'])
+  }
   
 
 

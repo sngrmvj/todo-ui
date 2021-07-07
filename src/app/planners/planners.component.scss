@@ -1,3 +1,25 @@
+html {
+    --scrollbarBG: #CFD8DC;
+    --thumbBG: #90A4AE;
+}
+
+
+
+//   html {
+//     background: lightgrey;
+//     overflow: hidden;
+//   }
+//   body {
+//     height: 100vh;
+//     background: whitesmoke;
+//     overflow-y: auto;
+//     max-width: 310px;
+//     margin: 0 auto;
+//     padding: 2rem;
+//     font: 100%/1.4 serif;
+//     border: 1px solid rgba(0, 0, 0, 0.25)
+//   }
+
 .nav-link:active {
     background-color: #FF6363;
     color: white;
@@ -12,4 +34,72 @@
     background-color: #FF6363;
     color: white !important; 
     border-radius: 2px ;
+}
+
+.daily_div{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width:50%;
+    margin-right:20px;
+    height: 600px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 5px;
+
+}
+
+.daily_div .title{
+    display: block;
+    text-align: center;
+    width:100%;
+    padding:10px 15px;
+    color: white;
+    background-color: #2a2a72;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.daily_div .daily_checks{
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+    overflow-y: scroll;
+    padding:10px
+}
+
+.daily_div .daily_checks::-webkit-scrollbar {
+    width:11px;
+}
+
+.daily_div .daily_checks::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+
+.daily_div .daily_checks::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+
+.normal_div{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width:50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 5px;
+}
+
+.normal_div .title{
+    display: block;
+    text-align: center;
+    width:100%;
+    padding:10px 15px;
+    color: white;
+    background-color: #3bb78f;
+    background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);   
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;  
 }
