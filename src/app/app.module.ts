@@ -14,6 +14,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     LoginComponent,
     MainComponent,
     AboutComponent,
-    PlannersComponent
+    PlannersComponent,
+    ForgotpwdComponent
   ],
   imports: [
     BrowserModule,
