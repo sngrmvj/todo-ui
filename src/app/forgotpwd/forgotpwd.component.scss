@@ -2,7 +2,7 @@
 
 
 .nav-link:active {
-    background-color: dodgerblue;
+    background-color: #1B212C;
     color: white;
     border-radius: 2px ;
 }
@@ -12,7 +12,7 @@
 }
 
 .nav-item:hover{
-    background-color: dodgerblue;
+    background-color: #1B212C;
     color: white !important; 
     border-radius: 2px ;
 }
@@ -56,7 +56,7 @@
 .reset-button{
     width:100%;
     border: none;
-    background-color: dodgerblue;
+    background-color: #1B212C;
     padding: 10px 20px;
     color: white;
     border-radius: 5px;
@@ -75,7 +75,7 @@ input {
 
 input:focus {
     outline: 0;
-    border-bottom: 1px solid dodgerblue;
+    border-bottom: 1px solid #1B212C;
 }
 
 input::-webkit-outer-spin-button,
@@ -87,6 +87,6 @@ input::-webkit-inner-spin-button {
 label {
 
     font-size: 15px;
-    color: dodgerblue;
+    color: #1B212C;
     font-family: Arial, Helvetica, sans-serif;
 }

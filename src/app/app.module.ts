@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
 import { PlannersComponent } from './planners/planners.component';
@@ -32,6 +33,7 @@ import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
     AppRoutingModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
     MatCheckboxModule,
     MatIconModule,
     BrowserAnimationsModule,
