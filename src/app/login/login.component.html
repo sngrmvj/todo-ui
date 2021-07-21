@@ -54,8 +54,8 @@
                     
                     <div *ngIf="toggleProperty === false">
                         <label for="signin-password" style="margin-bottom: -5px;">Password</label><br>
-                        <mat-form-field [style.width.px]=320>
-                            <input matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'" formControlName="password" required style="width: 300px !important;">
+                        <mat-form-field style="cursor: pointer;width:320px">
+                            <input matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 300px !important;">
                             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </mat-form-field>
                     </div><br>
@@ -102,7 +102,7 @@
                     <div>
                         <label for="signup-password" style="margin-bottom: -5px;">Password <b style="color:red">*</b></label><br>
                         <mat-form-field style="width:320px;cursor: pointer;">
-                            <input matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'" formControlName="password" required style="width: 300px !important;">
+                            <input matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 300px !important;">
                             <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </mat-form-field>
                     </div><br>
@@ -123,5 +123,3 @@
         <!-- End of Sign Up -->
     </div>
 </div>
-
-

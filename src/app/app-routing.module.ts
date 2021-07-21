@@ -6,6 +6,7 @@ import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { PlannersComponent } from './planners/planners.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'forgotpwd',
     component: ForgotpwdComponent
+  },
+  {
+    path: 'reset',
+    component: ResetPasswordComponent
   },
   {
     path: 'to-do',

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
 import { PlannersComponent } from './planners/planners.component';
@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +27,13 @@ import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
     MainComponent,
     AboutComponent,
     PlannersComponent,
-    ForgotpwdComponent
+    ForgotpwdComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,

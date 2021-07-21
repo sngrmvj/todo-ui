@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgotpwd',
@@ -12,7 +13,7 @@ export class ForgotpwdComponent implements OnInit {
   validateOTP:string = "";
   
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -53,6 +54,8 @@ export class ForgotpwdComponent implements OnInit {
   validationOfOTP(){
     if (this.validateOTP){
       // Make an API call to the server 
+      // When it is success we navigate to reset
+      this.router.navigate(['reset'])
     }
   }
 
