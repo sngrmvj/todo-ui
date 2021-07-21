@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,7 +10,9 @@ export class ResetPasswordComponent implements OnInit {
 
   isPasswordMatch: boolean = false;
   hide:boolean = true;
-  constructor() { }
+
+  
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +21,7 @@ export class ResetPasswordComponent implements OnInit {
   onSubmit(){
     // API Call pass the refresh token so that it contains the DBID. 
     // It will be easy to update the password for the user using the user id
+    this.router.navigate(['login'])
   }
 
 }
