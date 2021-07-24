@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { catchError, tap } from "rxjs/operators";
+import { of, throwError, interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit{
   title = 'to-do-planner';
 
-  constructor(){
+  constructor(private http: HttpClient){
     
   }
 
@@ -31,9 +34,19 @@ export class AppComponent implements OnInit{
 
     localStorage.setItem("hitCounter", n);
 
+
     var hitCount = Number(n).valueOf();
     if ((hitCount % 50) == 0){
       // Collect IP Address and send that to authentication server
+      this.http.get<any>('https://geolocation-db.com/json/')
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }),
+        tap(response => {
+          console.log(response.IPv4);
+        })
+      )
     }
   }
 

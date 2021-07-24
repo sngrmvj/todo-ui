@@ -13,6 +13,7 @@ import { PlannersComponent } from './planners/planners.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
@@ -35,6 +36,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AppRoutingModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    HttpClientModule,
     MatInputModule,
     FormsModule,
     MatCheckboxModule,
