@@ -4,22 +4,6 @@ html {
 }
 
 
-
-//   html {
-//     background: lightgrey;
-//     overflow: hidden;
-//   }
-//   body {
-//     height: 100vh;
-//     background: whitesmoke;
-//     overflow-y: auto;
-//     max-width: 310px;
-//     margin: 0 auto;
-//     padding: 2rem;
-//     font: 100%/1.4 serif;
-//     border: 1px solid rgba(0, 0, 0, 0.25)
-//   }
-
 .nav-link:active {
     background-color: #FF6363;
     color: white;
@@ -105,4 +89,49 @@ html {
     background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);   
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;  
+}
+
+.normal_div .daily_checks{
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+    overflow-y: scroll;
+    padding:10px
+}
+
+.normal_div .daily_checks::-webkit-scrollbar {
+    width:11px;
+}
+
+.normal_div .daily_checks::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+
+.normal_div .daily_checks::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+
+.add-item{
+    border:none;
+    background-color: transparent;
+    display: block;
+    padding: 10px 20px;
+}
+
+.add-item:hover{
+    color: #F64B29;
+}
+
+.example-section {
+    margin: 12px 0;
+}
+
+.example-margin {
+    margin: 0 12px;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 4px;
 }
