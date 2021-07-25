@@ -15,7 +15,7 @@ html {
 }
 
 .nav-item:hover{
-    background-color: #FF6363;
+    background-color: purple;
     color: white !important; 
     border-radius: 2px ;
 }
@@ -85,8 +85,10 @@ html {
     width:100%;
     padding:10px 15px;
     color: white;
-    background-color: #3bb78f;
-    background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);   
+    // background-color: #3bb78f;
+    // background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%); 
+    background-color: #e0455f;
+    background-image: linear-gradient(147deg, #e0455f 0%, #44000b 74%);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;  
 }
@@ -116,11 +118,12 @@ html {
     border:none;
     background-color: transparent;
     display: block;
-    padding: 10px 20px;
+    padding: 2px 5px;
+    outline: transparent;
 }
 
 .add-item:hover{
-    color: #F64B29;
+    color: purple;
 }
 
 .example-section {

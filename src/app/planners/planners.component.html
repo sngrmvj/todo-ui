@@ -15,7 +15,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
-            <a class="nav-item nav-link active" style="background-color: #FF6363;color:white;border-radius: 2px;" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a class="nav-item nav-link active" style="background-color: purple;color:white;border-radius: 2px;" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                 Daily
             </a>
             <a class="nav-item nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">General</a>
@@ -36,6 +36,9 @@
             <header style="font-size: 20px;font-variant: small-caps;">Daily Tasks</header>
         </div>
         <div class="daily_checks">
+            <div *ngFor="let tasks of daily_tasks">
+                <mat-checkbox ><span style="color: black;">{{tasks}}</span></mat-checkbox>
+            </div>
             <button class="add-item"> <b>+</b> Add Item</button>
         </div>
     </div>
@@ -44,10 +47,8 @@
             <header style="font-size: 20px;font-variant: small-caps;">General Tasks</header>
         </div>
         <div class="daily_checks">
-            <div>
-                <mat-checkbox class = "example-margin" > 
-                    <b style="color:black">To Do Tasks</b>
-                </mat-checkbox>
+            <div *ngFor="let tasks of general_tasks">
+                <mat-checkbox><span style="color: black;">{{tasks}}</span></mat-checkbox>
             </div>
             <button class="add-item"> <b>+</b> Add Item</button>
         </div>

@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlannersComponent implements OnInit {
 
+  general_tasks:any = ['Tasks','Ready'];
+  daily_tasks:any = ['Milk','Eggs'];
+
   constructor() { }
 
   ngOnInit(): void {
