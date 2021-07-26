@@ -21,7 +21,7 @@
             <a class="nav-item nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">General</a>
         </div>
         <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
-            <a class="nav-item nav-link active">Dark Theme</a>
+            <a class="nav-item nav-link active" (click)="darkTheme()">Dark Theme</a>
             <a class="nav-item nav-link active">My Profile</a>
         </div>
     </div>

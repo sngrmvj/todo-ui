@@ -15,4 +15,8 @@ export class PlannersComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  darkTheme(){
+    //  Try to set the background color to one black color
+  }
+
 }
