@@ -36,8 +36,11 @@
             <header style="font-size: 20px;font-variant: small-caps;">Daily Tasks</header>
         </div>
         <div class="daily_checks">
-            <div *ngFor="let tasks of daily_tasks">
-                <mat-checkbox ><span style="color: black;">{{tasks}}</span></mat-checkbox>
+            <div *ngFor="let tasks of daily_tasks;let i=index" style="display: flex;flex-wrap: wrap;flex-direction: row;">
+                <mat-checkbox>
+                    <span #daily_task class="checkbox">{{tasks}}</span>
+                </mat-checkbox>
+                <span class="hide" (click)="delete('daily_tasks',i)"><b>✕</b></span>
             </div>
             <button class="add-item"> <b>+</b> Add Item</button>
         </div>
@@ -47,8 +50,11 @@
             <header style="font-size: 20px;font-variant: small-caps;">General Tasks</header>
         </div>
         <div class="daily_checks">
-            <div *ngFor="let tasks of general_tasks">
-                <mat-checkbox><span style="color: black;">{{tasks}}</span></mat-checkbox>
+            <div *ngFor="let tasks of general_tasks;let i=index" style="display: flex;flex-wrap: wrap;flex-direction: row;">
+                <mat-checkbox>
+                    <span class="checkbox">{{tasks}}</span>
+                </mat-checkbox>
+                <span class="hide" (click)="delete('general_tasks',i)"><b>✕</b></span>
             </div>
             <button class="add-item"> <b>+</b> Add Item</button>
         </div>

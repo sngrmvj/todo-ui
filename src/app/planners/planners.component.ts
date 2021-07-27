@@ -8,11 +8,22 @@ import { Component, OnInit } from '@angular/core';
 export class PlannersComponent implements OnInit {
 
   general_tasks:any = ['Tasks','Ready'];
-  daily_tasks:any = ['Milk','Eggs'];
+  daily_tasks:any = ['Milk','Eggs','Tablets'];
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  delete(value:string,index:number){
+    if (value === 'daily_tasks'){
+      this.daily_tasks.splice(index,1);
+      console.log(this.daily_tasks);
+    }
+    else{
+      this.general_tasks.splice(index,1);
+      console.log(this.general_tasks);
+    }
   }
 
   darkTheme(){
