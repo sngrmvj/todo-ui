@@ -40,7 +40,7 @@
                 <mat-checkbox>
                     <span #daily_task class="checkbox">{{tasks}}</span>
                 </mat-checkbox>
-                <span class="hide" (click)="delete('daily_tasks',i)"><b>✕</b></span>
+                <span class="hide" (click)="delete('daily_tasks',i)"><b>✖</b></span>
             </div>
             <button class="add-item"> <b>+</b> Add Item</button>
         </div>
@@ -54,7 +54,7 @@
                 <mat-checkbox>
                     <span class="checkbox">{{tasks}}</span>
                 </mat-checkbox>
-                <span class="hide" (click)="delete('general_tasks',i)"><b>✕</b></span>
+                <span class="hide" (click)="delete('general_tasks',i)"><b>✖</b></span>
             </div>
             <button class="add-item"> <b>+</b> Add Item</button>
         </div>
