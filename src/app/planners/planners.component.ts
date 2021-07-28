@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-planners',
@@ -24,10 +24,6 @@ export class PlannersComponent implements OnInit {
       this.general_tasks.splice(index,1);
       console.log(this.general_tasks);
     }
-  }
-
-  darkTheme(){
-    //  Try to set the background color to one black color
   }
 
 }
