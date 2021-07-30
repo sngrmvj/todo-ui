@@ -17,8 +17,8 @@ export class PlannersComponent implements OnInit {
 
   delete(value:string,index:number){
     if (value === 'daily_tasks'){
-      this.daily_tasks.splice(index,1);
-      console.log(this.daily_tasks);
+      let deleted_item = this.daily_tasks.splice(index,1);
+      // Add the APi call to it
     }
     else{
       this.general_tasks.splice(index,1);
