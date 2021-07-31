@@ -41,7 +41,15 @@
                 </mat-checkbox>
                 <span class="hide" (click)="delete('daily_tasks',i)"><b>✖</b></span>
             </div>
-            <button class="add-item"> <b>+</b> Add Item</button>
+            <div id="input-daily" class="input-daily" *ngIf="displayDailyInput">
+                <form #form="ngForm" (ngSubmit)="addtoDaily(form.value)">
+                    <mat-checkbox>
+                        <input type="text" autofocus autocomplete="off" name="taskItem" ngModel style="width: 250px;">
+                    </mat-checkbox>
+                    <span class="hide" (click)="closeDailyInputTask()"><b>✖</b></span>
+                </form>
+            </div>
+            <button class="add-item" (click)="showDailyTaskInput()"> <b>+</b> Add Item</button>
         </div>
     </div>
     <div class="normal_div">

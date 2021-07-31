@@ -7,6 +7,7 @@ import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 })
 export class PlannersComponent implements OnInit {
 
+  displayDailyInput: boolean = false;
   general_tasks:any = ['Tasks','Ready'];
   daily_tasks:any = ['Milk','Eggs','Tablets'];
 
@@ -24,6 +25,31 @@ export class PlannersComponent implements OnInit {
       this.general_tasks.splice(index,1);
       console.log(this.general_tasks);
     }
+  }
+
+
+
+
+
+
+  // =============
+  // Daily Tasks 
+  // =============
+  showDailyTaskInput(){
+    if (this.displayDailyInput === false){
+      this.displayDailyInput = true;
+    }
+  }
+
+  closeDailyInputTask(){
+    if (this.displayDailyInput === true){
+      this.displayDailyInput = false;
+    }
+  }
+
+  addtoDaily(value:any){
+    this.daily_tasks.push(value.taskItem);
+    this.displayDailyInput = false
   }
 
 }
