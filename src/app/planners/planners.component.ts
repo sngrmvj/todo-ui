@@ -1,5 +1,5 @@
 import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
-
+import { CronJob } from 'cron';
 @Component({
   selector: 'app-planners',
   templateUrl: './planners.component.html',
@@ -8,10 +8,26 @@ import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 export class PlannersComponent implements OnInit {
 
   displayDailyInput: boolean = false;
+  cronJob: CronJob;
   general_tasks:any = ['Tasks','Ready'];
   daily_tasks:any = ['Milk','Eggs','Tablets'];
 
-  constructor() { }
+  constructor() {
+    // For Every minute use all stars 
+    this.cronJob = new CronJob('0 0 * * * *', async () => {
+      try {
+        await this.refreshDailyTasks();
+      } catch (e) {
+        console.error(e);
+      }
+    });
+    
+    // Start job
+    if (!this.cronJob.running) {
+      this.cronJob.start();
+    }
+
+  }
 
   ngOnInit(): void {
   }
@@ -25,6 +41,10 @@ export class PlannersComponent implements OnInit {
       this.general_tasks.splice(index,1);
       console.log(this.general_tasks);
     }
+  }
+
+  async refreshDailyTasks() {
+    // Need to have an API Call here so that it fetches from the backend and adds up here
   }
 
 
