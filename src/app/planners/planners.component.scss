@@ -163,7 +163,6 @@ ul {
 input {
     font-size: 12px;
     border: 0;
-    border-bottom: 1.5px solid black;
     width: 80%;
     margin-right: 5px;
     -webkit-appearance: none;
@@ -175,5 +174,5 @@ input {
 
 input:focus {
     outline: 0;
-    border-bottom: 1.5px solid purple;
+    // border-bottom: 1.5px solid purple;
 }
