@@ -14,13 +14,13 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
+        <!-- <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
             <a class="nav-item nav-link active" style="background-color: purple;color:white;border-radius: 2px;" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                 Daily
             </a>
             <a class="nav-item nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">General</a>
-        </div>
-        <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
+        </div> -->
+        <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;cursor: pointer;">
             <a class="nav-item nav-link active">My Profile</a>
         </div>
     </div>
@@ -63,7 +63,15 @@
                 </mat-checkbox>
                 <span class="hide" (click)="delete('general_tasks',i)"><b>✖</b></span>
             </div>
-            <button class="add-item"> <b>+</b> Add Item</button>
+            <div id="general-daily" class="general-daily" *ngIf="displayGeneralInput">
+                <form #form="ngForm" (ngSubmit)="addtoGeneral(form.value)">
+                    <mat-checkbox>
+                        <input type="text" autofocus autocomplete="off" name="taskItem" ngModel style="width: 250px;">
+                    </mat-checkbox>
+                    <span class="hide" (click)="closeGeneralInputTask()"><b>✖</b></span>
+                </form>
+            </div>
+            <button class="add-item" (click)="showGeneralTaskInput()"> <b>+</b> Add Item</button>
         </div>
     </div>
 </div>

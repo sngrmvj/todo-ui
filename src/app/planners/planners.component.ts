@@ -8,6 +8,7 @@ import { CronJob } from 'cron';
 export class PlannersComponent implements OnInit {
 
   displayDailyInput: boolean = false;
+  displayGeneralInput: boolean = false;
   cronJob: CronJob;
   general_tasks:any = ['Tasks','Ready'];
   daily_tasks:any = ['Milk','Eggs','Tablets'];
@@ -70,6 +71,29 @@ export class PlannersComponent implements OnInit {
   addtoDaily(value:any){
     this.daily_tasks.push(value.taskItem);
     this.displayDailyInput = false
+  }
+
+
+
+  // =============
+  // General Tasks 
+  // =============
+
+  showGeneralTaskInput(){
+    if (this.displayGeneralInput === false){
+      this.displayGeneralInput = true;
+    }
+  }
+
+  addtoGeneral(value:any){
+    this.general_tasks.push(value.taskItem);
+    this.displayGeneralInput = false
+  }
+
+  closeGeneralInputTask(){
+    if (this.displayGeneralInput === true){
+      this.displayGeneralInput = false;
+    }
   }
 
 }
