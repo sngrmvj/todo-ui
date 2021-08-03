@@ -10,8 +10,8 @@ export class PlannersComponent implements OnInit {
   displayDailyInput: boolean = false;
   displayGeneralInput: boolean = false;
   cronJob: CronJob;
-  general_tasks:any = ['Tasks','Ready'];
-  daily_tasks:any = ['Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets','Milk','Eggs','Tablets',];
+  general_tasks:any = ['Tasks','Ready',];
+  daily_tasks:any = ['Milk','Eggs'];
 
   constructor() {
     // For Every minute use all stars 
