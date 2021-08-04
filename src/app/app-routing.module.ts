@@ -5,6 +5,7 @@ import { ErrorComponent } from './error/error.component';
 import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
 import { PlannersComponent } from './planners/planners.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'reset',
     component: ResetPasswordComponent
+  },
+  {
+    path: 'myprofile',
+    component: MyprofileComponent
   },
   {
     path: 'to-do',

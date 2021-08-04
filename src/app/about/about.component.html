@@ -3,8 +3,7 @@
 <!--  -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <img src="../../assets/to-do.png" style="margin-right: 10px;width:30px;height:30px;">
-    <a class="navbar-brand" style="font-size: 30px;" [routerLink]="['/to-do']">
-        
+    <a class="navbar-brand" style="font-size: 30px;" >
         To Do Planner
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,10 +11,63 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
-            <a class="nav-item nav-link active" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                Login
+            <a class="nav-item nav-link active" [routerLink]="['/planners']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                Tasks
             </a>
-            <a class="nav-item nav-link" style="background-color: #5F28A6;color:white;border-radius: 2px;" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
         </div>
     </div>
 </nav>
+
+
+<div  id="container" style="display: flex;flex-wrap: wrap;flex-direction: column;width:100%;height:100%;padding:50px;">
+    <div>
+        <div class="title">
+            <header style="font-size: 20px;font-variant: small-caps;">About the application</header>
+        </div>
+        <div style="display: flex;flex-wrap:wrap;flex-direction: row;">
+            <div style="padding:10px 20px;display: flex;flex-direction: column;flex-wrap: wrap;">
+                <header style="margin-left: -15px;"><b>Daily Tasks</b></header>
+                <ul>
+                    <li>Sometimes because of the busy schedule, we miss some of the tasks or forget daily.</li>
+                    <li>Daily Tasks helps you perform tasks without fail in your busy schedule.</li>
+                    <li>Users can create daily tasks which are to be performed daily.</li>
+                    <li>The tasks under daily tasks gets refreshed daily at 12 am.</li>
+                    <li>Unless deletion of the task, the tasks under daily tasks gets refreshed.</li>
+                    <li>User can Delete his/her tasks or Add tasks </li>
+                    <li>Examples -</li>
+                    <ol style="margin-left: 10px;">
+                        <li>Daily time sheet filling.</li>
+                        <li>Consuming milk/water.</li>
+                        <li>Doing exercises.</li>
+                        <li>Taking medicines, etc.</li>
+                    </ol>
+                </ul>
+            </div>
+            <div style="padding:10px 20px;margin-left:10px;display: flex;flex-direction: column;flex-wrap: wrap;">
+                <header style="margin-left: -15px;"><b>General Tasks</b></header>
+                <ul>
+                    <li>Sometimes because of the busy schedule, we miss some of the tasks or forget daily.</li>
+                    <li>Daily Tasks helps you perform tasks without fail in your busy schedule.</li>
+                    <li>Users can create daily tasks which are to be performed daily.</li>
+                    <li>The tasks under daily tasks gets refreshed daily at 12 am.</li>
+                    <li>Unless deletion of the task, the tasks under daily tasks gets refreshed.</li>
+                    <li>User can Delete his/her tasks or Add tasks </li>
+                    <li>Examples -</li>
+                    <ol style="margin-left: 10px;">
+                        <li>Daily time sheet filling.</li>
+                        <li>Consuming milk/water.</li>
+                        <li>Doing exercises.</li>
+                        <li>Taking medicines, etc.</li>
+                    </ol>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <div>
+        <div class="title">
+            <header style="font-size: 20px;font-variant: small-caps;">Tech Stack</header>
+        </div>
+    </div>
+</div>
