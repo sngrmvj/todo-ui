@@ -6,8 +6,7 @@
 <!--  -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <img src="../../assets/to-do.png" style="margin-right: 10px;width:30px;height:30px;">
-    <a class="navbar-brand" style="font-size: 30px;" [routerLink]="['/to-do']">
-        
+    <a class="navbar-brand" style="font-size: 30px;" >
         To Do Planner
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +21,7 @@
         </div> -->
         <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;cursor: pointer;">
             <a class="nav-item nav-link active">My Profile</a>
+            <a class="nav-item nav-link active" [routerLink]="['/about']">About</a>
         </div>
     </div>
 </nav>
