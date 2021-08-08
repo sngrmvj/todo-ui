@@ -99,28 +99,29 @@
     <br>
     <div class="card">
         <div class="title">
+            <header style="font-size: 20px;font-variant: small-caps;">Feedback</header>
+        </div>
+        <div style="display: flex;flex-wrap:wrap;flex-direction: column;padding: 10px;">
+            <header><b>Please provide feedback -</b></header><br>
+            <form #form="ngForm" (ngSubmit)="submitFeedback(form.value)">
+                <textarea name="feedback" ngModel placeholder="Type here !!" style="border-radius: 5px;width:500px;padding:10px">
+                </textarea><br><br>
+                <button class="feedback-button" type="submit">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="title">
             <header style="font-size: 20px;font-variant: small-caps;">Details</header>
         </div>
         <div style="display: flex;flex-wrap:wrap;flex-direction: column;padding: 10px;">
             <header><b>Developed by -</b></header>
             <label>Vijayasai S</label>
             <a class="contact-details" href="https://www.linkedin.com/in/vijayasaisanagaram/" target="_blank">
-                <img src="https://img.icons8.com/color/96/000000/linkedin.png" style="width:50px;height:50px"/>
+                <img src="https://img.icons8.com/color/96/000000/linkedin.png" style="width:40px;height:40px"/>
             </a>
         </div>
     </div>
     <br>
-    <div class="card">
-        <div class="title">
-            <header style="font-size: 20px;font-variant: small-caps;">Feedback</header>
-        </div>
-        <div style="display: flex;flex-wrap:wrap;flex-direction: column;padding: 10px;">
-            <header><b>Please provide feedback -</b></header><br>
-            <form #form="ngForm" (ngSubmit)="submitFeedback(form.value)">
-                <textarea name="feedback" ngModel placeholder="Type here !!" style="border-radius: 5px;width:400px;padding:10px">
-                </textarea><br>
-                <button class="feedback-button" type="submit">Submit Feedback</button>
-            </form>
-        </div>
-    </div>
 </div>
