@@ -17,14 +17,27 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  reactiveForm = new FormGroup({
+    firstname: new FormControl('', [Validators.required]),
+    lastname: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    confirm_password : new FormControl('')
+  })
   
   toggle(){
-    console.log(this.toggleProperty);
     this.toggleProperty = !this.toggleProperty
   }
 
-  signMeIn(){
+  signMeIn(signInItem:any){
+    console.log(signInItem.email);
+    console.log(signInItem.password)
     this.router.navigate(['planners'])
+  }
+
+  signMeUp(): void{
+    console.log('Firstname:' + this.reactiveForm.get('firstname')?.value);
   }
   
 

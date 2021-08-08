@@ -46,27 +46,30 @@
                     <header style="font-size: 20px;">Sign In</header> <br>
                 </div>
                 
-                <form>
+                <form #signInForm="ngForm" (ngSubmit)="signMeIn(signInForm.value)">
                     <div>
                         <label for="signin-email">Email</label><br>
-                        <input type="email" id="signin-email" name="email" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                        <input ngModel type="email" id="signin-email" name="email" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
                     </div><br>
                     
                     <div *ngIf="toggleProperty === false">
-                        <label for="signin-password" style="margin-bottom: -5px;">Password</label><br>
-                        <mat-form-field style="cursor: pointer;width:320px">
-                            <input matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 300px !important;">
-                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </mat-form-field>
+                        <label for="signin-password" >Password</label><br>
+                        <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+                            <input ngModel name="password" matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 300px !important;">
+                            <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </div>
+
                     </div><br>
     
                     <a style="text-decoration: none;" [routerLink]="['/forgotpwd']" >Forgot Password?</a> <br><br>
-                    <button type="submit" class="btn draw-border" *ngIf="toggleProperty === false" (click)="signMeIn()">Login</button>
-                </form><br>
+                    <button type="submit" class="btn draw-border" *ngIf="toggleProperty === false" >Login</button>
+                </form>
+                
+                <br><br>
     
                 <div>
-                    <label>Don't have an account?</label><br>
-                    <a class="btn draw-border" (click)="toggle()" *ngIf="toggleProperty === false">Create an Account</a>
+                    <label style="color:black">Don't have an account?</label>
+                    <a class="another_button" (click)="toggle()" *ngIf="toggleProperty === false">Create an Account</a>
                 </div>
     
             </div>
@@ -86,40 +89,44 @@
                     <header style="font-size: 20px;">Create Account</header> <br>
                 </div>
                 
-                <form>
+                <form [formGroup]="reactiveForm" (ngSubmit)="signMeUp()">
                     <div>
-                        <label for="fname">Firstname <b style="color:red">*</b></label><br>
-                        <input type="text" id="fname" autofocus name="Firstname" required minlength="4"><br>
+                        <label for="firstname">Firstname <b style="color:red">*</b></label><br>
+                        <input name="firstname" formControlName="firstname" type="text" id="firstname" autofocus required minlength="4" autocomplete="off"><br>
                     </div><br>
                     <div>
-                        <label for="lname">Lastname <b style="color:red">*</b></label><br>
-                        <input type="text" id="lname" name="Lastname" required minlength="2"><br>
+                        <label for="lastname">Lastname <b style="color:red">*</b></label><br>
+                        <input formControlName="lastname" type="text" id="lastname" name="lastname" required minlength="2" autocomplete="off"><br>
                     </div><br>
                     <div>
-                        <label for="signup-email">Email <b style="color:red">*</b></label><br>
-                        <input type="email" id="signup-email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                        <label for="email">Email <b style="color:red">*</b></label><br>
+                        <input formControlName="email" type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
                     </div><br>
                     <div>
-                        <label for="signup-password" style="margin-bottom: -5px;">Password <b style="color:red">*</b></label><br>
-                        <mat-form-field style="width:320px;cursor: pointer;">
-                            <input matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 300px !important;">
+                        <label for="signup-password">Password <b style="color:red">*</b></label><br>
+                        <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+                            <input formControlName="password" matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 300px !important;" autocomplete="off">
                             <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </mat-form-field>
+                        </div>
                     </div><br>
                     <div>
                         <label for="signup-confirm-password">Confirm Password <b style="color:red">*</b></label><br>
-                        <input type="password" id="signup-confirm-password" name="confirm-password" required minlength="15" > <br>
+                        <input formControlName="confirm_password" type="password" id="signup-confirm-password" name="confirm-password" required minlength="15" autocomplete="off"> <br>
                     </div><br>
                     <button type="submit" class="btn draw-border" [disabled]="isPasswordMatch" >Create Account</button>
-                </form><br>
+                </form>
+                
+                <br><br>
     
                 <div>
-                    <label>Already have account?</label><br>
-                    <a class="btn draw-border" (click)="toggle()">Sign In</a>
+                    <label style="color: black;">Already have account?</label>
+                    <a class="another_button" (click)="toggle()">Sign In</a>
                 </div>
     
             </div>
         </div>
         <!-- End of Sign Up -->
+
+        
     </div>
 </div>
