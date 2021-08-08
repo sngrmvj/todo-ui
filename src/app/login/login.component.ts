@@ -31,13 +31,26 @@ export class LoginComponent implements OnInit {
   }
 
   signMeIn(signInItem:any){
-    console.log(signInItem.email);
-    console.log(signInItem.password)
+    let payload = {
+      "content":{
+        "email" : signInItem.email,
+        "password" : signInItem.password
+      }
+    }
+    console.log(payload);
     this.router.navigate(['planners'])
   }
 
   signMeUp(): void{
-    console.log('Firstname:' + this.reactiveForm.get('firstname')?.value);
+    let payload = {
+      "content": {
+        "firstname": this.reactiveForm.get('firstname')?.value,
+        "lastname" : this.reactiveForm.get('lastname')?.value,
+        "email" : this.reactiveForm.get('email')?.value,
+        "password": this.reactiveForm.get('password')?.value
+      }
+    }
+    console.log("SignUp Payload -",payload);
   }
   
 
