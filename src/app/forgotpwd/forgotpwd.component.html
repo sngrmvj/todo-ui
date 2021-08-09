@@ -36,7 +36,7 @@
                 <header> Confirm Email</header>
             </div>
             <br> -->
-            <form>
+            <div>
                 <div>
                     <label for="signin-email">Enter registered email</label><br>
                     <input [(ngModel)]="email" type="email" id="signin-email" name="email" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
@@ -47,21 +47,21 @@
                     <label style="color:black;font-size: 14px;color:#F64B29">Wait for 2 minute to resend the OTP</label>
                 </div>
                 <button type="submit" class="reset-button" (click)="sendOTP()"  >Send OTP</button>
-            </form>
+            </div>
 
 
             <br><br>
-            <div style="border-bottom:1px dashed black;width:100%"></div>
+            <!-- <div style="border-bottom:1px dashed black;width:100%"></div> -->
             <br><br>
 
-            <form>
+            <div>
                 <div>
                     <label for="otp">Enter OTP</label><br>
                     <label style="color:black;margin-right: 2px;"><b>P-</b></label>
                     <input [(ngModel)]="validateOTP" type="number" id="otp" name="otp" required minlength="6"><br>
                 </div><br>
                 <button type="submit" class="reset-button" (click)="validationOfOTP()">Confirm</button>
-            </form>
+            </div>
 
         </div>
 
