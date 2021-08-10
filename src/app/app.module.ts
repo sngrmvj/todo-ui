@@ -10,14 +10,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
 import { PlannersComponent } from './planners/planners.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     MatFormFieldModule,
     HttpClientModule,

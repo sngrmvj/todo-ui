@@ -1,5 +1,6 @@
 import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 import { CronJob } from 'cron';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-planners',
   templateUrl: './planners.component.html',
@@ -13,13 +14,14 @@ export class PlannersComponent implements OnInit {
   general_tasks:any = ['Tasks','Ready',];
   daily_tasks:any = ['Milk','Eggs'];
 
-  constructor() {
+  constructor(private toastMessage:ToastrService) {
     // For Every minute use all stars 
     this.cronJob = new CronJob('0 0 * * * *', async () => {
       try {
         await this.refreshDailyTasks();
       } catch (e) {
         console.error(e);
+        this.toastMessage.error("Error - "+ e);
       }
     });
     
@@ -37,10 +39,12 @@ export class PlannersComponent implements OnInit {
     if (value === 'daily_tasks'){
       let deleted_item = this.daily_tasks.splice(index,1);
       // Add the APi call to it
+      this.toastMessage.success("Task deleted successfully!!");
     }
     else{
-      this.general_tasks.splice(index,1);
-      console.log(this.general_tasks);
+      let deleted_item = this.general_tasks.splice(index,1);
+      // Add the APi call to it
+      this.toastMessage.success("Task deleted successfully!!");
     }
   }
 
@@ -71,6 +75,7 @@ export class PlannersComponent implements OnInit {
   addtoDaily(value:any){
     this.daily_tasks.push(value.taskItem);
     this.displayDailyInput = false
+    this.toastMessage.success("Successfully added to daily tasks");
   }
 
 
@@ -88,6 +93,7 @@ export class PlannersComponent implements OnInit {
   addtoGeneral(value:any){
     this.general_tasks.push(value.taskItem);
     this.displayGeneralInput = false
+    this.toastMessage.success("Successfully added to general tasks");
   }
 
   closeGeneralInputTask(){
