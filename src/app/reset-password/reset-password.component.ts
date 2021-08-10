@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,12 +10,10 @@ import { Router } from '@angular/router';
 export class ResetPasswordComponent implements OnInit {
 
   isPasswordMatch: boolean = true;
-  isLengthSatisfied: boolean = true;
-  lengthMismatchString: string = "";
   hide:boolean = true;
 
   
-  constructor(private router: Router) { }
+  constructor(private router: Router,private toastMessage:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -28,12 +27,11 @@ export class ResetPasswordComponent implements OnInit {
       this.router.navigate(['login'])
       }
       else{
-        this.isLengthSatisfied = false;
-        this.lengthMismatchString = `The length of the password should be 15 characters.`;
+        this.toastMessage.warning("Length of password should be 15 chars");
       }
     }
     else{
-      this.isPasswordMatch = false;
+      this.toastMessage.warning("Passwords did not match");
     }
   }
 

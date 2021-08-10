@@ -62,6 +62,7 @@ export class ForgotpwdComponent implements OnInit {
       let otp = localStorage.getItem(this.email);
       if (otp === this.validateOTP){
         this.toastMessage.success("OTP is correct");
+        localStorage.removeItem(this.email);
         this.router.navigate(['reset'])
       }
       else{
