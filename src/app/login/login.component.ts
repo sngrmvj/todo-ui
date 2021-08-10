@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   isPasswordMatch: boolean = false;
   hide:boolean = true;
   
-  constructor(private router: Router) { }
+  constructor(private router: Router,private toastMessage:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -31,26 +32,48 @@ export class LoginComponent implements OnInit {
   }
 
   signMeIn(signInItem:any){
-    let payload = {
-      "content":{
-        "email" : signInItem.email,
-        "password" : signInItem.password
-      }
+
+    if (!signInItem.email || !signInItem.password){
+      this.toastMessage.warning("Please enter the email and password");
     }
-    console.log(payload);
-    this.router.navigate(['planners'])
+    else{
+      let payload = {
+        "content":{
+          "email" : signInItem.email,
+          "password" : signInItem.password
+        }
+      }
+      console.log(payload);
+      this.router.navigate(['planners'])
+    }
   }
 
   signMeUp(): void{
-    let payload = {
-      "content": {
-        "firstname": this.reactiveForm.get('firstname')?.value,
-        "lastname" : this.reactiveForm.get('lastname')?.value,
-        "email" : this.reactiveForm.get('email')?.value,
-        "password": this.reactiveForm.get('password')?.value
+
+    if(!this.reactiveForm.get('firstname')?.value || !this.reactiveForm.get('lastname')?.value || !this.reactiveForm.get('email')?.value || !this.reactiveForm.get('password')?.value){
+      this.toastMessage.warning("Please enter the mandatory fields")
+    }
+    else{
+      if (this.reactiveForm.get("confirm_password")?.value === this.reactiveForm.get('password')?.value){
+        if (this.reactiveForm.get('password')?.value.length >= 15){
+          let payload = {
+            "content": {
+              "firstname": this.reactiveForm.get('firstname')?.value,
+              "lastname" : this.reactiveForm.get('lastname')?.value,
+              "email" : this.reactiveForm.get('email')?.value,
+              "password": this.reactiveForm.get('password')?.value
+            }
+          }
+          // make the API Call Here
+        }
+        else{
+          this.toastMessage.warning("Passwords length is less than 15 characters");
+        }
+      }
+      else{
+        this.toastMessage.warning("Passwords don't match");
       }
     }
-    console.log("SignUp Payload -",payload);
   }
   
 
