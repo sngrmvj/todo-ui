@@ -5,10 +5,10 @@
 export const UrlService = {
 
     // AuthVariables
-    registerURL : "",
-    loginURL : "",
+    registerURL : "/authentication/register",
+    loginURL : "/authentication/login",
     feedbackURL : "",
-    tokenRefreshURL : "",
+    getAccessTokenURL : "/authentication/refresh",
     validateOTPURL : "",
     sendOtpURL : "",
     passwordResetURl: "",
