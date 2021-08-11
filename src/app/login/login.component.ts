@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ProjectService } from '../services/project-service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   isPasswordMatch: boolean = false;
   hide:boolean = true;
   
-  constructor(private router: Router,private toastMessage:ToastrService) { }
+  constructor(private router: Router,private toastMessage:ToastrService, private projectService: ProjectService) { }
 
   ngOnInit(): void {
   }
@@ -64,7 +65,12 @@ export class LoginComponent implements OnInit {
               "password": this.reactiveForm.get('password')?.value
             }
           }
-          // make the API Call Here
+          this.projectService.register(payload).subscribe( (result) => {
+            this.toastMessage.success(result)
+          }, (error) =>{
+            this.toastMessage.error(error)
+            this.toastMessage.warning("Kindly contact the Admin !!")
+          })
         }
         else{
           this.toastMessage.warning("Passwords length is less than 15 characters");
