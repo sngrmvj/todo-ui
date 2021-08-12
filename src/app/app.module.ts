@@ -19,6 +19,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ProjectService } from './services/project-service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     MatPasswordStrengthModule.forRoot()
   ],
-  providers: [],
+  providers: [ProjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
