@@ -49,7 +49,7 @@
                 <form #signInForm="ngForm" (ngSubmit)="signMeIn(signInForm.value)">
                     <div>
                         <label for="signin-email">Email</label><br>
-                        <input ngModel type="email" id="signin-email" name="email" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                        <input ngModel type="email" id="signin-email" name="email" autocomplete="off" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
                     </div><br>
                     
                     <div *ngIf="toggleProperty === false">

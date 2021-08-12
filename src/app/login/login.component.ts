@@ -45,8 +45,9 @@ export class LoginComponent implements OnInit {
         }
       }
       this.projectService.login(payload).subscribe((result) =>{
-        console.log(result);
-        this.router.navigate(['planners'])
+        this.toastMessage.success(result.message)
+        console.log(result.headers.get("refresh"))
+        this.router.navigate(['planners']);
       }, (error) =>{
         console.log(error)
         this.toastMessage.error(error.error)

@@ -28,7 +28,7 @@ export class ProjectService {
 
     login(data:any): Observable<any>{
         let URL = this.getUrl()
-        return this.http.post<any>(URL+this.loginURL,data);
+        return this.http.put<any>(URL+this.loginURL,data, {observe: 'response'});
     }
 
 
