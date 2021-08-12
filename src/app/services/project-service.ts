@@ -9,6 +9,7 @@ export class ProjectService {
     constructor(private http: HttpClient) { }
 
     registerURL: string = UrlService.registerURL
+    loginURL: string = UrlService.loginURL
 
 
     // Auth Functions   
@@ -24,6 +25,12 @@ export class ProjectService {
         let URL = this.getUrl()
         return this.http.post<any>(URL+this.registerURL,data);
     }
+
+    login(data:any): Observable<any>{
+        let URL = this.getUrl()
+        return this.http.post<any>(URL+this.loginURL,data);
+    }
+
 
 }
 

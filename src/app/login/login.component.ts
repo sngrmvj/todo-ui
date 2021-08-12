@@ -44,8 +44,14 @@ export class LoginComponent implements OnInit {
           "password" : signInItem.password
         }
       }
-      console.log(payload);
-      this.router.navigate(['planners'])
+      this.projectService.login(payload).subscribe((result) =>{
+        console.log(result);
+        this.router.navigate(['planners'])
+      }, (error) =>{
+        console.log(error)
+        this.toastMessage.error(error.error)
+      })
+      
     }
   }
 
