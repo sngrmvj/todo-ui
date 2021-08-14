@@ -1,5 +1,6 @@
 import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 import { CronJob } from 'cron';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-planners',
@@ -14,7 +15,7 @@ export class PlannersComponent implements OnInit {
   general_tasks:any = ['Tasks','Ready',];
   daily_tasks:any = ['Milk','Eggs'];
 
-  constructor(private toastMessage:ToastrService) {
+  constructor(private toastMessage:ToastrService, private router: Router) {
     // For Every minute use all stars 
     this.cronJob = new CronJob('0 0 * * * *', async () => {
       try {
