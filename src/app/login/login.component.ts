@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../services/project-service';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +34,10 @@ export class LoginComponent implements OnInit {
     this.toggleProperty = !this.toggleProperty
   }
 
+  setCookie(token:string){
+    
+  }
+
   signMeIn(signInItem:any){
 
     if (!signInItem.email || !signInItem.password){
@@ -46,7 +52,7 @@ export class LoginComponent implements OnInit {
       }
       this.projectService.login(payload).subscribe((result) =>{
         this.toastMessage.success(result.message)
-        console.log(result.headers.get("refresh"))
+        console.log(result);
         this.router.navigate(['planners']);
       }, (error) =>{
         console.log(error)
