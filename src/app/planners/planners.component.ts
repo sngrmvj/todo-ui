@@ -2,6 +2,8 @@ import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
 import { CronJob } from 'cron';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProjectService } from '../services/project-service';
+
 @Component({
   selector: 'app-planners',
   templateUrl: './planners.component.html',
@@ -15,7 +17,7 @@ export class PlannersComponent implements OnInit {
   general_tasks:any = ['Tasks','Ready',];
   daily_tasks:any = ['Milk','Eggs'];
 
-  constructor(private toastMessage:ToastrService, private router: Router) {
+  constructor(private toastMessage:ToastrService, private router: Router, private projectService:ProjectService) {
     // For Every minute use all stars 
     this.cronJob = new CronJob('0 0 * * * *', async () => {
       try {
@@ -34,7 +36,25 @@ export class PlannersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.areYouAuthorized();
   }
+
+  // ====================
+  // Need to check whether you are authorised or not
+  // ====================
+  areYouAuthorized(){
+    this.projectService.checksAuthorization().subscribe((result) =>{
+      if(result.flag === false){
+        this.toastMessage.warning("You are not Authorized");
+        this.router.navigate(['login']);
+      }
+    },(error) =>{
+      this.toastMessage.error(error.error.error);
+      this.router.navigate(['login']);
+    })
+  }
+
+
 
   delete(value:string,index:number){
     if (value === 'daily_tasks'){

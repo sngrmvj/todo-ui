@@ -9,6 +9,7 @@ export const UrlService = {
     loginURL : "/authentication/login",
     feedbackURL : "",
     getAccessTokenURL : "/authentication/refresh",
+    check_authorization: "/authentication/check_authorize",
     validateOTPURL : "",
     sendOtpURL : "",
     passwordResetURl: "",

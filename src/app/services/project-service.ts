@@ -10,6 +10,7 @@ export class ProjectService {
 
     registerURL: string = UrlService.registerURL
     loginURL: string = UrlService.loginURL
+    check_authorizationURL: string = UrlService.check_authorization
 
 
     // Auth Functions   
@@ -21,6 +22,11 @@ export class ProjectService {
     }
 
 
+    checksAuthorization():Observable<any>{
+        let URL = this.getUrl();
+        return this.http.get<any>(URL+this.check_authorizationURL, {withCredentials: true,responseType:'json' as 'json'});
+    }
+
     register(data:any): Observable<any>{
         let URL = this.getUrl()
         return this.http.post<any>(URL+this.registerURL,data);
@@ -28,7 +34,7 @@ export class ProjectService {
 
     login(data:any): Observable<any>{
         let URL = this.getUrl()
-        return this.http.put<any>(URL+this.loginURL,data, {withCredentials: true});
+        return this.http.put<any>(URL+this.loginURL,data, {withCredentials: true, observe:"response"});
     }
 
 
