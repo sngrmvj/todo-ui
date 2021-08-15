@@ -13,6 +13,7 @@ export class MyprofileComponent implements OnInit {
   constructor(private router: Router,private toastMessage:ToastrService, private projectService:ProjectService) { }
 
   ngOnInit(): void {
+    this.areYouAuthorized()
   }
 
   // ====================
