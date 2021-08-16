@@ -20,11 +20,14 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,private toastMessage:ToastrService, private projectService: ProjectService) { }
 
   ngOnInit(): void {
+    this.checkUserValidated()
   }
 
   checkUserValidated(){
     this.projectService.getAccessToken().subscribe((result) =>{
-      console.log(result);
+      if(result.flag === true){
+        this.router.navigate(['planners']);
+      }
     }, (error)=>{
       this.toastMessage.error(error.error.error);
     })
