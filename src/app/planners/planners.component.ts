@@ -46,11 +46,11 @@ export class PlannersComponent implements OnInit {
     this.projectService.checksAuthorization().subscribe((result) =>{
       if(result.flag === false){
         this.toastMessage.warning("You are not Authorized");
-        this.router.navigate(['login']);
+        this.router.navigate(['authwall']);
       }
     },(error) =>{
       this.toastMessage.error(error.error.error);
-      this.router.navigate(['login']);
+      this.router.navigate(['authwall']);
     })
   }
 

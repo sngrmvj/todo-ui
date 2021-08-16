@@ -17,12 +17,18 @@ export class LoginComponent implements OnInit {
   isPasswordMatch: boolean = false;
   hide:boolean = true;
   
-  constructor(private router: Router,private toastMessage:ToastrService, private projectService: ProjectService) { }
-
-  ngOnInit(): void {
+  constructor(private router: Router,private toastMessage:ToastrService, private projectService: ProjectService) {
+    // This is function call.
     this.checkUserValidated()
   }
 
+  ngOnInit(): void {
+  }
+
+
+  // ---------------------
+  //  It is needed to bypass the user from logging in again and again.
+  // ---------------------
   checkUserValidated(){
     this.projectService.getAccessToken().subscribe((result) =>{
       if(result.flag === true){
@@ -33,6 +39,12 @@ export class LoginComponent implements OnInit {
     })
   }
 
+
+
+  // ----------------------------
+  // Form Group 
+  // Looks like form directive accepts only one in a view. For multiple "Form Group"
+  // ----------------------------
   reactiveForm = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
     lastname: new FormControl(''),
@@ -41,11 +53,20 @@ export class LoginComponent implements OnInit {
     confirm_password : new FormControl('')
   })
   
+
+
+  // -------------------
+  // This is important for flip of view
+  // -------------------
   toggle(){
     this.toggleProperty = !this.toggleProperty
   }
 
-  signMeIn(signInItem:any){
+
+  // --------------------
+  // Sign In
+  // --------------------
+  login(signInItem:any){
 
     if (!signInItem.email || !signInItem.password){
       this.toastMessage.warning("Please enter the email and password");
@@ -68,8 +89,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  signMeUp(): void{
 
+
+
+  // ------------------------
+  // Sign Up Function 
+  // ------------------------
+  registration(): void{
     if(!this.reactiveForm.get('firstname')?.value || !this.reactiveForm.get('lastname')?.value || !this.reactiveForm.get('email')?.value || !this.reactiveForm.get('password')?.value){
       this.toastMessage.warning("Please enter the mandatory fields")
     }
@@ -85,10 +111,12 @@ export class LoginComponent implements OnInit {
             }
           }
           this.projectService.register(payload).subscribe( (result) => {
-            this.toastMessage.success(result)
+            this.toastMessage.success(result.message);
+            this.reactiveForm.reset();
+            this.toggleProperty = !this.toggleProperty;
           }, (error) =>{
-            this.toastMessage.error(error)
-            this.toastMessage.warning("Kindly contact the Admin !!")
+            this.toastMessage.warning("Kindly contact the Admin !!");
+            this.toastMessage.error(error.error.message);
           })
         }
         else{

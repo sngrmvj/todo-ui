@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
     this.isTokenValid = this.checkTokenValidity()
 
     if (this.isTokenValid === false){
-      this.router.navigate(['login'])
+      this.router.navigate(['authwall'])
     }
     else{
       this.router.navigate(['planners'])

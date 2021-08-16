@@ -24,7 +24,7 @@ export class ResetPasswordComponent implements OnInit {
       if (resetForm.password.length >= 15){
       // API Call pass the refresh token so that it contains the DBID. 
       // It will be easy to update the password for the user using the user id
-      this.router.navigate(['login'])
+      this.router.navigate(['authwall'])
       }
       else{
         this.toastMessage.warning("Length of password should be 15 chars");

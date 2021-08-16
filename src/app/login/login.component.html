@@ -46,7 +46,7 @@
                     <header style="font-size: 20px;">Sign In</header> <br>
                 </div>
                 
-                <form #signInForm="ngForm" (ngSubmit)="signMeIn(signInForm.value)">
+                <form #signInForm="ngForm" (ngSubmit)="login(signInForm.value)">
                     <div>
                         <label for="signin-email">Email</label><br>
                         <input ngModel type="email" id="signin-email" name="email" autocomplete="off" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
@@ -89,7 +89,7 @@
                     <header style="font-size: 20px;">Create Account</header> <br>
                 </div>
                 
-                <form [formGroup]="reactiveForm" (ngSubmit)="signMeUp()">
+                <form [formGroup]="reactiveForm" (ngSubmit)="registration()">
                     <div>
                         <label for="firstname">Firstname <b style="color:red">*</b></label><br>
                         <input name="firstname" formControlName="firstname" type="text" id="firstname" autofocus required minlength="4" autocomplete="off"><br>
