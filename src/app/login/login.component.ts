@@ -22,6 +22,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  checkUserValidated(){
+    this.projectService.getAccessToken().subscribe((result) =>{
+      console.log(result);
+    }, (error)=>{
+      this.toastMessage.error(error.error.error);
+    })
+  }
+
   reactiveForm = new FormGroup({
     firstname: new FormControl('', [Validators.required]),
     lastname: new FormControl(''),
@@ -32,10 +40,6 @@ export class LoginComponent implements OnInit {
   
   toggle(){
     this.toggleProperty = !this.toggleProperty
-  }
-
-  setCookie(token:string){
-    
   }
 
   signMeIn(signInItem:any){
@@ -51,7 +55,7 @@ export class LoginComponent implements OnInit {
         }
       }
       this.projectService.login(payload).subscribe((result) =>{
-        this.toastMessage.success(result.message)
+        this.toastMessage.success(result.body.message);
         this.router.navigate(['planners']);
       }, (error) =>{
         console.log(error)

@@ -8,7 +8,7 @@ export const UrlService = {
     registerURL : "/authentication/register",
     loginURL : "/authentication/login",
     feedbackURL : "",
-    getAccessTokenURL : "/authentication/refresh",
+    getAccessTokenURL : "/authentication/get_access",
     check_authorization: "/authentication/check_authorize",
     validateOTPURL : "",
     sendOtpURL : "",

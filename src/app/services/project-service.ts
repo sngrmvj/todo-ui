@@ -11,6 +11,7 @@ export class ProjectService {
     registerURL: string = UrlService.registerURL
     loginURL: string = UrlService.loginURL
     check_authorizationURL: string = UrlService.check_authorization
+    get_access_token_url:string = UrlService.getAccessTokenURL
 
 
     // Auth Functions   
@@ -35,6 +36,11 @@ export class ProjectService {
     login(data:any): Observable<any>{
         let URL = this.getUrl()
         return this.http.put<any>(URL+this.loginURL,data, {withCredentials: true, observe:"response"});
+    }
+
+    getAccessToken():Observable<any>{
+        let URL = this.getUrl()
+        return this.http.get<any>(URL+this.get_access_token_url,{withCredentials: true,responseType:'json' as 'json'});
     }
 
 
