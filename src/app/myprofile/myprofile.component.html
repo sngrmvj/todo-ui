@@ -1,1 +1,24 @@
-<p>myprofile works!</p>
+
+
+
+<!--  -->
+<!-- NAVBAR -->
+<!--  -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <img src="../../assets/to-do.png" style="margin-right: 10px;width:30px;height:30px;">
+    <a class="navbar-brand" style="font-size: 30px;" [routerLink]="['/to-do']">
+        
+        To Do Planner
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
+            <a class="nav-item nav-link active" style="background-color: #FF6363;color:white;border-radius: 2px;" [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                Login
+            </a>
+            <a class="nav-item nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
+        </div>
+    </div>
+</nav>
