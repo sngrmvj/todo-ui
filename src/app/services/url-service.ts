@@ -14,6 +14,7 @@ export const UrlService = {
     sendOtpURL : "",
     passwordResetURl: "",
     deleteURL:"",
-    updateEmailURL :""
+    updateEmailURL :"",
+    make_adminURL: "/authentication/makeAdmin",
 
 };

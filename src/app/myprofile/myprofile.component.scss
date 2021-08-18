@@ -1,0 +1,16 @@
+
+.nav-link:active {
+    background-color: #70CAB0;
+    color: white;
+    border-radius: 2px ;
+}
+
+.nav-item{
+    margin-left: 20px;
+}
+
+.nav-item:hover{
+    background-color: #70CAB0;
+    color: white !important; 
+    border-radius: 2px ;
+}
