@@ -25,17 +25,43 @@
 
 
 
-<div id="container" style="display: flex;flex-direction: row;width:100%;height:100%;padding:10px;margin-bottom: 20px;">
-    <div class="card">
-
-    </div>
-    <br>
-    <div class="card">
-        <div class="header">
-            <header>Delete Account</header>
+<div id="container" style="display: flex;flex-direction: column;width:100%;height:100%;padding:10px;margin-bottom: 20px;">
+    <div style="display: flex;flex-direction: column;align-content: center;width:70%;justify-content: center;">
+        <div class="card">
+            <div class="header">
+                <header>User Details</header>
+            </div>
+            <div class="card-body">
+                
+            </div>
         </div>
-        <div class="card-body">
-
+        <br>
+        <div class="card">
+            <div class="header">
+                <header>Update Account</header>
+            </div>
+            <div class="card-body">
+                
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="header">
+                <header>Delete Account</header>
+            </div>
+            <div class="card-body">
+    
+            </div>
+        </div>
+        <br>
+        <div class="card" *ngIf="isAdmin">
+            <div class="header">
+                <header>All Users</header>
+            </div>
+            <div class="card-body">
+                <label>We should display the table of people.</label>
+            </div>
         </div>
     </div>
+
 </div>

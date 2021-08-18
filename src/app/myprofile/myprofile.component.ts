@@ -10,10 +10,14 @@ import { ProjectService } from '../services/project-service';
 })
 export class MyprofileComponent implements OnInit {
 
+
+  isAdmin:boolean = false;
+
   constructor(private router: Router,private toastMessage:ToastrService, private projectService:ProjectService) { }
 
   ngOnInit(): void {
     this.areYouAuthorized()
+    this.getIsAdmin()
   }
 
   // ====================
@@ -30,5 +34,18 @@ export class MyprofileComponent implements OnInit {
       this.router.navigate(['authwall']);
     })
   }
+
+
+  // ====================
+  // Get IS ADMIN
+  // ====================
+  getIsAdmin(){
+    let value = localStorage.getItem('todo-isAdmin');
+    if(value != null){
+      this.isAdmin = Boolean(window.atob(value));
+    }
+  }
+
+
 
 }
