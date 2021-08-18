@@ -24,15 +24,18 @@ export class MyprofileComponent implements OnInit {
   // Need to check whether you are authorised or not
   // ====================
   areYouAuthorized(){
-    this.projectService.checksAuthorization().subscribe((result) =>{
-      if(result.flag === false){
-        this.toastMessage.warning("You are not Authorized");
+    let check_logged_in_value = localStorage.getItem('todo-loggedin');
+    if (check_logged_in_value === 'true'){
+      this.projectService.checksAuthorization().subscribe((result) =>{
+        if(result.flag === false){
+          this.toastMessage.warning("You are not Authorized");
+          this.router.navigate(['authwall']);
+        }
+      },(error) =>{
+        this.toastMessage.error(error.error.error);
         this.router.navigate(['authwall']);
-      }
-    },(error) =>{
-      this.toastMessage.error(error.error.error);
-      this.router.navigate(['authwall']);
-    })
+      })
+    }
   }
 
 
@@ -44,6 +47,14 @@ export class MyprofileComponent implements OnInit {
     if(value != null){
       this.isAdmin = Boolean(window.atob(value));
     }
+  }
+
+  // ====================
+  // Sign Out from the present one
+  // ====================
+  signOut(){
+    localStorage.setItem('todo-loggedin','false');
+    this.router.navigate(['authwall']);
   }
 
 

@@ -14,10 +14,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav" style="font-family: Arial, Helvetica, sans-serif;margin-top: 8px;">
-            <a class="nav-item nav-link" style="border-radius: 2px;" [routerLink]="['/planners']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a class="nav-item nav-link active" style="border-radius: 2px;" [routerLink]="['/planners']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
                 My Planner
             </a>
-            <a class="nav-item nav-link" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
+            <a class="nav-item nav-link active" [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About</a>
+            <a class="nav-item nav-link active" (click)="signOut()" style="cursor: pointer;">Sign out</a>
         </div>
     </div>
 </nav>

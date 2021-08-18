@@ -19,10 +19,21 @@ export class LoginComponent implements OnInit {
   
   constructor(private router: Router,private toastMessage:ToastrService, private projectService: ProjectService) {
     // This is function call.
-    this.checkUserValidated()
+    this.allowLogin()
   }
 
   ngOnInit(): void {
+  }
+
+
+  // ---------------------
+  //  It is indeed called everytime. If logged out it allows you to log in else navigated directly to planners
+  // ---------------------
+  allowLogin(){
+    let check_logged_in_value = localStorage.getItem('todo-loggedin');
+    if (check_logged_in_value === 'true'){
+      this.checkUserValidated()
+    }
   }
 
 
@@ -83,9 +94,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['planners']);
         localStorage.setItem('todo-email',window.btoa(result.body.email));
         localStorage.setItem('todo-isAdmin',window.btoa(result.body.admin));
+        localStorage.setItem('todo-loggedin','true');
       }, (error) =>{
-        console.log(error);
-        this.toastMessage.error(error.error);
+        console.log(error.error);
+        this.toastMessage.error(error.error.error);
       })
       
     }
