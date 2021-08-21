@@ -16,6 +16,7 @@ export const UrlService = {
     deleteURL:"",
     updateEmailURL :"",
     make_adminURL: "/authentication/makeAdmin",
-    getAllURL: "/authentication/get_all"
+    getAllURL: "/authentication/get_all",
+    getUserURL: "/authentication/get_user"
 
 };

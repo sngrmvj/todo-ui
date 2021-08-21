@@ -14,6 +14,7 @@ export class ProjectService {
     get_access_token_url:string = UrlService.getAccessTokenURL
     makeAdminURL: string = UrlService.make_adminURL
     getAllURL: string = UrlService.getAllURL
+    get_user_url:string = UrlService.getUserURL
 
 
     // Auth Functions   
@@ -55,7 +56,10 @@ export class ProjectService {
         return this.http.get<any>(URL+this.getAllURL,{withCredentials: true,responseType:'json' as 'json'}); 
     }
 
-
+    getUser(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.get<any>(URL+this.getAllURL+"?id="+data,{withCredentials: true,responseType:'json' as 'json'}); 
+    }
 
 }
 
