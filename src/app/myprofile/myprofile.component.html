@@ -27,7 +27,7 @@
 
 
 <div id="container" style="display: flex;flex-direction: column;width:100%;height:100%;padding:10px;margin-bottom: 20px;">
-    <div style="display: flex;flex-direction: column;align-items: center;margin-top: 100px;">
+    <div style="display: flex;flex-direction: column;align-items: center;margin-top: 50px;">
         <div class="items" style="width:350px; display: flex;flex-wrap: wrap;flex-direction: row;">
             <div style="float: left;">
                 <img src="https://img.icons8.com/clouds/100/000000/business-contact.png"/>
@@ -35,30 +35,31 @@
             <div style="color:black;margin-left: 20px;margin-top: 15px;">
                 <label style="font-size: 20px;margin-right: 5px;color:black">{{yourDetails.firstname}}</label>
                 <label style="font-size: 20px;color:black">{{yourDetails.lastname}}</label><br>
-                <label>{{yourDetails.email}}</label><br>
+                <label style="color:black;font-size: 12px">{{yourDetails.email}}</label><br>
                 <button style="color: red;padding:0px;background-color: transparent;border: none;" (click)="deleteUser(yourDetails.id)">Delete Account</button>
             </div>
         </div>
-        <br>
-        <div class="card">
+        <br><br>
+        <div style="display: flex;flex-direction: column;flex-wrap: wrap;">
             <div class="header">
-                <header>Updation</header>
+                <header style="font-variant: small-caps;font-size: 20px;"><b>Update Profile</b></header>
             </div><br>
             <div>
                 <mat-accordion>
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel class="parametersPanel" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header >
                             <mat-panel-title>
                                 <b>Update Firstname</b>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <form>
+                        <form [formGroup]="newFirstnameForm" (ngSubmit)="firstnameUpdate()">
                             <div>
                                 <label for="new-firstname">New Firstname <b style="color:red">*</b></label><br>
                                 <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
                                     <input name="firstname" formControlName="firstname" type="text" id="new-firstname" autofocus required minlength="4" autocomplete="off"><br>
                                 </div>
                             </div><br>
+                            <button type="submit" class="updateButton">Submit</button>
                         </form>
                     </mat-expansion-panel>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -67,28 +68,30 @@
                                 <b>Update Lastname</b>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <form>
+                        <form [formGroup]="newLastnameForm" (ngSubmit)="lastnameUpdate()">
                             <div>
                                 <label for="new-lastname">New Lastname <b style="color:red">*</b></label><br>
                                 <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
                                     <input formControlName="lastname" type="text" id="lastname" name="new-lastname" required minlength="2" autocomplete="off"><br>
                                 </div>
                             </div><br>
+                            <button type="submit" class="updateButton">Submit</button>
                         </form>
                     </mat-expansion-panel>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
-                                <b>Update Firstname</b>
+                                <b>Update Email</b>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <form>
+                        <form [formGroup]="newEmailForm" (ngSubmit)="emailUpdate()">
                             <div>
                                 <label for="new-email">New Email <b style="color:red">*</b></label><br>
                                 <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
-                                    <input formControlName="email" type="email" id="email" name="new-email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                                    <input formControlName="email" type="email" id="email" name="new-email" autocomplete="off" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
                                 </div>
                             </div><br>
+                            <button type="submit" class="updateButton">Submit</button>
                         </form>
                     </mat-expansion-panel>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -115,23 +118,25 @@
                                     <label for="signup-confirm-password">Confirm New Password <b style="color:red">*</b></label><br>
                                     <input formControlName="confirm_password" type="password" id="signup-confirm-password" name="confirm-password" required minlength="15" autocomplete="off"> <br>
                                 </div><br>
+                                <button type="submit" class="updateButton">Submit</button>
                             </form>
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>
         </div>
-        <br>
-        <div class="card" *ngIf="isAdmin===true">
+        <br><br>
+        <div style="display: flex;flex-direction: column;flex-wrap: wrap;width:600px" *ngIf="isAdmin">
             <div class="header">
-                <header>All Users</header>
+                <header style="font-variant: small-caps;font-size: 20px;"><b>User Details</b></header>
             </div>
             <div class="card-body">
                 <div *ngFor="let item of allUserDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding:10px">
                     <div class="items">
-                        <label style="font-size: 20px;margin-right: 5px;">{{item.firstname}}</label>
-                        <label style="font-size: 20px">{{item.lastname}}</label><br>
-                        <label>{{item.email}}</label><br>
-                        <button style="border:none;color:red;padding:0px;background-color: transparent;" (click)="deleteUser(item.id)">Delete</button>
+                        <label style="font-size: 20px;margin-right: 5px;color: black;">{{item.firstname}}</label>
+                        <label style="font-size: 20px;color:black">{{item.lastname}}</label><br>
+                        <label style="color:black;font-size: 12px;">{{item.email}}</label><br>
+                        <button style="border:none;color:red;padding:0px;background-color: transparent;outline:none" (click)="deleteUser(item.id)">Delete</button>
+                        <button style="border:none;color:dodgerblue;padding:0px;background-color: transparent; margin-left: 30px;outline: none;" (click)="makeAdmin(item.id)">Make Admin</button>
                     </div>
                 </div>
             </div>

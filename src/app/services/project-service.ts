@@ -15,6 +15,9 @@ export class ProjectService {
     makeAdminURL: string = UrlService.make_adminURL
     getAllURL: string = UrlService.getAllURL
     get_user_url:string = UrlService.getUserURL
+    update_email:string = UrlService.updateEmailURL
+    update_lastname:string = UrlService.updatelastnameURL
+    update_firstname:string = UrlService.updatefirstnameURL
 
 
     // Auth Functions   
@@ -59,6 +62,21 @@ export class ProjectService {
     getUser(data:any):Observable<any>{
         let URL = this.getUrl();
         return this.http.get<any>(URL+this.get_user_url+"?id="+data,{withCredentials: true,responseType:'json' as 'json'}); 
+    }
+
+    updateUserEmail(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.put<any>(URL+this.update_email,data,{withCredentials: true,responseType:'json' as 'json'})
+    }
+
+    updateUserlastname(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.put<any>(URL+this.update_lastname,data,{withCredentials: true,responseType:'json' as 'json'})
+    }
+
+    updateUserfirstname(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.put<any>(URL+this.update_firstname,data,{withCredentials: true,responseType:'json' as 'json'})
     }
 
 }

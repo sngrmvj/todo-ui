@@ -27,6 +27,9 @@ export class MyprofileComponent implements OnInit {
     this.allUsers()
   }
 
+
+
+
   // ----------------------------
   // Form Group 
   // Looks like form directive accepts only one in a view. For multiple "Form Group"
@@ -37,6 +40,18 @@ export class MyprofileComponent implements OnInit {
     confirm_password : new FormControl('')
   })
 
+  newFirstnameForm = new FormGroup({
+    firstname: new FormControl('')
+  })
+
+  newLastnameForm = new FormGroup({
+    lastname: new FormControl('')
+  })
+
+  newEmailForm = new FormGroup({
+    email: new FormControl('')
+  })
+
 
 
   // =====================
@@ -45,11 +60,87 @@ export class MyprofileComponent implements OnInit {
   passwordUpdate(){
     if (this.newPasswordForm.get("confirm_password")?.value === this.newPasswordForm.get('password')?.value){
       if(this.newPasswordForm.get('password')?.value.length >= 15){
-        
+
       }
     }
   }
+
+
+
+
+
+  // =====================
+  // Update the firstname 
+  // =====================
+  firstnameUpdate(){
+    if(this.newFirstnameForm.get('firstname')?.value != "" || this.newFirstnameForm.get('firstname')?.value != null){
+      let ids = localStorage.getItem('todo-id');
+      if (ids != null){
+        let payload = {
+          'content':{
+            'firstname' : this.newFirstnameForm.get('firstname')?.value,
+            'id': window.atob(ids),
+          }
+        }
+        this.projectService.updateUserfirstname(payload).subscribe((result) =>{
+          this.toastMessage.success(result.message);
+          this.newLastnameForm.reset();
+          this.allUsers();
+        },(error)=>{
+          this.toastMessage.error(error.error.error);
+        })
+      }
+    }
+  }
+
+
+
+  // =====================
+  // Update the lastname 
+  // =====================
+  lastnameUpdate(){
+    if(this.newLastnameForm.get('lastname')?.value != "" || this.newLastnameForm.get('lastname')?.value != null){
+      let ids = localStorage.getItem('todo-id');
+      if (ids != null){
+        let payload = {
+          'content':{
+            'lastname' : this.newLastnameForm.get('lastname')?.value,
+            'id': window.atob(ids),
+          }
+        }
+        this.projectService.updateUserlastname(payload).subscribe((result) =>{
+          this.toastMessage.success(result.message);
+          this.newLastnameForm.reset();
+          this.allUsers();
+        },(error)=>{
+          this.toastMessage.error(error.error.error);
+        })
+      }
+    }
+  }
+
+
+  // =====================
+  // Update the Email 
+  // =====================
+  emailUpdate(){
+    if(this.newEmailForm.get('firstname')?.value != "" || this.newEmailForm.get('firstname')?.value != null){
+      
+    }
+  }
+
+
   
+  // ====================
+  // Delete user
+  // ====================
+  deleteUser(ids:any){
+    if(this.isAdmin === true){
+      // console.log(ids)
+      // Need to ask for confirmation.
+    }
+  }
+
 
   // ====================
   // Need to check whether you are authorised or not
@@ -76,7 +167,12 @@ export class MyprofileComponent implements OnInit {
   getIsAdmin(){
     let value = localStorage.getItem('todo-isAdmin');
     if(value != null){
-      this.isAdmin = value;
+      if(value === 'false'){
+        this.isAdmin = false
+      }
+      else{
+        this.isAdmin = true
+      }
     }
   }
 
@@ -87,6 +183,7 @@ export class MyprofileComponent implements OnInit {
   // ====================
   signOut(){
     localStorage.setItem('todo-loggedin','false');
+    localStorage.removeItem('todo-isAdmin');
     this.router.navigate(['authwall']);
   }
 
@@ -94,6 +191,9 @@ export class MyprofileComponent implements OnInit {
   allUsers(){
     if(this.isAdmin === true){
       this.projectService.getAllDetails().subscribe( (result) =>{
+        if(this.allUserDetails.length > 0){
+          this.allUserDetails.length = 0;
+        }
         for (let item in result.message){
           this.allUserDetails.push(result.message[item]);
         }
@@ -104,15 +204,22 @@ export class MyprofileComponent implements OnInit {
   }
 
 
-
-  // ====================
-  // Delete user
-  // ====================
-  deleteUser(ids:any){
-    if(this.isAdmin === true){
-      console.log(ids)
+  makeAdmin(ids:any){
+    if( this.isAdmin === true){
+      let payload ={
+        'content':{
+          'id': ids
+        }
+      }
+      this.projectService.makePersonAdmin(payload).subscribe((result)=>{
+        this.toastMessage.success(result.message);
+      }, (error)=>{
+        this.toastMessage.error(error.error.error)
+      })
     }
   }
+
+
 
   // ====================
   // Display User details

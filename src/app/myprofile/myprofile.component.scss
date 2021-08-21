@@ -44,7 +44,7 @@ label {
 }
 
 .card{
-    width:70%;
+    width:60%;
     align-items: center;
     padding:10px
 }
@@ -67,4 +67,12 @@ label {
 .items:hover{
     box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
     cursor: pointer;
+}
+
+.updateButton{
+    padding: 10px;
+    background-color: #70CAB0;
+    border-radius: 2px;
+    border:none;
+    color:white;
 }

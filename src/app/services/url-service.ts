@@ -14,7 +14,9 @@ export const UrlService = {
     sendOtpURL : "",
     passwordResetURl: "",
     deleteURL:"",
-    updateEmailURL :"",
+    updateEmailURL :"/authentication/updateEmail",
+    updatelastnameURL : "/authentication/lastname",
+    updatefirstnameURL : "/authentication/firstname",
     make_adminURL: "/authentication/makeAdmin",
     getAllURL: "/authentication/get_all",
     getUserURL: "/authentication/get_user"
