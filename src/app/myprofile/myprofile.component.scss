@@ -23,3 +23,24 @@
 .card{
     width:100%
 }
+
+.card-body{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+
+.items{
+    box-shadow: 0 1px 1px #70CAB0;
+    padding:10px;
+    margin-bottom: 10px;
+    width: 250px;
+    border-radius: 5px
+}
+
+.items:hover{
+    box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
+    cursor: pointer;
+}

@@ -74,4 +74,15 @@ export class MyprofileComponent implements OnInit {
 
 
 
+  // ====================
+  // Delete user
+  // ====================
+  deleteUser(user:any){
+    if(this.isAdmin === true){
+      console.log(user)
+    }
+  }
+
+
+
 }

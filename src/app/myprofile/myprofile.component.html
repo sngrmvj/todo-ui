@@ -60,12 +60,12 @@
                 <header>All Users</header>
             </div>
             <div class="card-body">
-                <div *ngFor="let item of allUserDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;">
+                <div *ngFor="let item of allUserDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding: 10px;">
                     <div class="items">
                         <label style="font-size: 20px;margin-right: 5px;">{{item.firstname}}</label>
                         <label style="font-size: 20px">{{item.lastname}}</label><br>
                         <label>{{item.email}}</label><br>
-                        <button style="border:none;color:red;padding:0px;background-color: transparent;">Delete</button>
+                        <button style="border:none;color:red;padding:0px;background-color: transparent;" (click)="deleteUser(item.id)">Delete</button>
                     </div>
                 </div>
             </div>
