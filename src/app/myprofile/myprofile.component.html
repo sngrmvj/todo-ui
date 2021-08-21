@@ -33,8 +33,8 @@
                 <img src="https://img.icons8.com/clouds/100/000000/business-contact.png"/>
             </div>
             <div style="color:black;margin-left: 20px;margin-top: 15px;">
-                <label style="font-size: 20px;margin-right: 5px;">{{yourDetails.firstname}}</label>
-                <label style="font-size: 20px">{{yourDetails.lastname}}</label><br>
+                <label style="font-size: 20px;margin-right: 5px;color:black">{{yourDetails.firstname}}</label>
+                <label style="font-size: 20px;color:black">{{yourDetails.lastname}}</label><br>
                 <label>{{yourDetails.email}}</label><br>
                 <button style="color: red;padding:0px;background-color: transparent;border: none;" (click)="deleteUser(yourDetails.id)">Delete Account</button>
             </div>
@@ -43,10 +43,85 @@
         <div class="card">
             <div class="header">
                 <header>Updation</header>
+            </div><br>
+            <div>
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <b>Update Firstname</b>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <form>
+                            <div>
+                                <label for="new-firstname">New Firstname <b style="color:red">*</b></label><br>
+                                <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
+                                    <input name="firstname" formControlName="firstname" type="text" id="new-firstname" autofocus required minlength="4" autocomplete="off"><br>
+                                </div>
+                            </div><br>
+                        </form>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <b>Update Lastname</b>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <form>
+                            <div>
+                                <label for="new-lastname">New Lastname <b style="color:red">*</b></label><br>
+                                <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
+                                    <input formControlName="lastname" type="text" id="lastname" name="new-lastname" required minlength="2" autocomplete="off"><br>
+                                </div>
+                            </div><br>
+                        </form>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <b>Update Firstname</b>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <form>
+                            <div>
+                                <label for="new-email">New Email <b style="color:red">*</b></label><br>
+                                <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
+                                    <input formControlName="email" type="email" id="email" name="new-email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
+                                </div>
+                            </div><br>
+                        </form>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <b>Update Password</b>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                            <form [formGroup]="newPasswordForm" (ngSubmit)="passwordUpdate()">
+                                <div>
+                                    <label for="current-password">Current Password <b style="color:red">*</b></label><br>
+                                    <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
+                                        <input formControlName="current" name="current-password" matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 280px !important;" autocomplete="off">
+                                    </div>
+                                </div><br>
+                                <div>
+                                    <label for="new-password">New Password <b style="color:red">*</b></label><br>
+                                    <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
+                                        <input formControlName="password" name="new-password" matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 280px !important;" autocomplete="off">
+                                        <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </div>
+                                </div><br>
+                                <div>
+                                    <label for="signup-confirm-password">Confirm New Password <b style="color:red">*</b></label><br>
+                                    <input formControlName="confirm_password" type="password" id="signup-confirm-password" name="confirm-password" required minlength="15" autocomplete="off"> <br>
+                                </div><br>
+                            </form>
+                    </mat-expansion-panel>
+                </mat-accordion>
             </div>
         </div>
         <br>
-        <div class="card" *ngIf="isAdmin">
+        <div class="card" *ngIf="isAdmin===true">
             <div class="header">
                 <header>All Users</header>
             </div>

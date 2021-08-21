@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../services/project-service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-myprofile',
@@ -11,7 +12,9 @@ import { ProjectService } from '../services/project-service';
 export class MyprofileComponent implements OnInit {
 
 
-  isAdmin:boolean = false;
+  isAdmin:any = false;
+  panelOpenState = false;
+  hide:boolean = true;
   yourDetails:any = {};
   allUserDetails: any = [];
 
@@ -23,6 +26,30 @@ export class MyprofileComponent implements OnInit {
     this.popUserDetails()
     this.allUsers()
   }
+
+  // ----------------------------
+  // Form Group 
+  // Looks like form directive accepts only one in a view. For multiple "Form Group"
+  // ----------------------------
+  newPasswordForm = new FormGroup({
+    current: new FormControl(''),
+    password: new FormControl(''),
+    confirm_password : new FormControl('')
+  })
+
+
+
+  // =====================
+  // Update the password 
+  // =====================
+  passwordUpdate(){
+    if (this.newPasswordForm.get("confirm_password")?.value === this.newPasswordForm.get('password')?.value){
+      if(this.newPasswordForm.get('password')?.value.length >= 15){
+        
+      }
+    }
+  }
+  
 
   // ====================
   // Need to check whether you are authorised or not
@@ -49,9 +76,11 @@ export class MyprofileComponent implements OnInit {
   getIsAdmin(){
     let value = localStorage.getItem('todo-isAdmin');
     if(value != null){
-      this.isAdmin = Boolean(value);
+      this.isAdmin = value;
     }
   }
+
+
 
   // ====================
   // Sign Out from the present one
@@ -79,9 +108,9 @@ export class MyprofileComponent implements OnInit {
   // ====================
   // Delete user
   // ====================
-  deleteUser(user:any){
+  deleteUser(ids:any){
     if(this.isAdmin === true){
-      console.log(user)
+      console.log(ids)
     }
   }
 
@@ -90,7 +119,6 @@ export class MyprofileComponent implements OnInit {
   // ====================
   popUserDetails(){
     let id_to_be_passed = window.atob(String(localStorage.getItem('todo-id')));
-    console.log(id_to_be_passed)
     this.projectService.getUser(id_to_be_passed).subscribe((result) =>{
       this.yourDetails = result.message.content;
     }, (error) =>{

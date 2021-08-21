@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectService } from './services/project-service';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ProjectService } from './services/project-service';
     MatFormFieldModule,
     HttpClientModule,
     FormsModule,
+    MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
     BrowserAnimationsModule,
