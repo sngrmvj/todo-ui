@@ -60,7 +60,14 @@
                 <header>All Users</header>
             </div>
             <div class="card-body">
-                <label>We should display the table of people.</label>
+                <div *ngFor="let item of allUserDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;">
+                    <div class="items">
+                        <label style="font-size: 20px;margin-right: 5px;">{{item.firstname}}</label>
+                        <label style="font-size: 20px">{{item.lastname}}</label><br>
+                        <label>{{item.email}}</label><br>
+                        <button style="border:none;color:red;padding:0px;background-color: transparent;">Delete</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

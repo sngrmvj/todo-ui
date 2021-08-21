@@ -12,12 +12,14 @@ export class MyprofileComponent implements OnInit {
 
 
   isAdmin:boolean = false;
+  allUserDetails: any = [];
 
   constructor(private router: Router,private toastMessage:ToastrService, private projectService:ProjectService) { }
 
   ngOnInit(): void {
     this.areYouAuthorized()
     this.getIsAdmin()
+    this.allUsers()
   }
 
   // ====================
@@ -55,6 +57,19 @@ export class MyprofileComponent implements OnInit {
   signOut(){
     localStorage.setItem('todo-loggedin','false');
     this.router.navigate(['authwall']);
+  }
+
+
+  allUsers(){
+    if(this.isAdmin === true){
+      this.projectService.getAllDetails().subscribe( (result) =>{
+        for (let item in result.message){
+          this.allUserDetails.push(result.message[item]);
+        }
+      }, (error) =>{
+        this.toastMessage.error(error.error.error);
+      })
+    }
   }
 
 

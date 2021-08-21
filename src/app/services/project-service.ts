@@ -13,6 +13,7 @@ export class ProjectService {
     check_authorizationURL: string = UrlService.check_authorization
     get_access_token_url:string = UrlService.getAccessTokenURL
     makeAdminURL: string = UrlService.make_adminURL
+    getAllURL: string = UrlService.getAllURL
 
 
     // Auth Functions   
@@ -48,6 +49,12 @@ export class ProjectService {
         let URL = this.getUrl()
         return this.http.put<any>(URL+this.makeAdminURL,data,{withCredentials: true,responseType:'json' as 'json'});
     }
+
+    getAllDetails():Observable<any>{
+        let URL = this.getUrl();
+        return this.http.get<any>(URL+this.getAllURL,{withCredentials: true,responseType:'json' as 'json'}); 
+    }
+
 
 
 }
