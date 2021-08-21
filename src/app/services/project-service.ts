@@ -58,7 +58,7 @@ export class ProjectService {
 
     getUser(data:any):Observable<any>{
         let URL = this.getUrl();
-        return this.http.get<any>(URL+this.getAllURL+"?id="+data,{withCredentials: true,responseType:'json' as 'json'}); 
+        return this.http.get<any>(URL+this.get_user_url+"?id="+data,{withCredentials: true,responseType:'json' as 'json'}); 
     }
 
 }

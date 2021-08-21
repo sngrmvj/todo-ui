@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
         this.toastMessage.success(result.body.message);
         this.router.navigate(['planners']);
         localStorage.setItem('todo-id',window.btoa(result.body.id));
-        localStorage.setItem('todo-isAdmin',window.btoa(result.body.admin));
+        localStorage.setItem('todo-isAdmin',result.body.admin);
         localStorage.setItem('todo-loggedin','true');
       }, (error) =>{
         console.log(error.error);

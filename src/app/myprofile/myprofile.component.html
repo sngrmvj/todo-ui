@@ -27,31 +27,22 @@
 
 
 <div id="container" style="display: flex;flex-direction: column;width:100%;height:100%;padding:10px;margin-bottom: 20px;">
-    <div style="display: flex;flex-direction: column;align-content: center;width:70%;justify-content: center;">
-        <div class="card">
-            <div class="header">
-                <header>User Details</header>
+    <div style="display: flex;flex-direction: column;align-items: center;margin-top: 100px;">
+        <div class="items" style="width:350px; display: flex;flex-wrap: wrap;flex-direction: row;">
+            <div style="float: left;">
+                <img src="https://img.icons8.com/clouds/100/000000/business-contact.png"/>
             </div>
-            <div class="card-body">
-                
-            </div>
-        </div>
-        <br>
-        <div class="card">
-            <div class="header">
-                <header>Update Account</header>
-            </div>
-            <div class="card-body">
-                
+            <div style="color:black;margin-left: 20px;margin-top: 15px;">
+                <label style="font-size: 20px;margin-right: 5px;">{{yourDetails.firstname}}</label>
+                <label style="font-size: 20px">{{yourDetails.lastname}}</label><br>
+                <label>{{yourDetails.email}}</label><br>
+                <button style="color: red;padding:0px;background-color: transparent;border: none;" (click)="deleteUser(yourDetails.id)">Delete Account</button>
             </div>
         </div>
         <br>
         <div class="card">
             <div class="header">
-                <header>Delete Account</header>
-            </div>
-            <div class="card-body">
-    
+                <header>Updation</header>
             </div>
         </div>
         <br>
@@ -60,7 +51,7 @@
                 <header>All Users</header>
             </div>
             <div class="card-body">
-                <div *ngFor="let item of allUserDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding: 10px;">
+                <div *ngFor="let item of allUserDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding:10px">
                     <div class="items">
                         <label style="font-size: 20px;margin-right: 5px;">{{item.firstname}}</label>
                         <label style="font-size: 20px">{{item.lastname}}</label><br>

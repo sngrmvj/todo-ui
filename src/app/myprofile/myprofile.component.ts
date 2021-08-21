@@ -12,6 +12,7 @@ export class MyprofileComponent implements OnInit {
 
 
   isAdmin:boolean = false;
+  yourDetails:any = {};
   allUserDetails: any = [];
 
   constructor(private router: Router,private toastMessage:ToastrService, private projectService:ProjectService) { }
@@ -19,6 +20,7 @@ export class MyprofileComponent implements OnInit {
   ngOnInit(): void {
     this.areYouAuthorized()
     this.getIsAdmin()
+    this.popUserDetails()
     this.allUsers()
   }
 
@@ -47,7 +49,7 @@ export class MyprofileComponent implements OnInit {
   getIsAdmin(){
     let value = localStorage.getItem('todo-isAdmin');
     if(value != null){
-      this.isAdmin = Boolean(window.atob(value));
+      this.isAdmin = Boolean(value);
     }
   }
 
@@ -81,6 +83,19 @@ export class MyprofileComponent implements OnInit {
     if(this.isAdmin === true){
       console.log(user)
     }
+  }
+
+  // ====================
+  // Display User details
+  // ====================
+  popUserDetails(){
+    let id_to_be_passed = window.atob(String(localStorage.getItem('todo-id')));
+    console.log(id_to_be_passed)
+    this.projectService.getUser(id_to_be_passed).subscribe((result) =>{
+      this.yourDetails = result.message.content;
+    }, (error) =>{
+      this.toastMessage.error(error.error.error);
+    })
   }
 
 
