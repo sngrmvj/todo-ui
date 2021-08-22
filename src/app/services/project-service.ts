@@ -18,6 +18,7 @@ export class ProjectService {
     update_email:string = UrlService.updateEmailURL
     update_lastname:string = UrlService.updatelastnameURL
     update_firstname:string = UrlService.updatefirstnameURL
+    password_profile:string = UrlService.passwordResetFromProfileURl
 
 
     // Auth Functions   
@@ -77,6 +78,11 @@ export class ProjectService {
     updateUserfirstname(data:any):Observable<any>{
         let URL = this.getUrl();
         return this.http.put<any>(URL+this.update_firstname,data,{withCredentials: true,responseType:'json' as 'json'})
+    }
+
+    updatePasswordProfile(data:any): Observable<any>{
+        let URL = this.getUrl();
+        return this.http.put<any>(URL+this.password_profile,data,{withCredentials: true,responseType:'json' as 'json'})
     }
 
 }

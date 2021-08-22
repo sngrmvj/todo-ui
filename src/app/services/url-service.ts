@@ -12,7 +12,7 @@ export const UrlService = {
     check_authorization: "/authentication/check_authorize",
     validateOTPURL : "",
     sendOtpURL : "",
-    passwordResetURl: "",
+    passwordResetFromProfileURl: "/authentication/change_password_from_profile",
     deleteURL:"",
     updateEmailURL :"/authentication/updateEmail",
     updatelastnameURL : "/authentication/lastname",

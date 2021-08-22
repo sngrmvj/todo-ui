@@ -60,7 +60,28 @@ export class MyprofileComponent implements OnInit {
   passwordUpdate(){
     if (this.newPasswordForm.get("confirm_password")?.value === this.newPasswordForm.get('password')?.value){
       if(this.newPasswordForm.get('password')?.value.length >= 15){
-
+        let ids = localStorage.getItem('todo-id');
+        if (ids != null){
+          let payload ={
+            'content':{
+              'password': this.newPasswordForm.get('password')?.value,
+              'current': this.newPasswordForm.get('current')?.value,
+              'id': window.atob(ids),
+            }
+          }
+          this.projectService.updatePasswordProfile(payload).subscribe((result) => {
+            if ('flag' in result){
+              if (result.flag === false){
+                this.toastMessage.warning(result.message);
+                this.router.navigate(['authwall']);
+              }
+            }
+            this.toastMessage.success(result.message);
+            this.newPasswordForm.reset();
+          }, (error) =>{
+            this.toastMessage.error(error.error.error);
+          })
+        }
       }
     }
   }
@@ -83,6 +104,12 @@ export class MyprofileComponent implements OnInit {
           }
         }
         this.projectService.updateUserfirstname(payload).subscribe((result) =>{
+          if ('flag' in result){
+            if (result.flag === false){
+              this.toastMessage.warning(result.message);
+              this.router.navigate(['authwall']);
+            }
+          }
           this.toastMessage.success(result.message);
           this.newFirstnameForm.reset();
           this.allUsers();
@@ -110,6 +137,12 @@ export class MyprofileComponent implements OnInit {
           }
         }
         this.projectService.updateUserlastname(payload).subscribe((result) =>{
+          if ('flag' in result){
+            if (result.flag === false){
+              this.toastMessage.warning(result.message);
+              this.router.navigate(['authwall']);
+            }
+          }
           this.toastMessage.success(result.message);
           this.newLastnameForm.reset();
           this.allUsers();
@@ -190,6 +223,10 @@ export class MyprofileComponent implements OnInit {
   }
 
 
+
+  // ====================
+  // Display All Users from DB
+  // ====================
   allUsers(){
     if(this.isAdmin === true){
       this.projectService.getAllDetails().subscribe( (result) =>{
@@ -206,6 +243,10 @@ export class MyprofileComponent implements OnInit {
   }
 
 
+  // ====================
+  // Make a person Admin.
+  // Only Admins can make other person admin.
+  // ====================
   makeAdmin(ids:any){
     if( this.isAdmin === true){
       let payload ={
