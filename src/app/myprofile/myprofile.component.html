@@ -104,7 +104,8 @@
                                 <div>
                                     <label for="current-password">Current Password <b style="color:red">*</b></label><br>
                                     <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
-                                        <input formControlName="current" name="current-password" matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 280px !important;" autocomplete="off">
+                                        <input formControlName="current" name="current-password" matInput type="password" minlength="15" [type]="currentPasswordHide ? 'password' : 'text'"  required style="width: 280px !important;" autocomplete="off">
+                                        <mat-icon matSuffix (click)="currentPasswordHide = !currentPasswordHide" style="cursor: pointer;">{{currentPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     </div>
                                 </div><br>
                                 <div>

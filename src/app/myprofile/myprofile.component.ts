@@ -15,6 +15,7 @@ export class MyprofileComponent implements OnInit {
   isAdmin:any = false;
   panelOpenState = false;
   hide:boolean = true;
+  currentPasswordHide:boolean = true;
   yourDetails:any = {};
   allUserDetails: any = [];
 
