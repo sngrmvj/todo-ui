@@ -135,8 +135,9 @@
                         <label style="font-size: 20px;margin-right: 5px;color: black;">{{item.firstname}}</label>
                         <label style="font-size: 20px;color:black">{{item.lastname}}</label><br>
                         <label style="color:black;font-size: 12px;">{{item.email}}</label><br>
-                        <button style="border:none;color:red;padding:0px;background-color: transparent;outline:none" (click)="deleteUser(item.id)">Delete</button>
-                        <button style="border:none;color:dodgerblue;padding:0px;background-color: transparent; margin-left: 30px;outline: none;" (click)="makeAdmin(item.id)">Make Admin</button>
+                        <button style="border:none;color:red;padding:0px;background-color: transparent;outline:none" *ngIf="item.isadmin===false" (click)="deleteUser(item.id)">Delete</button>
+                        <button style="border:none;color:dodgerblue;padding:0px;background-color: transparent; margin-left: 30px;outline: none;" *ngIf="item.isadmin===false" (click)="makeAdmin(item.id)">Make Admin</button>
+                        <label *ngIf="item.isadmin" style="color:#70CDB0">Admin</label>
                     </div>
                 </div>
             </div>

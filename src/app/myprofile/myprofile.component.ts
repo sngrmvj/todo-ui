@@ -84,8 +84,9 @@ export class MyprofileComponent implements OnInit {
         }
         this.projectService.updateUserfirstname(payload).subscribe((result) =>{
           this.toastMessage.success(result.message);
-          this.newLastnameForm.reset();
+          this.newFirstnameForm.reset();
           this.allUsers();
+          this.popUserDetails();
         },(error)=>{
           this.toastMessage.error(error.error.error);
         })
@@ -112,6 +113,7 @@ export class MyprofileComponent implements OnInit {
           this.toastMessage.success(result.message);
           this.newLastnameForm.reset();
           this.allUsers();
+          this.popUserDetails();
         },(error)=>{
           this.toastMessage.error(error.error.error);
         })
@@ -125,7 +127,7 @@ export class MyprofileComponent implements OnInit {
   // =====================
   emailUpdate(){
     if(this.newEmailForm.get('firstname')?.value != "" || this.newEmailForm.get('firstname')?.value != null){
-      
+      let ids = localStorage.getItem('todo-id');
     }
   }
 
