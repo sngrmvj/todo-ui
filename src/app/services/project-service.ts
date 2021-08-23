@@ -19,10 +19,17 @@ export class ProjectService {
     update_lastname:string = UrlService.updatelastnameURL
     update_firstname:string = UrlService.updatefirstnameURL
     password_profile:string = UrlService.passwordResetFromProfileURl
+    forgotPasswordURL: string = UrlService.forgotPasswordURL
     deleteURLS: any = {
         'account_deletion' : UrlService.accountDeleteURL,
         'deleteUser': UrlService.deleteUserURL
     }
+    OTPs: any ={
+        'send_otp': UrlService.sendOtpURL,
+        'validate_otp': UrlService.validateOTPURL
+    }
+    blacklistURL: string = UrlService.blacklistTokenURL
+    storeFeedbackURL: string = UrlService.feedbackURL
 
 
     // Auth Functions   
@@ -34,11 +41,8 @@ export class ProjectService {
     }
 
 
-    checksAuthorization():Observable<any>{
-        let URL = this.getUrl();
-        return this.http.get<any>(URL+this.check_authorizationURL, {withCredentials: true,responseType:'json' as 'json'});
-    }
 
+    // Authentication Section
     register(data:any): Observable<any>{
         let URL = this.getUrl()
         return this.http.post<any>(URL+this.registerURL,data);
@@ -49,16 +53,18 @@ export class ProjectService {
         return this.http.put<any>(URL+this.loginURL,data, {withCredentials: true, observe:"response"});
     }
 
+    checksAuthorization():Observable<any>{
+        let URL = this.getUrl();
+        return this.http.get<any>(URL+this.check_authorizationURL, {withCredentials: true,responseType:'json' as 'json'});
+    }
+
     getAccessToken():Observable<any>{
         let URL = this.getUrl()
         return this.http.get<any>(URL+this.get_access_token_url,{withCredentials: true,responseType:'json' as 'json'});
     }
 
-    makePersonAdmin(data:any): Observable<any>{
-        let URL = this.getUrl()
-        return this.http.put<any>(URL+this.makeAdminURL,data,{withCredentials: true,responseType:'json' as 'json'});
-    }
 
+    // Get Details Section
     getAllDetails():Observable<any>{
         let URL = this.getUrl();
         return this.http.get<any>(URL+this.getAllURL,{withCredentials: true,responseType:'json' as 'json'}); 
@@ -69,6 +75,8 @@ export class ProjectService {
         return this.http.get<any>(URL+this.get_user_url+"?id="+data,{withCredentials: true,responseType:'json' as 'json'}); 
     }
 
+
+    // Update Section
     updateUserEmail(data:any):Observable<any>{
         let URL = this.getUrl();
         return this.http.put<any>(URL+this.update_email,data,{withCredentials: true,responseType:'json' as 'json'})
@@ -90,7 +98,14 @@ export class ProjectService {
     }
 
 
+    // Forgot Section
+    forgotPassword(data:any):Observable<any>{
+        let URL = this.getUrl()
+        return this.http.post<any>(URL+this.forgotPasswordURL,data,{withCredentials: true,responseType:'json' as 'json'});
+    }
 
+
+    // Deletion Section
     deleteUser(data:any):Observable<any>{
         let URL = this.getUrl();
         return this.http.delete<any>(URL+this.deleteURLS.deleteUser+"?id="+data,{withCredentials: true,responseType:'json' as 'json'})
@@ -99,6 +114,35 @@ export class ProjectService {
     accountDeletion(data:any):Observable<any>{
         let URL = this.getUrl();
         return this.http.delete<any>(URL+this.deleteURLS.account_deletion+"?id="+data,{withCredentials: true,responseType:'json' as 'json'})
+    }
+
+
+    // OTP section
+    emailOTP(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.put<any>(URL+this.OTPs.send_otp,data,{withCredentials: true,responseType:'json' as 'json'}) 
+    }
+
+    validateSentOTP(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.put<any>(URL+this.OTPs.validate_otp,data,{withCredentials: true,responseType:'json' as 'json'}) 
+    }
+
+
+    // General Section
+    makePersonAdmin(data:any): Observable<any>{
+        let URL = this.getUrl();
+        return this.http.put<any>(URL+this.makeAdminURL,data,{withCredentials: true,responseType:'json' as 'json'});
+    }
+
+    blacklistRefreshToknen(): Observable<any>{
+        let URL = this.getUrl();
+        return this.http.get<any>(URL+this.blacklistURL,{withCredentials: true,responseType:'json' as 'json'})
+    }
+
+    getTheFeedbackURL(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.put<any>(URL+this.storeFeedbackURL,data,{withCredentials: true,responseType:'json' as 'json'});
     }
 
 }

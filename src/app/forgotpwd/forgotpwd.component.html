@@ -30,19 +30,13 @@
 
 <div class="container">
     <div class="card">
-
         <div class="front">
-            <!-- <div style="display: flex;flex-wrap: wrap;text-align: center;color:#1B212C;font-size: 20px;">
-                <header> Confirm Email</header>
-            </div>
-            <br> -->
             <div>
                 <div>
                     <label for="signin-email">Enter registered email</label><br>
                     <input [(ngModel)]="email" type="email" id="signin-email" name="email" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"><br>
                 </div><br>
-                <!-- <button style="background: none;font-size: 14px;margin-bottom: 5px;border:none;" [disabled]="" (click)="resendOTP()">Resend OTP</button><br> -->
-                <button type="submit" class="reset-button" (click)="sendOTP()"  >Send OTP</button>
+                <button type="submit" class="reset-button" (click)="sendOTP()">Send OTP</button>
             </div>
 
 
@@ -53,8 +47,7 @@
             <div>
                 <div>
                     <label for="otp">Enter OTP</label><br>
-                    <label style="color:black;margin-right: 2px;"><b>P-</b></label>
-                    <input [(ngModel)]="validateOTP" type="number" id="otp" name="otp" required minlength="6"><br>
+                    <input [(ngModel)]="validateOTP" type="password" id="otp" name="otp" required minlength="6"><br>
                 </div><br>
                 <button type="submit" class="reset-button" (click)="validationOfOTP()">Confirm</button>
             </div>

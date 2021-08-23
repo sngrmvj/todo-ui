@@ -46,6 +46,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['planners']);
       }
     }, (error)=>{
+      if(error.status === 401){
+        this.toastMessage.warning(error.error.message);
+      }
       this.toastMessage.error(error.error.error);
     })
   }
@@ -133,7 +136,7 @@ export class LoginComponent implements OnInit {
             this.toggleProperty = !this.toggleProperty;
           }, (error) =>{
             this.toastMessage.warning("Kindly contact the Admin !!");
-            this.toastMessage.error(error.error.message);
+            this.toastMessage.error(error.error.warning);
           })
         }
         else{

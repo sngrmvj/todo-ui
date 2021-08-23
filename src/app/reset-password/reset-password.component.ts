@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProjectService } from '../services/project-service';
+import { DataService } from '../services/general-service';
 
 @Component({
   selector: 'app-reset-password',
@@ -11,20 +13,34 @@ export class ResetPasswordComponent implements OnInit {
 
   isPasswordMatch: boolean = true;
   hide:boolean = true;
+  userEmail: string = "";
 
   
-  constructor(private router: Router,private toastMessage:ToastrService) { }
+  constructor(private router: Router,private toastMessage:ToastrService,private projectService: ProjectService,private messageService: DataService) { }
 
   ngOnInit(): void {
+    this.messageService.currentMessage.subscribe(message => this.userEmail=message);
   }
 
 
   onSubmit(resetForm:any){
     if(resetForm.password === resetForm.confirm_password ){
       if (resetForm.password.length >= 15){
-      // API Call pass the refresh token so that it contains the DBID. 
-      // It will be easy to update the password for the user using the user id
-      this.router.navigate(['authwall'])
+        let payload={
+          'content':{
+            'password':resetForm.password,
+            'email': this.userEmail
+          }
+        }
+        this.projectService.forgotPassword(payload).subscribe((result)=>{
+          this.toastMessage.success(result.message);
+          this.router.navigate(['authwall']);
+        },(error)=>{
+          if(error.status){
+            this.toastMessage.warning(error.error.message);
+          }
+          this.toastMessage.error(error.error.error);
+        })
       }
       else{
         this.toastMessage.warning("Length of password should be 15 chars");

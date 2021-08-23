@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectService } from './services/project-service';
+import { DataService } from './services/general-service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
@@ -54,7 +55,7 @@ import { DialogComponent } from './dialog/dialog.component';
     BrowserAnimationsModule,
     MatPasswordStrengthModule.forRoot()
   ],
-  providers: [ProjectService],
+  providers: [ProjectService,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

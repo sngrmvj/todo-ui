@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../services/project-service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -63,25 +63,22 @@ export class MyprofileComponent implements OnInit {
   passwordUpdate(){
     if (this.newPasswordForm.get("confirm_password")?.value === this.newPasswordForm.get('password')?.value){
       if(this.newPasswordForm.get('password')?.value.length >= 15){
-        let ids = localStorage.getItem('todo-id');
-        if (ids != null){
+        if (this.yourDetails.id != null){
           let payload ={
             'content':{
               'password': this.newPasswordForm.get('password')?.value,
               'current': this.newPasswordForm.get('current')?.value,
-              'id': window.atob(ids),
+              'id': this.yourDetails.id,
             }
           }
           this.projectService.updatePasswordProfile(payload).subscribe((result) => {
-            if ('flag' in result){
-              if (result.flag === false){
-                this.toastMessage.warning(result.message);
-                this.router.navigate(['authwall']);
-              }
-            }
             this.toastMessage.success(result.message);
             this.newPasswordForm.reset();
           }, (error) =>{
+            if(error.status === 401){
+              this.toastMessage.warning(error.error.message);
+              this.router.navigate(['authwall']);
+            }
             this.toastMessage.error(error.error.error);
           })
         }
@@ -98,26 +95,23 @@ export class MyprofileComponent implements OnInit {
   // =====================
   firstnameUpdate(){
     if(this.newFirstnameForm.get('firstname')?.value != "" || this.newFirstnameForm.get('firstname')?.value != null){
-      let ids = localStorage.getItem('todo-id');
-      if (ids != null){
+      if (this.yourDetails.id != null){
         let payload = {
           'content':{
             'firstname' : this.newFirstnameForm.get('firstname')?.value,
-            'id': window.atob(ids),
+            'id': this.yourDetails.id,
           }
         }
         this.projectService.updateUserfirstname(payload).subscribe((result) =>{
-          if ('flag' in result){
-            if (result.flag === false){
-              this.toastMessage.warning(result.message);
-              this.router.navigate(['authwall']);
-            }
-          }
           this.toastMessage.success(result.message);
           this.newFirstnameForm.reset();
           this.allUsers();
           this.popUserDetails();
         },(error)=>{
+          if(error.status === 401){
+            this.toastMessage.warning(error.error.message);
+            this.router.navigate(['authwall']);
+          }
           this.toastMessage.error(error.error.error);
         })
       }
@@ -131,26 +125,23 @@ export class MyprofileComponent implements OnInit {
   // =====================
   lastnameUpdate(){
     if(this.newLastnameForm.get('lastname')?.value != "" || this.newLastnameForm.get('lastname')?.value != null){
-      let ids = localStorage.getItem('todo-id');
-      if (ids != null){
+      if (this.yourDetails.id != null){
         let payload = {
           'content':{
             'lastname' : this.newLastnameForm.get('lastname')?.value,
-            'id': window.atob(ids),
+            'id': this.yourDetails.id,
           }
         }
         this.projectService.updateUserlastname(payload).subscribe((result) =>{
-          if ('flag' in result){
-            if (result.flag === false){
-              this.toastMessage.warning(result.message);
-              this.router.navigate(['authwall']);
-            }
-          }
           this.toastMessage.success(result.message);
           this.newLastnameForm.reset();
           this.allUsers();
           this.popUserDetails();
         },(error)=>{
+          if(error.status === 401){
+            this.toastMessage.warning(error.error.message);
+            this.router.navigate(['authwall']);
+          }
           this.toastMessage.error(error.error.error);
         })
       }
@@ -162,8 +153,23 @@ export class MyprofileComponent implements OnInit {
   // Update the Email 
   // =====================
   emailUpdate(){
-    if(this.newEmailForm.get('firstname')?.value != "" || this.newEmailForm.get('firstname')?.value != null){
-      let ids = localStorage.getItem('todo-id');
+    if(this.newEmailForm.get('email')?.value != "" || this.newEmailForm.get('email')?.value != null){
+      if (this.yourDetails.id != null){
+        let payload = {
+          'content':{
+            'email' : this.newEmailForm.get('email')?.value,
+            'id': this.yourDetails.id,
+          }
+        }
+        this.projectService.updateUserEmail(payload).subscribe((result)=>{
+          this.toastMessage.success(result.message);
+        }, (error) =>{
+          if (error.status === 401){
+            this.toastMessage.warning(error.error.message);
+          }
+          this.toastMessage.error(error.error.error);
+        })
+      }
     }
   }
 
@@ -176,46 +182,54 @@ export class MyprofileComponent implements OnInit {
     if(this.isAdmin === true){
       let dialogRef = this.dialog.open(DialogComponent);
       dialogRef.afterClosed().subscribe((result)=>{
-        if (result === true){
+        if (Boolean(result) === true){
           if(decision === 'self'){
             this.projectService.accountDeletion(String(ids)).subscribe((result)=>{
-              if ('flag' in result){
-                this.toastMessage.error(result.message);
-                this.router.navigate(['authwall']);
+              this.toastMessage.success(result.message);
+              this.router.navigate(['authwall']);
+            },(error)=>{
+              if(error.status != 404){
+                this.toastMessage.warning(error.error.message);
               }
               else{
-                this.toastMessage.success(result.message);
+                this.toastMessage.error(error.error.error);
               }
-              
-            },(error)=>{
-              this.toastMessage.error(error.error.error);
             })
           }
           else{
             this.projectService.deleteUser(String(ids)).subscribe((result)=>{
-              if ('flag' in result){
-                this.toastMessage.error(result.message);
+              this.toastMessage.success(result.message);
+              this.allUsers();
+            }, (error) =>{
+              if(error.status != 404){
+                this.toastMessage.warning(error.error.message);
               }
               else{
-                this.toastMessage.success(result.message);
+                this.toastMessage.error(error.error.error);
               }
-            }, (error) =>{
-              this.toastMessage.error(error.error.error);
             })
           }
         }
       })
     }
     else{
-      this.projectService.deleteUser(String(ids)).subscribe((result)=>{
-        if ('flag' in result){
-          this.toastMessage.error(result.message);
+      let dialogRef = this.dialog.open(DialogComponent);
+      dialogRef.afterClosed().subscribe((result)=>{
+        if (Boolean(result) === true){
+          if(decision === 'self'){
+            this.projectService.deleteUser(String(ids)).subscribe((result)=>{
+              this.toastMessage.success(result.message);
+              this.router.navigate(['authwall']);
+            }, (error) =>{
+              if(error.status != 404){
+                this.toastMessage.warning(error.error.warning);
+              }
+              else{
+                this.toastMessage.error(error.error.error);
+              }
+            })
+          }
         }
-        else{
-          this.toastMessage.success(result.message);
-        }
-      }, (error) =>{
-        this.toastMessage.error(error.error.error);
       })
     }
   }
@@ -300,6 +314,7 @@ export class MyprofileComponent implements OnInit {
       }
       this.projectService.makePersonAdmin(payload).subscribe((result)=>{
         this.toastMessage.success(result.message);
+        this.allUsers();
       }, (error)=>{
         this.toastMessage.error(error.error.error)
       })

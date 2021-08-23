@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../services/general-service';
+import { ProjectService } from '../services/project-service';
 @Component({
   selector: 'app-forgotpwd',
   templateUrl: './forgotpwd.component.html',
@@ -9,11 +11,12 @@ import { ToastrService } from 'ngx-toastr';
 export class ForgotpwdComponent implements OnInit {
 
   otpSent:boolean = false;
+  message:string = "";
   email:string = "";
   validateOTP:string = "";
   
 
-  constructor(private router: Router, private toastMessage:ToastrService) { }
+  constructor(private router: Router, private toastMessage:ToastrService,private messageService:DataService,private projectService: ProjectService) { }
 
   ngOnInit(): void {
   }
@@ -27,19 +30,31 @@ export class ForgotpwdComponent implements OnInit {
     }
   }
 
+
+
+  // ====================
+  // Send OTP to the concerned person
+  // ====================
   sendOTP(){
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (this.email != ""){
       if (re.test(String(this.email).toLowerCase())){
         if (this.otpSent === false ){
           this.otpSent = true
-          //Need to make an api call for generating the mail to send the OTP. 
-          // Once the message from API call is obtained then we can trigger the below timer
-          // Add the sent otp to the local_storage
-          let otp = ""
-          localStorage.setItem(this.email, otp);
-          this.toastMessage.success("OTP successfully send to the registered email");
-          this.startTimer();
+          let payload ={
+            'content' :{
+              'email' : this.email
+            }
+          }
+          this.projectService.emailOTP(payload).subscribe((result) =>{
+            this.toastMessage.success(result.message);
+            this.startTimer();
+          }, (error)=>{
+            if(error.status === 404){
+              this.toastMessage.warning(error.error.message);
+            }
+            this.toastMessage.error(error.error.error);
+          })
         }
         else{
           this.toastMessage.warning("OTP has been already sent");
@@ -59,15 +74,21 @@ export class ForgotpwdComponent implements OnInit {
 
   validationOfOTP(){
     if (this.validateOTP){
-      let otp = localStorage.getItem(this.email);
-      if (otp === this.validateOTP){
-        this.toastMessage.success("OTP is correct");
-        localStorage.removeItem(this.email);
-        this.router.navigate(['reset'])
+      let payload = {
+        'content' : {
+          'otp' : this.validateOTP
+        }
       }
-      else{
-        this.toastMessage.error("OTP is not valid");
-      }
+      this.projectService.validateSentOTP(payload).subscribe((result)=>{
+        this.toastMessage.success(result.message);
+        this.messageService.changeMessage(this.email);
+        this.router.navigate(['reset']);
+      },(error)=>{
+        if(error.status === 400){
+          this.toastMessage.warning(error.error.earning);
+        }
+        this.toastMessage.error(error.error.error);
+      })
     }
     else{
       this.toastMessage.warning("Please enter the OTP");
