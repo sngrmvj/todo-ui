@@ -26,8 +26,10 @@ export const UrlService = {
     passwordResetFromProfileURl: "/authentication/change_password_from_profile",
 
     make_adminURL: "/authentication/makeAdmin",
-    feedbackURL : "/authentication/feedback",
     blacklistTokenURL: "/authentication/blacklist",
+
+    feedbackURL : "/authentication/feedback",
+    displayFeedbackURL :"/authentication/display_feedback",
 
     getAllURL: "/authentication/get_all",
     getUserURL: "/authentication/get_user"

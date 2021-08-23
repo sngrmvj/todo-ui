@@ -39,7 +39,9 @@ export class ResetPasswordComponent implements OnInit {
           if(error.status){
             this.toastMessage.warning(error.error.message);
           }
-          this.toastMessage.error(error.error.error);
+          else{
+            this.toastMessage.error(error.error.error);
+          }
         })
       }
       else{

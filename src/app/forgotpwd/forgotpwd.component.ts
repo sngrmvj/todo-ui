@@ -53,7 +53,9 @@ export class ForgotpwdComponent implements OnInit {
             if(error.status === 404){
               this.toastMessage.warning(error.error.message);
             }
-            this.toastMessage.error(error.error.error);
+            else{
+              this.toastMessage.error(error.error.error);
+            }
           })
         }
         else{
@@ -87,7 +89,9 @@ export class ForgotpwdComponent implements OnInit {
         if(error.status === 400){
           this.toastMessage.warning(error.error.earning);
         }
-        this.toastMessage.error(error.error.error);
+        else{
+          this.toastMessage.error(error.error.error);
+        }
       })
     }
     else{

@@ -103,7 +103,7 @@
         </div>
         <div style="display: flex;flex-wrap:wrap;flex-direction: column;padding: 10px;">
             <header><b>Please provide feedback -</b></header><br>
-            <form #form="ngForm" (ngSubmit)="submitFeedback(form.value)">
+            <form #form="ngForm" (ngSubmit)="submitFeedback(form.value); form.resetForm();">
                 <textarea name="feedback" ngModel placeholder="Type here !!" style="border-radius: 5px;width:500px;padding:10px">
                 </textarea><br><br>
                 <button class="feedback-button" type="submit">Submit Feedback</button>

@@ -20,6 +20,7 @@ export class ProjectService {
     update_firstname:string = UrlService.updatefirstnameURL
     password_profile:string = UrlService.passwordResetFromProfileURl
     forgotPasswordURL: string = UrlService.forgotPasswordURL
+    blacklistURL: string = UrlService.blacklistTokenURL
     deleteURLS: any = {
         'account_deletion' : UrlService.accountDeleteURL,
         'deleteUser': UrlService.deleteUserURL
@@ -28,8 +29,11 @@ export class ProjectService {
         'send_otp': UrlService.sendOtpURL,
         'validate_otp': UrlService.validateOTPURL
     }
-    blacklistURL: string = UrlService.blacklistTokenURL
-    storeFeedbackURL: string = UrlService.feedbackURL
+    feedbacks: any  = {
+        'storeFeedback': UrlService.feedbackURL,
+        'displayFeedback': UrlService.displayFeedbackURL
+    }
+
 
 
     // Auth Functions   
@@ -140,9 +144,17 @@ export class ProjectService {
         return this.http.get<any>(URL+this.blacklistURL,{withCredentials: true,responseType:'json' as 'json'})
     }
 
-    getTheFeedbackURL(data:any):Observable<any>{
+
+
+    // Feedback Section
+    getTheFeedback(data:any):Observable<any>{
         let URL = this.getUrl();
-        return this.http.put<any>(URL+this.storeFeedbackURL,data,{withCredentials: true,responseType:'json' as 'json'});
+        return this.http.put<any>(URL+this.feedbacks.storeFeedback,data,{withCredentials: true,responseType:'json' as 'json'});
+    }
+
+    getAllFeedback(): Observable<any>{
+        let URL = this.getUrl();
+        return this.http.get<any>(URL+this.feedbacks.displayFeedback,{withCredentials: true,responseType:'json' as 'json'})
     }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../services/project-service';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -20,6 +20,7 @@ export class MyprofileComponent implements OnInit {
   currentPasswordHide:boolean = true;
   yourDetails:any = {};
   allUserDetails: any = [];
+  allFeedbackDetails: any = [];
 
   constructor(private router: Router,private toastMessage:ToastrService, private projectService:ProjectService,private dialog:MatDialog) { }
 
@@ -28,8 +29,8 @@ export class MyprofileComponent implements OnInit {
     this.getIsAdmin()
     this.popUserDetails()
     this.allUsers()
+    this.allFeedback()
   }
-
 
 
 
@@ -79,7 +80,9 @@ export class MyprofileComponent implements OnInit {
               this.toastMessage.warning(error.error.message);
               this.router.navigate(['authwall']);
             }
-            this.toastMessage.error(error.error.error);
+            else{
+              this.toastMessage.error(error.error.error);
+            }
           })
         }
       }
@@ -112,7 +115,9 @@ export class MyprofileComponent implements OnInit {
             this.toastMessage.warning(error.error.message);
             this.router.navigate(['authwall']);
           }
-          this.toastMessage.error(error.error.error);
+          else{
+            this.toastMessage.error(error.error.error);
+          }
         })
       }
     }
@@ -142,7 +147,9 @@ export class MyprofileComponent implements OnInit {
             this.toastMessage.warning(error.error.message);
             this.router.navigate(['authwall']);
           }
-          this.toastMessage.error(error.error.error);
+          else{
+            this.toastMessage.error(error.error.error);
+          }
         })
       }
     }
@@ -167,7 +174,9 @@ export class MyprofileComponent implements OnInit {
           if (error.status === 401){
             this.toastMessage.warning(error.error.message);
           }
-          this.toastMessage.error(error.error.error);
+          else{
+            this.toastMessage.error(error.error.error);
+          }
         })
       }
     }
@@ -293,6 +302,25 @@ export class MyprofileComponent implements OnInit {
         }
         for (let item in result.message){
           this.allUserDetails.push(result.message[item]);
+        }
+      }, (error) =>{
+        this.toastMessage.error(error.error.error);
+      })
+    }
+  }
+
+
+  // ====================
+  // Display All User Feedback from DB
+  // ====================
+  allFeedback(){
+    if(this.isAdmin === true){
+      this.projectService.getAllFeedback().subscribe( (result) =>{
+        if(this.allFeedbackDetails.length > 0){
+          this.allFeedbackDetails.length = 0;
+        }
+        for (let item in result.message){
+          this.allFeedbackDetails.push(result.message[item]);
         }
       }, (error) =>{
         this.toastMessage.error(error.error.error);

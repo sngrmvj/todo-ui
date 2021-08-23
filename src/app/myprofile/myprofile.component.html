@@ -143,6 +143,23 @@
                 </div>
             </div>
         </div>
+        <br><br>
+        <div style="display: flex;flex-direction: column;flex-wrap: wrap;width:600px" *ngIf="isAdmin">
+            <div class="header">
+                <header style="font-variant: small-caps;font-size: 20px;"><b>Feedback Details</b></header>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let item of allFeedbackDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding:10px">
+                    <div class="items" style="width:100%">
+                        <label style="font-size: 15px;margin-right: 5px;color: black;">{{item.email}}</label><br>
+                        <p style="font-size: 12px;color:black">{{item.feedback}}</p><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 
 </div>
