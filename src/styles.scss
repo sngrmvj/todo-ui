@@ -17,9 +17,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: purple !important;
 }
 
+button{
+    outline: none;
+}
+
 
 .parametersPanel .mat-expansion-panel-body {
-    width:600px !important;
+    width:800px !important;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

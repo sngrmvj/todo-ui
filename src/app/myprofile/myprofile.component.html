@@ -126,12 +126,12 @@
             </div>
         </div>
         <br><br>
-        <div style="display: flex;flex-direction: column;flex-wrap: wrap;width:600px" *ngIf="isAdmin">
+        <div style="display: flex;flex-direction: column;flex-wrap: wrap;width:800px" *ngIf="isAdmin">
             <div class="header">
                 <header style="font-variant: small-caps;font-size: 20px;"><b>User Details</b></header>
             </div>
             <div class="card-body">
-                <div *ngFor="let item of allUserDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding:10px">
+                <div *ngFor="let item of allUserDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding:5px">
                     <div class="items">
                         <label style="font-size: 20px;margin-right: 5px;color: black;">{{item.firstname}}</label>
                         <label style="font-size: 20px;color:black">{{item.lastname}}</label><br>
@@ -144,22 +144,25 @@
             </div>
         </div>
         <br><br>
-        <div style="display: flex;flex-direction: column;flex-wrap: wrap;width:600px" *ngIf="isAdmin">
+        <div style="display: flex;flex-direction: column;flex-wrap: wrap;width:800px" *ngIf="isAdmin">
             <div class="header">
                 <header style="font-variant: small-caps;font-size: 20px;"><b>Feedback Details</b></header>
             </div>
-            <div class="card-body">
-                <div *ngFor="let item of allFeedbackDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding:10px">
-                    <div class="items" style="width:100%">
-                        <label style="font-size: 15px;margin-right: 5px;color: black;">{{item.email}}</label><br>
-                        <p style="font-size: 12px;color:black">{{item.feedback}}</p><br>
+            <div class="feedback_body">
+                <div *ngFor="let item of allFeedbackDetails" style="display: flex;flex-direction: row;flex-wrap: wrap;padding:10px;height: fit-content;width:100%">
+                    <div class="items" style="width:100%;display:flex;flex-direction: column;padding:10px">
+                        <div style="display: flex;flex-direction: row;padding:10px">
+                            <label style="font-size: 20px;margin-right: 5px;color: black;">{{item.firstname}}</label>
+                            <label style="font-size: 20px;margin-right: 5px;color: black;">{{item.lastname}}</label><br>
+                        </div>
+                        <div *ngFor="let feedbacks of item.feedback; let i = index" [attr.data-index]="i" style="display: flex;flex-direction:column;flex-wrap: wrap;padding-left:15px">
+                            <label style="font-size: 12px;color:black;margin-bottom:0px">{{i+1}}. {{feedbacks}}</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
+        <br><br>
     </div>
 
 </div>

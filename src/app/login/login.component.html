@@ -105,8 +105,8 @@
                     <div>
                         <label for="signup-password">Password <b style="color:red">*</b></label><br>
                         <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
-                            <input formControlName="password" matInput type="password" minlength="15" [type]="hide ? 'password' : 'text'"  required style="width: 280px !important;" autocomplete="off">
-                            <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <input formControlName="password" matInput type="password" minlength="15" [type]="signUpHide ? 'password' : 'text'"  required style="width: 280px !important;" autocomplete="off">
+                            <mat-icon matSuffix (click)="signUpHide = !signUpHide" style="cursor: pointer;">{{signUpHide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </div>
                     </div><br>
                     <div>

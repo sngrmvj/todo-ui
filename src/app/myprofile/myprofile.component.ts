@@ -344,7 +344,7 @@ export class MyprofileComponent implements OnInit {
         this.toastMessage.success(result.message);
         this.allUsers();
       }, (error)=>{
-        this.toastMessage.error(error.error.error)
+        this.toastMessage.error(error.error.error);
       })
     }
   }
@@ -359,7 +359,13 @@ export class MyprofileComponent implements OnInit {
     this.projectService.getUser(id_to_be_passed).subscribe((result) =>{
       this.yourDetails = result.message.content;
     }, (error) =>{
-      this.toastMessage.error(error.error.error);
+      if (error.status === 404){
+        this.toastMessage.warning(error.error.message);
+      }
+      else{
+        this.toastMessage.error(error.error.error);
+        this.router.navigate(['authwall']);
+      } 
     })
   }
 

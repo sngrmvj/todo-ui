@@ -53,13 +53,13 @@ label {
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 10px !important;
 }
 
 
 .items{
     box-shadow: 0 1px 1px #70CAB0;
     padding:10px;
-    margin-bottom: 10px;
     width: 250px;
     border-radius: 5px
 }
@@ -75,4 +75,23 @@ label {
     border-radius: 2px;
     border:none;
     color:white;
+}
+
+.feedback_div{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width:600px;
+}
+
+.feedback_body{
+    overflow-y: scroll;
+    display:flex;
+    height: 500px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
 }

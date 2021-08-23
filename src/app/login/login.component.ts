@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   toggleProperty: boolean = false;
   isPasswordMatch: boolean = false;
   hide:boolean = true;
+  signUpHide:boolean = true;
   
   constructor(private router: Router,private toastMessage:ToastrService, private projectService: ProjectService) {
     // This is function call.
