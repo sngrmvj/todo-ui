@@ -21,6 +21,9 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectService } from './services/project-service';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -33,13 +36,15 @@ import {MatExpansionModule} from '@angular/material/expansion';
     PlannersComponent,
     ForgotpwdComponent,
     ResetPasswordComponent,
-    MyprofileComponent
+    MyprofileComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
+    MatDialogModule,
     MatFormFieldModule,
     HttpClientModule,
     FormsModule,

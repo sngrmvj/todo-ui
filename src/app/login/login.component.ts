@@ -91,16 +91,18 @@ export class LoginComponent implements OnInit {
       }
       this.projectService.login(payload).subscribe((result) =>{
         this.toastMessage.success(result.body.message);
-        console.log(result.body)
         localStorage.setItem('todo-id',window.btoa(result.body.id));
         localStorage.setItem('todo-isAdmin',result.body.admin);
         localStorage.setItem('todo-loggedin','true');
         this.router.navigate(['planners']);
       }, (error) =>{
-        console.log(error.error);
-        this.toastMessage.error(error.error.error);
+        if(error.status === 400){
+          this.toastMessage.warning(error.error.error);
+        }
+        else{
+          this.toastMessage.error(error.error.error);
+        }
       })
-      
     }
   }
 

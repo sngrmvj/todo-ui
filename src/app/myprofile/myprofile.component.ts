@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../services/project-service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-myprofile',
@@ -19,7 +21,7 @@ export class MyprofileComponent implements OnInit {
   yourDetails:any = {};
   allUserDetails: any = [];
 
-  constructor(private router: Router,private toastMessage:ToastrService, private projectService:ProjectService) { }
+  constructor(private router: Router,private toastMessage:ToastrService, private projectService:ProjectService,private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.areYouAuthorized()
@@ -170,10 +172,51 @@ export class MyprofileComponent implements OnInit {
   // ====================
   // Delete user
   // ====================
-  deleteUser(ids:any){
+  deleteUser(ids:any,decision:any){
     if(this.isAdmin === true){
-      // console.log(ids)
-      // Need to ask for confirmation.
+      let dialogRef = this.dialog.open(DialogComponent);
+      dialogRef.afterClosed().subscribe((result)=>{
+        if (result === true){
+          if(decision === 'self'){
+            this.projectService.accountDeletion(String(ids)).subscribe((result)=>{
+              if ('flag' in result){
+                this.toastMessage.error(result.message);
+                this.router.navigate(['authwall']);
+              }
+              else{
+                this.toastMessage.success(result.message);
+              }
+              
+            },(error)=>{
+              this.toastMessage.error(error.error.error);
+            })
+          }
+          else{
+            this.projectService.deleteUser(String(ids)).subscribe((result)=>{
+              if ('flag' in result){
+                this.toastMessage.error(result.message);
+              }
+              else{
+                this.toastMessage.success(result.message);
+              }
+            }, (error) =>{
+              this.toastMessage.error(error.error.error);
+            })
+          }
+        }
+      })
+    }
+    else{
+      this.projectService.deleteUser(String(ids)).subscribe((result)=>{
+        if ('flag' in result){
+          this.toastMessage.error(result.message);
+        }
+        else{
+          this.toastMessage.success(result.message);
+        }
+      }, (error) =>{
+        this.toastMessage.error(error.error.error);
+      })
     }
   }
 
@@ -276,7 +319,6 @@ export class MyprofileComponent implements OnInit {
       this.toastMessage.error(error.error.error);
     })
   }
-
 
 
 }

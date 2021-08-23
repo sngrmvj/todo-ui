@@ -1,0 +1,36 @@
+
+.buttons_div{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.yes{
+    border: none;
+    padding: 10px;
+    background-color: transparent;
+    color: black;
+    outline: none;
+    margin-left: -5px;
+    margin-right: 5px;
+}
+.yes:hover{
+    background-color: whitesmoke;
+    border-radius: 5px;
+    color:green
+}
+
+.no{
+    border: none;
+    padding: 10px;
+    background-color: transparent;
+    color: black;
+    outline:none;
+}
+.no:hover{
+    background-color: whitesmoke;
+    border-radius: 5px;
+    color: red;
+}

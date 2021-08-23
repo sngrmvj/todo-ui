@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, ObservedValueOf, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { UrlService } from './url-service';
 
@@ -19,6 +19,10 @@ export class ProjectService {
     update_lastname:string = UrlService.updatelastnameURL
     update_firstname:string = UrlService.updatefirstnameURL
     password_profile:string = UrlService.passwordResetFromProfileURl
+    deleteURLS: any = {
+        'account_deletion' : UrlService.accountDeleteURL,
+        'deleteUser': UrlService.deleteUserURL
+    }
 
 
     // Auth Functions   
@@ -83,6 +87,18 @@ export class ProjectService {
     updatePasswordProfile(data:any): Observable<any>{
         let URL = this.getUrl();
         return this.http.put<any>(URL+this.password_profile,data,{withCredentials: true,responseType:'json' as 'json'})
+    }
+
+
+
+    deleteUser(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.delete<any>(URL+this.deleteURLS.deleteUser+"?id="+data,{withCredentials: true,responseType:'json' as 'json'})
+    }
+
+    accountDeletion(data:any):Observable<any>{
+        let URL = this.getUrl();
+        return this.http.delete<any>(URL+this.deleteURLS.account_deletion+"?id="+data,{withCredentials: true,responseType:'json' as 'json'})
     }
 
 }
