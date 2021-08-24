@@ -14,14 +14,23 @@ export class PlannersComponent implements OnInit {
   displayDailyInput: boolean = false;
   displayGeneralInput: boolean = false;
   cronJob: CronJob;
-  general_tasks:any = ['Tasks','Ready',];
+  shouldNotRefresh: boolean = true;
+
+  general_tasks:any = ['Tasks','Ready'];
+  generalTasksChecked: any = [];
   daily_tasks:any = ['Milk','Eggs'];
+  dailyTasksChecked:any = [];
 
   constructor(private toastMessage:ToastrService, private router: Router, private projectService:ProjectService) {
     // For Every minute use all stars 
+    // when the page refreshes it makes an api call So we need to have four lists stored per person
+    // daily tasks, daily tasks checked, general tasks, general tasks checked.
+    // It should be possible to delete even after checked.
+    // Need to handle the daily tasks, daily tasks checked during daily refresh.
     this.cronJob = new CronJob('0 0 * * * *', async () => {
       try {
         await this.refreshDailyTasks();
+        this.shouldNotRefresh = false;
       } catch (e) {
         console.error(e);
         this.toastMessage.error("Error - "+ e);
@@ -36,7 +45,6 @@ export class PlannersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.areYouAuthorized();
   }
 
@@ -80,10 +88,18 @@ export class PlannersComponent implements OnInit {
       // Add the APi call to it
       this.toastMessage.success("Task deleted successfully!!");
     }
-    else{
+    else if(value === 'general_tasks'){
       let deleted_item = this.general_tasks.splice(index,1);
       // Add the APi call to it
       this.toastMessage.success("Task deleted successfully!!");
+    }
+    else if(value === 'dailyTasksChecked'){
+      let deleted_item = this.dailyTasksChecked.splice(index,1);
+      this.toastMessage.success("Task deleted successfully!!")
+    }
+    else if(value === ''){
+      let deleted_item = this.dailyTasksChecked.splice(index,1);
+      this.toastMessage.success("Task deleted successfully!!")
     }
   }
 
@@ -138,6 +154,35 @@ export class PlannersComponent implements OnInit {
   closeGeneralInputTask(){
     if (this.displayGeneralInput === true){
       this.displayGeneralInput = false;
+    }
+  }
+
+
+  checked(value:any,index:any){
+    if (value === 'daily_tasks'){
+      let deleted_item = this.daily_tasks.splice(index,1);
+      this.dailyTasksChecked.push(deleted_item);
+      // NEED TO ADD THAT IN THE BACKEND API CALL
+      this.toastMessage.success("Daily task checked successfully!!");
+    }else{
+      let deleted_item = this.general_tasks.splice(index,1);
+      this.generalTasksChecked.push(deleted_item);
+      // Need to add that in the backend API CALL
+      this.toastMessage.success("General task checked successfully!!");
+    }
+  }
+
+  unChecked(value:any,index:any){
+    if (value === 'dailyTasksChecked'){
+      let deleted_item = this.dailyTasksChecked.splice(index,1);
+      this.daily_tasks.push(deleted_item);
+      // NEED TO ADD THAT IN THE BACKEND API CALL
+      this.toastMessage.success("Daily task unchecked successfully!!");
+    }else{
+      let deleted_item = this.generalTasksChecked.splice(index,1);
+      this.general_tasks.push(deleted_item);
+      // NEED TO ADD THAT IN THE BACKEND API CALL
+      this.toastMessage.success("General task unchecked successfully!!");
     }
   }
 
