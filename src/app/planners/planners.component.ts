@@ -26,6 +26,7 @@ export class PlannersComponent implements OnInit {
     // when the page refreshes it makes an api call So we need to have four lists stored per person
     // daily tasks, daily tasks checked, general tasks, general tasks checked.
     // It should be possible to delete even after checked.
+    // Deletion of item in the daily tasks, daily tasks checked.
     // Need to handle the daily tasks, daily tasks checked during daily refresh.
     this.cronJob = new CronJob('0 0 * * * *', async () => {
       try {
@@ -91,15 +92,15 @@ export class PlannersComponent implements OnInit {
     else if(value === 'general_tasks'){
       let deleted_item = this.general_tasks.splice(index,1);
       // Add the APi call to it
-      this.toastMessage.success("Task deleted successfully!!");
+      this.toastMessage.success("General task deleted successfully!!");
     }
     else if(value === 'dailyTasksChecked'){
       let deleted_item = this.dailyTasksChecked.splice(index,1);
-      this.toastMessage.success("Task deleted successfully!!")
+      this.toastMessage.success("Daily task deleted successfully!!");
     }
-    else if(value === ''){
-      let deleted_item = this.dailyTasksChecked.splice(index,1);
-      this.toastMessage.success("Task deleted successfully!!")
+    else if(value === 'generalTasksChecked'){
+      let deleted_item = this.generalTasksChecked.splice(index,1);
+      this.toastMessage.success("General task deleted successfully!!");
     }
   }
 
@@ -158,6 +159,9 @@ export class PlannersComponent implements OnInit {
   }
 
 
+  // =======================
+  // Adds the item to the checked ones list
+  // =======================
   checked(value:any,index:any){
     if (value === 'daily_tasks'){
       let deleted_item = this.daily_tasks.splice(index,1);
@@ -172,6 +176,9 @@ export class PlannersComponent implements OnInit {
     }
   }
 
+  // ===============================
+  // If you click on this, This adds to the unchecked lists
+  // ===============================
   unChecked(value:any,index:any){
     if (value === 'dailyTasksChecked'){
       let deleted_item = this.dailyTasksChecked.splice(index,1);

@@ -51,10 +51,14 @@
                         <span class="hide" (click)="closeDailyInputTask()"><b>✖</b></span>
                     </form>
                 </div>
-                <button class="add-item" (click)="showDailyTaskInput()"> <b>+</b> Add Item</button><br>
-
+                <button class="add-item" (click)="showDailyTaskInput()"> <b>+</b> Add Item</button>
+                
+                <div style="width:100%;align-items: center;display: flex;flex-wrap: wrap;padding:10px;justify-content: center;">
+                    <div style="border-bottom:1px solid rgb(201, 195, 195);width:99%"></div>
+                </div>
+                <label style="color:grey">Checked Items</label><br>
                 <div *ngFor="let tasks of dailyTasksChecked;let i=index" style="display: flex;flex-wrap: wrap;flex-direction: row;">
-                    <mat-checkbox style="max-width: 550px;margin-right: 20px;" [checked]="true">
+                    <mat-checkbox style="max-width: 550px;margin-right: 20px;" [checked]="true" (click)="unChecked('dailyTasksChecked',i)">
                         <span style="color:black;text-decoration:line-through;" (click)="unChecked('dailyTasksChecked',i)">
                             <span #daily_task class="checkbox" (click)="unChecked('dailyTasksChecked',i)">{{tasks}}</span>
                         </span>
@@ -86,9 +90,12 @@
                     </form>
                 </div>
                 <button class="add-item" (click)="showGeneralTaskInput()"> <b>+</b> Add Item</button>
-
+                <div style="width:100%;align-items: center;display: flex;flex-wrap: wrap;padding:10px;justify-content: center;">
+                    <div style="border-bottom:1px solid rgb(201, 195, 195);width:99%"></div>
+                </div>
+                <label style="color:grey">Checked Items</label><br>
                 <div *ngFor="let tasks of generalTasksChecked;let i=index" style="display: flex;flex-wrap: wrap;flex-direction: row;">
-                    <mat-checkbox style="max-width: 550px;margin-right: 20px;" [checked]="true">
+                    <mat-checkbox style="max-width: 550px;margin-right: 20px;" [checked]="true" (click)="unChecked('generalTasksChecked',i)">
                         <span style="color:black;text-decoration:line-through;" (click)="unChecked('generalTasksChecked',i)">
                             <span #daily_task class="checkbox" (click)="unChecked('generalTasksChecked',i)">{{tasks}}</span>
                         </span>
