@@ -31,11 +31,11 @@
 <br>
 
 <div id="container" style="display: flex;flex-direction: row;width:100%;height:100%;padding:10px;margin-bottom: 20px;">
-    <div class="daily">
+    <div class="daily" >
         <div class="title">
             <header style="font-size: 20px;font-variant: small-caps;">Daily Tasks</header>
         </div>
-        <div class="daily_div">
+        <div class="daily_div" >
             <div class="daily_checks">
                 <div *ngFor="let tasks of daily_tasks;let i=index" style="display: flex;flex-wrap: wrap;flex-direction: row;">
                     <mat-checkbox style="max-width: 550px;margin-right: 20px;" (click)="checked('daily_tasks',i)" >
@@ -74,7 +74,7 @@
             <header style="font-size: 20px;font-variant: small-caps;">General Tasks</header>
         </div>
         <div class="normal_div">
-            <div class="daily_checks">
+            <div class="daily_checks" >
                 <div *ngFor="let tasks of general_tasks;let i=index" style="display: flex;flex-wrap: wrap;flex-direction: row;">
                     <mat-checkbox style="max-width: 550px;margin-right: 20px;" (click)="checked('general_tasks',i)">
                         <span class="checkbox" (click)="checked('general_tasks',i)">{{tasks}}</span>

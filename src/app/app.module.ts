@@ -23,6 +23,8 @@ import { ProjectService } from './services/project-service';
 import { DataService } from './services/general-service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { DialogComponent } from './dialog/dialog.component';
 
 
@@ -43,10 +45,12 @@ import { DialogComponent } from './dialog/dialog.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatSlideToggleModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatSidenavModule,
     HttpClientModule,
     FormsModule,
     MatExpansionModule,

@@ -14,6 +14,7 @@ export class PlannersComponent implements OnInit {
   displayDailyInput: boolean = false;
   displayGeneralInput: boolean = false;
   cronJob: CronJob;
+  isDarkTheme: boolean = true; 
   shouldNotRefresh: boolean = true;
 
   general_tasks:any = ['Tasks','Ready'];
