@@ -9,7 +9,7 @@
 
 .yes{
     border: none;
-    padding: 10px;
+    padding: -10px;
     background-color: transparent;
     color: black;
     outline: none;
@@ -17,20 +17,21 @@
     margin-right: 5px;
 }
 .yes:hover{
-    background-color: whitesmoke;
+    background-color: rgb(0, 216, 0);
     border-radius: 5px;
-    color:green
+    color:white
 }
 
 .no{
     border: none;
-    padding: 10px;
+    padding: -10px;
     background-color: transparent;
     color: black;
     outline:none;
 }
+
 .no:hover{
-    background-color: whitesmoke;
+    background-color: red;
     border-radius: 5px;
-    color: red;
+    color: white;
 }

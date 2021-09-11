@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../services/project-service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -22,6 +22,14 @@ export class MyprofileComponent implements OnInit {
   allUserDetails: any = [];
   allFeedbackDetails: any = [];
 
+  // Question
+  accountDeleteQuestion: string = 'Do you want to delete your account?';
+  migrateDatabaseQuestion: string = 'Do you want to migrate the database?';
+  firstnameUpdateQuestion: string = 'Do you want to update the firstname?';
+  lastnameUpdateQuestion: string = 'Do you want to update the lastname?';
+  emailUpdateQuestion: string = 'Do you want to update the email?';
+  passwordUpdateQuestion: string = 'Do you want to update the password?';
+
   constructor(private router: Router,private toastMessage:ToastrService, private projectService:ProjectService,private dialog:MatDialog) { }
 
   ngOnInit(): void {
@@ -31,6 +39,47 @@ export class MyprofileComponent implements OnInit {
     this.allUsers()
     this.allFeedback()
   }
+
+  // =====================
+  // Confirmation dialog box
+  // =====================
+  openDialog(query:any,choice:any,options:any){
+    const dialogRef = this.dialog.open(DialogComponent,{data:{question:query}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === "true"){
+        if (choice === 'migrate'){
+          console.info("Migrating the database")
+          this.migration();
+        }
+        else if(choice === 'self'){
+          console.info("Self account delete");
+          this.deleteIndividual(options,choice);
+        }
+        else if(choice === 'others'){
+          console.info("User account deletion");
+          this.deleteIndividual(options,choice);
+        }
+        else if(choice === 'firstname'){
+          console.info("Updating firstname")
+          this.firstnameUpdate()
+        }
+        else if(choice === 'lastname'){
+          console.info("Updating lastname")
+          this.lastnameUpdate()
+        }
+        else if(choice === 'email'){
+          console.info("Updating Email")
+          this.emailUpdate()
+        }
+        else if(choice === 'password'){
+          console.info("Updating password")
+          this.passwordUpdate()
+        }
+      }  
+    });
+  }
+
 
 
 
@@ -187,7 +236,7 @@ export class MyprofileComponent implements OnInit {
   // ====================
   // Delete user
   // ====================
-  deleteUser(ids:any,decision:any){
+  deleteIndividual(ids:any,decision:any){
     if(this.isAdmin === true){
       let dialogRef = this.dialog.open(DialogComponent);
       dialogRef.afterClosed().subscribe((result)=>{
@@ -369,5 +418,17 @@ export class MyprofileComponent implements OnInit {
     })
   }
 
+  // ====================
+  // Migration of Database when there is an update in the database Schema
+  // ====================
+  migration(){
+    if(this.isAdmin === true){
+      this.projectService.migrate().subscribe((result)=>{
+        this.toastMessage.success(result.message);
+      },(error)=>{
+        this.toastMessage.error(error.error.error);
+      })
+    }
+  }
 
 }

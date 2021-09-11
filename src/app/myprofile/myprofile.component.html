@@ -36,23 +36,34 @@
                 <label style="font-size: 20px;margin-right: 5px;color:black">{{yourDetails.firstname}}</label>
                 <label style="font-size: 20px;color:black">{{yourDetails.lastname}}</label><br>
                 <label style="color:black;font-size: 12px">{{yourDetails.email}}</label><br>
-                <button style="color: red;padding:0px;background-color: transparent;border: none;outline:none" mat-raised-button (click)="deleteUser(yourDetails.id,'self')">Delete Account</button>
+                <button style="color: red;padding:0px;background-color: transparent;border: none;outline:none" (click)="openDialog(accountDeleteQuestion,'self', yourDetails.id)">Delete Account</button>
             </div>
         </div>
         <br><br>
         <div style="display: flex;flex-direction: column;flex-wrap: wrap;">
             <div class="header">
-                <header style="font-variant: small-caps;font-size: 20px;"><b>Update Profile</b></header>
+                <header style="font-variant: small-caps;font-size: 20px;"><b>Admin Operations</b></header>
             </div><br>
             <div>
                 <mat-accordion>
+
+                    <mat-expansion-panel *ngIf="isAdmin" class="parametersPanel" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header >
+                            <mat-panel-title>
+                                <b>Migrate Database</b>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <label><b>Note -</b> Migrate once there is update in the schema of the database.</label><br>
+                        <button class="updateButton" (click)="openDialog(migrateDatabaseQuestion,'migrate',null)">Migrate</button>
+                    </mat-expansion-panel>
+
                     <mat-expansion-panel class="parametersPanel" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         <mat-expansion-panel-header >
                             <mat-panel-title>
                                 <b>Update Firstname</b>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <form [formGroup]="newFirstnameForm" (ngSubmit)="firstnameUpdate()">
+                        <form [formGroup]="newFirstnameForm" (ngSubmit)="openDialog(firstnameUpdateQuestion,'firstname',null)">
                             <div>
                                 <label for="new-firstname">New Firstname <b style="color:red">*</b></label><br>
                                 <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
@@ -62,13 +73,14 @@
                             <button type="submit" class="updateButton">Submit</button>
                         </form>
                     </mat-expansion-panel>
+
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <b>Update Lastname</b>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <form [formGroup]="newLastnameForm" (ngSubmit)="lastnameUpdate()">
+                        <form [formGroup]="newLastnameForm" (ngSubmit)="openDialog(lastnameUpdateQuestion,'lastname',null)">
                             <div>
                                 <label for="new-lastname">New Lastname <b style="color:red">*</b></label><br>
                                 <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
@@ -78,13 +90,14 @@
                             <button type="submit" class="updateButton">Submit</button>
                         </form>
                     </mat-expansion-panel>
+
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <b>Update Email</b>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                        <form [formGroup]="newEmailForm" (ngSubmit)="emailUpdate()">
+                        <form [formGroup]="newEmailForm" (ngSubmit)="openDialog(emailUpdateQuestion,'email',null)">
                             <div>
                                 <label for="new-email">New Email <b style="color:red">*</b></label><br>
                                 <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
@@ -94,13 +107,14 @@
                             <button type="submit" class="updateButton">Submit</button>
                         </form>
                     </mat-expansion-panel>
+
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <b>Update Password</b>
                             </mat-panel-title>
                         </mat-expansion-panel-header>
-                            <form [formGroup]="newPasswordForm" (ngSubmit)="passwordUpdate()">
+                            <form [formGroup]="newPasswordForm" (ngSubmit)="openDialog(passwordUpdateQuestion,'password',null)">
                                 <div>
                                     <label for="current-password">Current Password <b style="color:red">*</b></label><br>
                                     <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
@@ -122,6 +136,7 @@
                                 <button type="submit" class="updateButton">Submit</button>
                             </form>
                     </mat-expansion-panel>
+
                 </mat-accordion>
             </div>
         </div>
@@ -136,7 +151,7 @@
                         <label style="font-size: 20px;margin-right: 5px;color: black;">{{item.firstname}}</label>
                         <label style="font-size: 20px;color:black">{{item.lastname}}</label><br>
                         <label style="color:black;font-size: 12px;">{{item.email}}</label><br>
-                        <button style="border:none;color:red;padding:0px;background-color: transparent;outline:none" *ngIf="item.isadmin===false" (click)="deleteUser(item.id,'others')">Delete</button>
+                        <button style="border:none;color:red;padding:0px;background-color: transparent;outline:none" *ngIf="item.isadmin===false" (click)="openDialog(accountDeleteQuestion,'others', yourDetails.id)">Delete</button>
                         <button style="border:none;color:dodgerblue;padding:0px;background-color: transparent; margin-left: 30px;outline: none;" *ngIf="item.isadmin===false" (click)="makeAdmin(item.id)">Make Admin</button>
                         <label *ngIf="item.isadmin" style="color:#70CDB0">Admin</label>
                     </div>

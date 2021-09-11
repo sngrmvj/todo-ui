@@ -1,9 +1,19 @@
 
-<header mat-dialog-title>Confirmation</header>
-<mat-dialog-content>Do you really want to delete your accout?</mat-dialog-content>
-<mat-dialog-actions>
-    <div class="buttons_div">
-        <button class="yes" mat-button mat-dialog-close mat-dialog-close="true"> Yes </button>
-        <button class="no" mat-button mat-dialog-close mat-dialog-close="false"> No </button>
+<div style="width:300px">
+    <div style="display: flex;margin-bottom: 5px;">
+        <header style="font-size: 20px;font-variant: small-caps;">Action Confirmation</header>
     </div>
-</mat-dialog-actions>
+    <div style="width:150px;border-bottom:0.5px solid black;margin-left:30px"></div>
+    <br>
+    <div mat-dialog-content style="margin-bottom: 5px;">
+        <header style="font-size: 15px;"><b>{{question}}</b></header>
+    </div>
+    <div>
+        <mat-dialog-actions class="buttons_div">
+            <button class="yes" mat-button mat-dialog-close mat-dialog-close="true"> Yes </button>
+            <button class="no" mat-button  mat-dialog-close mat-dialog-close="false"> No </button>
+        </mat-dialog-actions>
+    </div>
+    
+</div>
+

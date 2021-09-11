@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { Router } from '@angular/router';
 import { ProjectService } from './services/project-service';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, tap } from "rxjs/operators";
@@ -13,7 +14,7 @@ import { of, throwError, interval } from 'rxjs';
 export class AppComponent implements OnInit{
   title = 'to-do-planner';
 
-  constructor(private http: HttpClient,private toastMessage:ToastrService, private projectService: ProjectService){
+  constructor(private http: HttpClient,private router: Router,private toastMessage:ToastrService, private projectService: ProjectService){
     
   }
 
@@ -29,7 +30,8 @@ export class AppComponent implements OnInit{
       this.toastMessage.success(result.status);
     }, (error)=>{
       this.toastMessage.warning("Error in contacting the server");
-      this.toastMessage.warning("Please contact the admin")
+      this.toastMessage.warning("Please contact the admin");
+      this.router.navigate(['authwall']);
     })
   }  
 

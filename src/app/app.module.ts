@@ -23,6 +23,8 @@ import { ProjectService } from './services/project-service';
 import { DataService } from './services/general-service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DialogComponent } from './dialog/dialog.component';
@@ -51,6 +53,8 @@ import { DialogComponent } from './dialog/dialog.component';
     MatDialogModule,
     MatFormFieldModule,
     MatSidenavModule,
+    MatButtonModule,
+    MatCardModule,
     HttpClientModule,
     FormsModule,
     MatExpansionModule,
@@ -59,6 +63,7 @@ import { DialogComponent } from './dialog/dialog.component';
     BrowserAnimationsModule,
     MatPasswordStrengthModule.forRoot()
   ],
+  entryComponents:[DialogComponent],
   providers: [ProjectService,DataService],
   bootstrap: [AppComponent]
 })
