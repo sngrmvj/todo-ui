@@ -8,6 +8,7 @@ import { UrlService } from './url-service';
 export class ProjectService {
     constructor(private http: HttpClient) { }
 
+    migrationURL: string = UrlService.migrationURl
     pingURL: string= UrlService.pingURL
     registerURL: string = UrlService.registerURL
     loginURL: string = UrlService.loginURL
@@ -47,10 +48,17 @@ export class ProjectService {
 
 
     // Ping
-    ping():Observable<any>{
+    pingServer():Observable<any>{
         let URL = this.getUrl()
         return this.http.get<any>(URL+this.pingURL)
     }
+
+    //Migration
+    migrate():Observable<any>{
+        let URL = this.getUrl()
+        return this.http.put<any>(URL+this.migrationURL,{})
+    }
+
 
     // Authentication Section
     register(data:any): Observable<any>{

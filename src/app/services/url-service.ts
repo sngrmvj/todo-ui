@@ -6,6 +6,7 @@ export const UrlService = {
 
     //admins
     pingURL:"/authentication/ping",
+    migrationURl:"/authentication/migrations",
 
     // AuthVariables
     registerURL : "/authentication/register",

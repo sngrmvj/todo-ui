@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { ProjectService } from './services/project-service';
+import { ToastrService } from 'ngx-toastr';
 import { catchError, tap } from "rxjs/operators";
 import { of, throwError, interval } from 'rxjs';
 
@@ -11,13 +13,25 @@ import { of, throwError, interval } from 'rxjs';
 export class AppComponent implements OnInit{
   title = 'to-do-planner';
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient,private toastMessage:ToastrService, private projectService: ProjectService){
     
   }
 
   ngOnInit(){
     this.calculateHits()
+    this.pingBackend()
   }
+
+
+  pingBackend(){
+    this.projectService.pingServer().subscribe((result)=>{
+      console.info(result.status);
+      this.toastMessage.success(result.status);
+    }, (error)=>{
+      this.toastMessage.warning("Error in contacting the server");
+      this.toastMessage.warning("Please contact the admin")
+    })
+  }  
 
   calculateHits(){
     var n = localStorage.getItem('hitCounter');
