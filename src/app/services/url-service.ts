@@ -4,6 +4,9 @@
 
 export const UrlService = {
 
+    //admins
+    pingURL:"/authentication/ping",
+
     // AuthVariables
     registerURL : "/authentication/register",
     loginURL : "/authentication/login",

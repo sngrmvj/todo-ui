@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
       if(error.status === 401){
         this.toastMessage.warning(error.error.message);
       }
-      else{
-        this.toastMessage.error(error.error.error);
-      }
+      // else{
+      //   this.toastMessage.error(error.error.error);
+      // }
     })
   }
 

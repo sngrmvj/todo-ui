@@ -8,6 +8,7 @@ import { UrlService } from './url-service';
 export class ProjectService {
     constructor(private http: HttpClient) { }
 
+    pingURL: string= UrlService.pingURL
     registerURL: string = UrlService.registerURL
     loginURL: string = UrlService.loginURL
     check_authorizationURL: string = UrlService.check_authorization
@@ -45,6 +46,11 @@ export class ProjectService {
     }
 
 
+    // Ping
+    ping():Observable<any>{
+        let URL = this.getUrl()
+        return this.http.get<any>(URL+this.pingURL)
+    }
 
     // Authentication Section
     register(data:any): Observable<any>{
