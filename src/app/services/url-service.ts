@@ -36,6 +36,9 @@ export const UrlService = {
     displayFeedbackURL :"/authentication/display_feedback",
 
     getAllURL: "/authentication/get_all",
-    getUserURL: "/authentication/get_user"
+    getUserURL: "/authentication/get_user",
+
+
+    kafka_topics_url : "/topics"
 
 };

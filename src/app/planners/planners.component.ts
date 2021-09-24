@@ -1,4 +1,5 @@
 import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
+import { HttpClient,HttpHeaders } from "@angular/common/http";
 import { CronJob } from 'cron';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -17,10 +18,17 @@ export class PlannersComponent implements OnInit {
   isDarkTheme: boolean = true; 
   shouldNotRefresh: boolean = true;
 
+  topics: any = [];
+  general_task_namefb: string = 'general_ftob_tasks';
+  general_task_namebf: string = 'general_btof_tasks';
   general_tasks:any = ['Tasks','Ready'];
   generalTasksChecked: any = [];
+  daily_task_namefb: string = 'daily_ftob_tasks';
+  daily_task_namebf: string = 'daily_btof_tasks';
   daily_tasks:any = ['Milk','Eggs'];
   dailyTasksChecked:any = [];
+
+
 
   constructor(private toastMessage:ToastrService, private router: Router, private projectService:ProjectService) {
     // For Every minute use all stars 
@@ -48,6 +56,7 @@ export class PlannersComponent implements OnInit {
 
   ngOnInit(): void {
     this.areYouAuthorized();
+    this.displayKafkaTopics();
   }
 
   
@@ -149,8 +158,10 @@ export class PlannersComponent implements OnInit {
 
   addtoGeneral(value:any){
     this.general_tasks.push(value.taskItem);
-    this.displayGeneralInput = false
+    this.displayGeneralInput = false;
+    this.postGeneralTasks(value);
     this.toastMessage.success("Successfully added to general tasks");
+
   }
 
   closeGeneralInputTask(){
@@ -192,6 +203,90 @@ export class PlannersComponent implements OnInit {
       // NEED TO ADD THAT IN THE BACKEND API CALL
       this.toastMessage.success("General task unchecked successfully!!");
     }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // ===============================
+  // Kafka topics
+  // ===============================
+  displayKafkaTopics(){
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'content-type':'application/vnd.kafka.v2+json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
+    });
+    this.projectService.getKafkaTopics(headers).subscribe((result)=>{
+      this.topics = result;
+      if(this.topics.includes(this.general_task_namebf) && this.topics.includes(this.general_task_namefb) && this.topics.includes(this.daily_task_namebf) && this.topics.includes(this.daily_task_namefb)){
+        console.info("All topics exist");
+      }
+      else{
+        this.toastMessage.error("No topics are available");
+        this.toastMessage.error("Contact Administrator");
+      }
+    })
+  }
+
+
+
+  // ===============================
+  // Kafka general send topics
+  // ===============================
+  postGeneralTasks(value:any){
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'content-type':'application/vnd.kafka.json.v2+json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
+    });
+    let payload = {
+      "records": [
+        {
+          "key": "user_general_"+ String(Date.now()),
+          "value": {"general": value}
+        }
+      ]
+    }
+    this.projectService.postToGeneralTasks(headers,payload,this.general_task_namefb).subscribe((result)=>{
+      console.log(result)
+    })
+  }
+
+
+
+  // ===============================
+  // Kafka general receive topics
+  // ===============================
+  getGeneralTasks(){
+
+  }
+
+
+  // ===============================
+  // Kafka daily send topics
+  // ===============================
+  postDailyTasks(){
+
+  }
+
+
+
+  // ===============================
+  // Kafka daily receive topics
+  // ===============================
+  getDailyTasks(){
+
   }
 
 }

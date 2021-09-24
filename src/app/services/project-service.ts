@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, ObservedValueOf, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { UrlService } from './url-service';
@@ -36,6 +36,10 @@ export class ProjectService {
         'displayFeedback': UrlService.displayFeedbackURL
     }
 
+    kafkaLinks:any = {
+        'get_topics': UrlService.kafka_topics_url
+    }
+
 
 
     // Auth Functions   
@@ -44,6 +48,13 @@ export class ProjectService {
             return "http://localhost:8000"
         }
         return 
+    }
+
+    kafkaUrl(){
+        if(location.origin.includes("localhost")){
+            return "http://localhost:8082"
+        }
+        return
     }
 
 
@@ -169,6 +180,25 @@ export class ProjectService {
     getAllFeedback(): Observable<any>{
         let URL = this.getUrl();
         return this.http.get<any>(URL+this.feedbacks.displayFeedback,{withCredentials: true,responseType:'json' as 'json'})
+    }
+
+
+
+
+
+
+
+
+
+
+
+    // Kafka 
+    getKafkaTopics(heads:any):Observable<any>{
+        return this.http.get<any>(this.kafkaLinks.get_topics,{headers:heads,withCredentials: true})
+    }
+
+    postToGeneralTasks(heads:any,payload:any,topic_name:any):Observable<any>{
+        return this.http.post<any>(this.kafkaLinks.get_topics+"/"+topic_name,payload,{headers:heads,withCredentials: true})
     }
 
 }
