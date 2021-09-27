@@ -39,6 +39,7 @@ export const UrlService = {
     getUserURL: "/authentication/get_user",
 
 
-    post_tasks_general_url : "/todo/general/person"
-
+    post_tasks_general_url : "/todo/general/post_tasks",
+    get_tasks_general_url: "/todo/general/active_tasks",
+    toggle_general_url: "/todo/general/toggle"
 };

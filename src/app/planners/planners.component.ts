@@ -12,21 +12,20 @@ import { ProjectService } from '../services/project-service';
 })
 export class PlannersComponent implements OnInit {
 
+  // Attributes
   displayDailyInput: boolean = false;
   displayGeneralInput: boolean = false;
   cronJob: CronJob;
   isDarkTheme: boolean = true; 
   shouldNotRefresh: boolean = true;
 
-  topics: any = [];
-  general_task_namefb: string = 'general_ftob_tasks';
-  general_task_namebf: string = 'general_btof_tasks';
-  general_tasks:any = ['Tasks','Ready'];
+  // General tasks variables
+  general_tasks: any = [];
   generalTasksChecked: any = [];
-  daily_task_namefb: string = 'daily_ftob_tasks';
-  daily_task_namebf: string = 'daily_btof_tasks';
-  daily_tasks:any = ['Milk','Eggs'];
-  dailyTasksChecked:any = [];
+
+  // Daily tasks variables
+  daily_tasks: any = [];
+  dailyTasksChecked: any = [];
 
 
 
@@ -56,7 +55,7 @@ export class PlannersComponent implements OnInit {
 
   ngOnInit(): void {
     this.areYouAuthorized();
-    this.displayKafkaTopics();
+    this.generalTasks();
   }
 
   
@@ -110,6 +109,7 @@ export class PlannersComponent implements OnInit {
     }
     else if(value === 'generalTasksChecked'){
       let deleted_item = this.generalTasksChecked.splice(index,1);
+      
       this.toastMessage.success("General task deleted successfully!!");
     }
   }
@@ -147,6 +147,14 @@ export class PlannersComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+
+
   // =============
   // General Tasks 
   // =============
@@ -161,8 +169,6 @@ export class PlannersComponent implements OnInit {
     this.general_tasks.push(value.taskItem);
     this.displayGeneralInput = false;
     this.postGeneralTasks(value);
-    this.toastMessage.success("Successfully added to general tasks");
-
   }
 
   closeGeneralInputTask(){
@@ -170,6 +176,117 @@ export class PlannersComponent implements OnInit {
       this.displayGeneralInput = false;
     }
   }
+
+  postGeneralTasks(value:any){
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let payload = {
+      "value": {"general": value}
+    }
+    this.projectService.getAccessToken().subscribe((result)=>{
+      if (result.flag === true){
+        this.projectService.postGeneralTasks(payload,headers).subscribe((result) =>{
+          if ("warning" in result){
+            this.toastMessage.warning(result.response);
+          }
+          else{
+            this.toastMessage.success("Task successfully added");
+            this.general_tasks = result.response.active;
+            this.generalTasksChecked = result.response.deactive;
+          }
+        }, (error)=>{
+          if(error.status === 404){
+            this.toastMessage.warning(error.error.error);
+          }
+          else{
+            this.toastMessage.error(error.error.error);
+          }
+        })
+      }
+    })
+  }
+
+
+
+  // ===============================
+  // general receive 
+  // ===============================
+  generalTasks(){
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    this.projectService.getAccessToken().subscribe((result)=>{
+      if (result.flag === true){
+        this.projectService.getGeneralTasks(headers).subscribe((result) =>{
+          if ("warning" in result){
+            this.toastMessage.warning(result.response);
+          }
+          else{
+            this.general_tasks = result.response.active;
+            this.generalTasksChecked = result.response.deactive;
+          }
+        }, (error)=>{
+          if(error.status === 404){
+            this.toastMessage.warning(error.error.error);
+          }
+          else{
+            this.toastMessage.error(error.error.error);
+          }
+        })
+      }
+    }, (error)=>{
+      if(error.status === 404){
+        this.toastMessage.warning(error.error.error);
+      }
+      else{
+        this.toastMessage.error(error.error.error);
+      }
+    })
+  }
+
+
+  togglingGeneralTasks(item:any,action:any){
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let payload = {
+      "value": item[0],
+      "action": action
+    }
+    this.projectService.toggleGeneralTasks(payload,headers).subscribe((result)=>{
+      if ("warning" in result){
+        this.toastMessage.warning(result.response);
+      }
+      else{
+        this.general_tasks = result.response.active;
+        this.generalTasksChecked = result.response.deactive;
+      }
+    }, (error) =>{
+      if(error.status === 404){
+        this.toastMessage.warning(error.error.error);
+      }
+      else{
+        this.toastMessage.error(error.error.error);
+      }
+    })
+  }
+
+
+
+
+
+
+
 
 
   // =======================
@@ -180,12 +297,13 @@ export class PlannersComponent implements OnInit {
       let deleted_item = this.daily_tasks.splice(index,1);
       this.dailyTasksChecked.push(deleted_item);
       // NEED TO ADD THAT IN THE BACKEND API CALL
-      this.toastMessage.success("Daily task checked successfully!!");
+      this.toastMessage.success("Task checked successfully!!");
     }else{
-      let deleted_item = this.general_tasks.splice(index,1);
-      this.generalTasksChecked.push(deleted_item);
+      let toggle_item = this.general_tasks.splice(index,1);
+      this.togglingGeneralTasks(toggle_item,"checked");
+      // this.generalTasksChecked.push(deleted_item);
       // Need to add that in the backend API CALL
-      this.toastMessage.success("General task checked successfully!!");
+      this.toastMessage.success("Task checked successfully!!");
     }
   }
 
@@ -197,12 +315,11 @@ export class PlannersComponent implements OnInit {
       let deleted_item = this.dailyTasksChecked.splice(index,1);
       this.daily_tasks.push(deleted_item);
       // NEED TO ADD THAT IN THE BACKEND API CALL
-      this.toastMessage.success("Daily task unchecked successfully!!");
+      this.toastMessage.success("Task unchecked successfully!!");
     }else{
-      let deleted_item = this.generalTasksChecked.splice(index,1);
-      this.general_tasks.push(deleted_item);
-      // NEED TO ADD THAT IN THE BACKEND API CALL
-      this.toastMessage.success("General task unchecked successfully!!");
+      let toggle_item = this.generalTasksChecked.splice(index,1);
+      this.togglingGeneralTasks(toggle_item,"unchecked");
+      this.toastMessage.success("Task unchecked successfully!!");
     }
   }
 
@@ -222,66 +339,25 @@ export class PlannersComponent implements OnInit {
   // ===============================
   // Kafka topics
   // ===============================
-  displayKafkaTopics(){
-    let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'content-type':'application/vnd.kafka.v2+json',
-      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
-    });
-    // this.projectService.getKafkaTopics(headers).subscribe((result)=>{
-    //   this.topics = result;
-    //   if(this.topics.includes(this.general_task_namebf) && this.topics.includes(this.general_task_namefb) && this.topics.includes(this.daily_task_namebf) && this.topics.includes(this.daily_task_namefb)){
-    //     console.info("All topics exist");
-    //   }
-    //   else{
-    //     this.toastMessage.error("No topics are available");
-    //     this.toastMessage.error("Contact Administrator");
-    //   }
-    // })
-  }
+  // displayKafkaTopics(){
+  //   let headers = new HttpHeaders({
+  //     'Access-Control-Allow-Origin': '*',
+  //     'content-type':'application/vnd.kafka.v2+json',
+  //     'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
+  //   });
+  //   // this.projectService.getKafkaTopics(headers).subscribe((result)=>{
+  //   //   this.topics = result;
+  //   //   if(this.topics.includes(this.general_task_namebf) && this.topics.includes(this.general_task_namefb) && this.topics.includes(this.daily_task_namebf) && this.topics.includes(this.daily_task_namefb)){
+  //   //     console.info("All topics exist");
+  //   //   }
+  //   //   else{
+  //   //     this.toastMessage.error("No topics are available");
+  //   //     this.toastMessage.error("Contact Administrator");
+  //   //   }
+  //   // })
+  // }
 
 
-
-  // ===============================
-  // Kafka general send topics
-  // ===============================
-  postGeneralTasks(value:any){
-    let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'content-type':'application/json',
-      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
-      'Access-Control-Allow-Credentials': 'true'
-    });
-    let payload = {
-      "value": {"general": value}
-    }
-    this.projectService.getAccessToken().subscribe((result)=>{
-      if (result.flag === true){
-        this.projectService.postTasks(payload,headers).subscribe((result) =>{
-          console.log(result)
-        })
-      }
-    })
-
-    // this.projectService.checksAuthorization().subscribe((result) =>{
-    //   if(result.flag === false){
-    //     this.toastMessage.warning("You are not Authorized");
-    //     this.router.navigate(['authwall']);
-    //   }
-    //   this.projectService.postToTasks(headers,payload,this.general_task_namefb).subscribe((result)=>{
-    //     console.log(result);
-    //   })
-    // })
-  }
-
-
-
-  // ===============================
-  // Kafka general receive topics
-  // ===============================
-  getGeneralTasks(){
-
-  }
 
 
   // ===============================
