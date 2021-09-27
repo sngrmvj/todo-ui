@@ -140,7 +140,8 @@ export class PlannersComponent implements OnInit {
 
   addtoDaily(value:any){
     this.daily_tasks.push(value.taskItem);
-    this.displayDailyInput = false
+    this.displayDailyInput = false;
+    this.postDailyTasks(value);
     this.toastMessage.success("Successfully added to daily tasks");
   }
 
@@ -227,16 +228,16 @@ export class PlannersComponent implements OnInit {
       'content-type':'application/vnd.kafka.v2+json',
       'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
     });
-    this.projectService.getKafkaTopics(headers).subscribe((result)=>{
-      this.topics = result;
-      if(this.topics.includes(this.general_task_namebf) && this.topics.includes(this.general_task_namefb) && this.topics.includes(this.daily_task_namebf) && this.topics.includes(this.daily_task_namefb)){
-        console.info("All topics exist");
-      }
-      else{
-        this.toastMessage.error("No topics are available");
-        this.toastMessage.error("Contact Administrator");
-      }
-    })
+    // this.projectService.getKafkaTopics(headers).subscribe((result)=>{
+    //   this.topics = result;
+    //   if(this.topics.includes(this.general_task_namebf) && this.topics.includes(this.general_task_namefb) && this.topics.includes(this.daily_task_namebf) && this.topics.includes(this.daily_task_namefb)){
+    //     console.info("All topics exist");
+    //   }
+    //   else{
+    //     this.toastMessage.error("No topics are available");
+    //     this.toastMessage.error("Contact Administrator");
+    //   }
+    // })
   }
 
 
@@ -246,21 +247,31 @@ export class PlannersComponent implements OnInit {
   // ===============================
   postGeneralTasks(value:any){
     let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'content-type':'application/vnd.kafka.json.v2+json',
-      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
     });
     let payload = {
-      "records": [
-        {
-          "key": "user_general_"+ String(Date.now()),
-          "value": {"general": value}
-        }
-      ]
+      "value": {"general": value}
     }
-    this.projectService.postToGeneralTasks(headers,payload,this.general_task_namefb).subscribe((result)=>{
-      console.log(result)
+    this.projectService.getAccessToken().subscribe((result)=>{
+      if (result.flag === true){
+        this.projectService.postTasks(payload,headers).subscribe((result) =>{
+          console.log(result)
+        })
+      }
     })
+
+    // this.projectService.checksAuthorization().subscribe((result) =>{
+    //   if(result.flag === false){
+    //     this.toastMessage.warning("You are not Authorized");
+    //     this.router.navigate(['authwall']);
+    //   }
+    //   this.projectService.postToTasks(headers,payload,this.general_task_namefb).subscribe((result)=>{
+    //     console.log(result);
+    //   })
+    // })
   }
 
 
@@ -276,8 +287,25 @@ export class PlannersComponent implements OnInit {
   // ===============================
   // Kafka daily send topics
   // ===============================
-  postDailyTasks(){
-
+  postDailyTasks(value:any){
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'content-type':'application/vnd.kafka.json.v2+json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
+    });
+    let payload = {
+      "key": "user_general_"+ String(Date.now()),
+      "value": {"general": value}
+    }
+    // this.projectService.checksAuthorization().subscribe((result) =>{
+    //   if(result.flag === false){
+    //     this.toastMessage.warning("You are not Authorized");
+    //     this.router.navigate(['authwall']);
+    //   }
+    //   this.projectService.postToTasks(headers,payload,this.general_task_namefb).subscribe((result)=>{
+    //     console.log(result);
+    //   })
+    // })
   }
 
 

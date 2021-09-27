@@ -39,6 +39,6 @@ export const UrlService = {
     getUserURL: "/authentication/get_user",
 
 
-    kafka_topics_url : "/topics"
+    post_tasks_general_url : "/todo/general/person"
 
 };

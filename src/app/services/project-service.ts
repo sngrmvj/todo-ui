@@ -36,8 +36,8 @@ export class ProjectService {
         'displayFeedback': UrlService.displayFeedbackURL
     }
 
-    kafkaLinks:any = {
-        'get_topics': UrlService.kafka_topics_url
+    tasksEndpoints:any = {
+        'post_general_tasks': UrlService.post_tasks_general_url
     }
 
 
@@ -50,9 +50,9 @@ export class ProjectService {
         return 
     }
 
-    kafkaUrl(){
+    tasksUrl(){
         if(location.origin.includes("localhost")){
-            return "http://localhost:8082"
+            return "http://localhost:5000"
         }
         return
     }
@@ -192,15 +192,11 @@ export class ProjectService {
 
 
 
-    // Kafka 
-    getKafkaTopics(heads:any):Observable<any>{
-        return this.http.get<any>(this.kafkaLinks.get_topics,{headers:heads,withCredentials: true})
+    // Tasks
+    postTasks(payload:any,heads:any):Observable<any>{
+        let URL = this.tasksUrl();
+        return this.http.post<any>(URL+this.tasksEndpoints.post_general_tasks,payload,{withCredentials: true,responseType:'json' as 'json',headers:heads})
     }
-
-    postToGeneralTasks(heads:any,payload:any,topic_name:any):Observable<any>{
-        return this.http.post<any>(this.kafkaLinks.get_topics+"/"+topic_name,payload,{headers:heads,withCredentials: true})
-    }
-
 }
 
 
