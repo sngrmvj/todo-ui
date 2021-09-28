@@ -141,7 +141,6 @@ export class PlannersComponent implements OnInit {
   addtoDaily(value:any){
     this.daily_tasks.push(value.taskItem);
     this.displayDailyInput = false;
-    this.postDailyTasks(value);
     this.toastMessage.success("Successfully added to daily tasks");
   }
 
@@ -322,13 +321,11 @@ export class PlannersComponent implements OnInit {
       let deleted_item = this.daily_tasks.splice(index,1);
       this.dailyTasksChecked.push(deleted_item);
       // NEED TO ADD THAT IN THE BACKEND API CALL
-      this.toastMessage.success("Task checked successfully!!");
+      // this.toastMessage.success("Task checked successfully!!");
     }else{
       let toggle_item = this.general_tasks.splice(index,1);
       this.togglingGeneralTasks(toggle_item,"checked");
-      // this.generalTasksChecked.push(deleted_item);
-      // Need to add that in the backend API CALL
-      this.toastMessage.success("Task checked successfully!!");
+      // this.toastMessage.success("Task checked successfully!!");
     }
   }
 
@@ -340,82 +337,12 @@ export class PlannersComponent implements OnInit {
       let deleted_item = this.dailyTasksChecked.splice(index,1);
       this.daily_tasks.push(deleted_item);
       // NEED TO ADD THAT IN THE BACKEND API CALL
-      this.toastMessage.success("Task unchecked successfully!!");
+      // this.toastMessage.success("Task unchecked successfully!!");
     }else{
       let toggle_item = this.generalTasksChecked.splice(index,1);
       this.togglingGeneralTasks(toggle_item,"unchecked");
-      this.toastMessage.success("Task unchecked successfully!!");
+      // this.toastMessage.success("Task unchecked successfully!!");
     }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // ===============================
-  // Kafka topics
-  // ===============================
-  // displayKafkaTopics(){
-  //   let headers = new HttpHeaders({
-  //     'Access-Control-Allow-Origin': '*',
-  //     'content-type':'application/vnd.kafka.v2+json',
-  //     'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
-  //   });
-  //   // this.projectService.getKafkaTopics(headers).subscribe((result)=>{
-  //   //   this.topics = result;
-  //   //   if(this.topics.includes(this.general_task_namebf) && this.topics.includes(this.general_task_namefb) && this.topics.includes(this.daily_task_namebf) && this.topics.includes(this.daily_task_namefb)){
-  //   //     console.info("All topics exist");
-  //   //   }
-  //   //   else{
-  //   //     this.toastMessage.error("No topics are available");
-  //   //     this.toastMessage.error("Contact Administrator");
-  //   //   }
-  //   // })
-  // }
-
-
-
-
-  // ===============================
-  // Kafka daily send topics
-  // ===============================
-  postDailyTasks(value:any){
-    let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'content-type':'application/vnd.kafka.json.v2+json',
-      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE'
-    });
-    let payload = {
-      "key": "user_general_"+ String(Date.now()),
-      "value": {"general": value}
-    }
-    // this.projectService.checksAuthorization().subscribe((result) =>{
-    //   if(result.flag === false){
-    //     this.toastMessage.warning("You are not Authorized");
-    //     this.router.navigate(['authwall']);
-    //   }
-    //   this.projectService.postToTasks(headers,payload,this.general_task_namefb).subscribe((result)=>{
-    //     console.log(result);
-    //   })
-    // })
-  }
-
-
-
-  // ===============================
-  // Kafka daily receive topics
-  // ===============================
-  getDailyTasks(){
-
   }
 
 }
