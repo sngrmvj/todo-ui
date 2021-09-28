@@ -100,7 +100,7 @@ export class PlannersComponent implements OnInit {
     }
     else if(value === 'general_tasks'){
       let deleted_item = this.general_tasks.splice(index,1);
-      // Add the APi call to it
+      this.deleteGeneralTasks(deleted_item,'general_tasks')
       this.toastMessage.success("General task deleted successfully!!");
     }
     else if(value === 'dailyTasksChecked'){
@@ -109,7 +109,7 @@ export class PlannersComponent implements OnInit {
     }
     else if(value === 'generalTasksChecked'){
       let deleted_item = this.generalTasksChecked.splice(index,1);
-      
+      this.deleteGeneralTasks(deleted_item,'generalTasksChecked')
       this.toastMessage.success("General task deleted successfully!!");
     }
   }
@@ -252,6 +252,9 @@ export class PlannersComponent implements OnInit {
   }
 
 
+  // ===============================
+  // Toggling General Tasks
+  // ===============================
   togglingGeneralTasks(item:any,action:any){
     let headers = new HttpHeaders({
       'Access-Control-Allow-Origin': 'http://localhost:4200',
@@ -281,8 +284,30 @@ export class PlannersComponent implements OnInit {
     })
   }
 
-
-
+  // ===============================
+  // Delete general tasks
+  // ===============================
+  deleteGeneralTasks(deleted_item:any,category:any){
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let payload = {
+      "value": deleted_item[0],
+    }
+    this.projectService.deleteGeneralTasksAPI(payload,headers,category).subscribe((result)=>{
+      console.log(result)
+    }, (error)=>{
+      if(error.status === 404){
+        this.toastMessage.warning(error.error.error);
+      }
+      else{
+        this.toastMessage.error(error.error.error);
+      }
+    })
+  }
 
 
 

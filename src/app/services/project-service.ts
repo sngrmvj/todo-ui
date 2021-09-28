@@ -39,7 +39,8 @@ export class ProjectService {
     tasksEndpoints:any = {
         'post_general_tasks': UrlService.post_tasks_general_url,
         'get_tasks_general_url': UrlService.get_tasks_general_url,
-        'toggle_the_general_tasks_url' : UrlService.toggle_general_url
+        'toggle_the_general_tasks_url' : UrlService.toggle_general_url,
+        'delete_the_general_tasks_url' : UrlService.deleted_general_url
     }
 
 
@@ -208,6 +209,11 @@ export class ProjectService {
     toggleGeneralTasks(payload:any,heads:any):Observable<any>{
         let URL = this.tasksUrl();
         return this.http.put<any>(URL+this.tasksEndpoints.toggle_the_general_tasks_url,payload,{withCredentials: true,responseType:'json' as 'json',headers:heads})
+    }
+
+    deleteGeneralTasksAPI(payload:any,heads:any,category:any):Observable<any>{
+        let URL = this.tasksUrl();
+        return this.http.put<any>(URL+this.tasksEndpoints.delete_the_general_tasks_url+"?category="+category,payload,{withCredentials: true,responseType:'json' as 'json',headers:heads})
     }
 
 }
