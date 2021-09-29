@@ -56,6 +56,7 @@ export class PlannersComponent implements OnInit {
   ngOnInit(): void {
     this.areYouAuthorized();
     this.generalTasks();
+    this.dailyTasks();
   }
 
   
@@ -91,6 +92,12 @@ export class PlannersComponent implements OnInit {
   }
 
 
+
+
+
+  // ====================
+  // Delete of tasks ... Generic function
+  // ====================
 
   delete(value:string,index:number){
     if (value === 'daily_tasks'){
@@ -141,7 +148,161 @@ export class PlannersComponent implements OnInit {
   addtoDaily(value:any){
     this.daily_tasks.push(value.taskItem);
     this.displayDailyInput = false;
-    this.toastMessage.success("Successfully added to daily tasks");
+    this.postDailyTasks(value);
+  }
+
+
+  postDailyTasks(value:any){
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': baseURL,
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let payload = {
+      "value": {"daily": value}
+    }
+    this.projectService.getAccessToken().subscribe((result)=>{
+      if (result.flag === true){
+        this.projectService.postDailyTasks(payload,headers).subscribe((result) =>{
+          if ("warning" in result){
+            this.toastMessage.warning(result.response);
+          }
+          else{
+            this.toastMessage.success("Task successfully added");
+            this.general_tasks = result.response.active;
+            this.generalTasksChecked = result.response.deactive;
+          }
+        }, (error)=>{
+          if(error.status === 404){
+            this.toastMessage.warning(error.error.error);
+          }
+          else{
+            this.toastMessage.error(error.error.error);
+          }
+        })
+      }
+    })
+  }
+
+
+
+  // ===============================
+  // general receive 
+  // ===============================
+  dailyTasks(){
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': baseURL,
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    this.projectService.getAccessToken().subscribe((result)=>{
+      if (result.flag === true){
+        this.projectService.getDailyTasks(headers).subscribe((result) =>{
+          if ("warning" in result){
+            this.toastMessage.warning(result.response);
+          }
+          else{
+            this.general_tasks = result.response.active;
+            this.generalTasksChecked = result.response.deactive;
+          }
+        }, (error)=>{
+          if(error.status === 404){
+            this.toastMessage.warning(error.error.error);
+          }
+          else{
+            this.toastMessage.error(error.error.error);
+          }
+        })
+      }
+    }, (error)=>{
+      if(error.status === 404){
+        this.toastMessage.warning(error.error.error);
+      }
+      else{
+        this.toastMessage.error(error.error.error);
+      }
+    })
+  }
+
+
+  // ===============================
+  // Toggling General Tasks
+  // ===============================
+  togglingDailyTasks(item:any,action:any){
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': baseURL,
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let payload = {
+      "value": item[0],
+      "action": action
+    }
+    this.projectService.toggleDailyTasks(payload,headers).subscribe((result)=>{
+      if ("warning" in result){
+        this.toastMessage.warning(result.response);
+      }
+      else{
+        this.general_tasks = result.response.active;
+        this.generalTasksChecked = result.response.deactive;
+      }
+    }, (error) =>{
+      if(error.status === 404){
+        this.toastMessage.warning(error.error.error);
+      }
+      else{
+        this.toastMessage.error(error.error.error);
+      }
+    })
+  }
+
+  // ===============================
+  // Delete general tasks
+  // ===============================
+  deleteDailyTasks(deleted_item:any,category:any){
+
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': baseURL,
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let payload = {
+      "value": deleted_item[0],
+    }
+    this.projectService.deleteDailyTasksAPI(payload,headers,category).subscribe((result)=>{
+      console.log(result)
+    }, (error)=>{
+      if(error.status === 404){
+        this.toastMessage.warning(error.error.error);
+      }
+      else{
+        this.toastMessage.error(error.error.error);
+      }
+    })
   }
 
 
@@ -177,8 +338,14 @@ export class PlannersComponent implements OnInit {
   }
 
   postGeneralTasks(value:any){
+
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
     let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Origin': baseURL,
       'content-type':'application/json',
       'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
       'Access-Control-Allow-Credentials': 'true'
@@ -215,8 +382,14 @@ export class PlannersComponent implements OnInit {
   // general receive 
   // ===============================
   generalTasks(){
+
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
     let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Origin': baseURL,
       'content-type':'application/json',
       'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
       'Access-Control-Allow-Credentials': 'true'
@@ -255,8 +428,14 @@ export class PlannersComponent implements OnInit {
   // Toggling General Tasks
   // ===============================
   togglingGeneralTasks(item:any,action:any){
+
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
     let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Origin': baseURL,
       'content-type':'application/json',
       'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
       'Access-Control-Allow-Credentials': 'true'
@@ -287,8 +466,14 @@ export class PlannersComponent implements OnInit {
   // Delete general tasks
   // ===============================
   deleteGeneralTasks(deleted_item:any,category:any){
+
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
     let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Origin': baseURL,
       'content-type':'application/json',
       'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
       'Access-Control-Allow-Credentials': 'true'
@@ -318,9 +503,8 @@ export class PlannersComponent implements OnInit {
   // =======================
   checked(value:any,index:any){
     if (value === 'daily_tasks'){
-      let deleted_item = this.daily_tasks.splice(index,1);
-      this.dailyTasksChecked.push(deleted_item);
-      // NEED TO ADD THAT IN THE BACKEND API CALL
+      let toggle_item = this.daily_tasks.splice(index,1);
+      this.togglingDailyTasks(toggle_item,"checked");
       // this.toastMessage.success("Task checked successfully!!");
     }else{
       let toggle_item = this.general_tasks.splice(index,1);
@@ -334,9 +518,8 @@ export class PlannersComponent implements OnInit {
   // ===============================
   unChecked(value:any,index:any){
     if (value === 'dailyTasksChecked'){
-      let deleted_item = this.dailyTasksChecked.splice(index,1);
-      this.daily_tasks.push(deleted_item);
-      // NEED TO ADD THAT IN THE BACKEND API CALL
+      let toggle_item = this.dailyTasksChecked.splice(index,1);
+      this.togglingDailyTasks(toggle_item,"unchecked");
       // this.toastMessage.success("Task unchecked successfully!!");
     }else{
       let toggle_item = this.generalTasksChecked.splice(index,1);

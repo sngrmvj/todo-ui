@@ -42,5 +42,11 @@ export const UrlService = {
     post_tasks_general_url : "/todo/general/post_tasks",
     get_tasks_general_url: "/todo/general/active_tasks",
     toggle_general_url: "/todo/general/toggle",
-    deleted_general_url: "/todo/general/delete"
+    deleted_general_url: "/todo/general/delete",
+
+    post_tasks_daily_url : "/todo/daily/post_tasks",
+    get_tasks_daily_url: "/todo/daily/active_tasks",
+    toggle_daily_url: "/todo/daily/toggle",
+    deleted_daily_url: "/todo/daily/delete",
+
 };

@@ -40,7 +40,12 @@ export class ProjectService {
         'post_general_tasks': UrlService.post_tasks_general_url,
         'get_tasks_general_url': UrlService.get_tasks_general_url,
         'toggle_the_general_tasks_url' : UrlService.toggle_general_url,
-        'delete_the_general_tasks_url' : UrlService.deleted_general_url
+        'delete_the_general_tasks_url' : UrlService.deleted_general_url,
+
+        'post_daily_tasks': UrlService.post_tasks_daily_url,
+        'get_tasks_daily_url': UrlService.get_tasks_daily_url,
+        'toggle_the_daily_tasks_url' : UrlService.toggle_daily_url,
+        'delete_the_daily_tasks_url' : UrlService.deleted_daily_url,
     }
 
 
@@ -214,6 +219,29 @@ export class ProjectService {
     deleteGeneralTasksAPI(payload:any,heads:any,category:any):Observable<any>{
         let URL = this.tasksUrl();
         return this.http.put<any>(URL+this.tasksEndpoints.delete_the_general_tasks_url+"?category="+category,payload,{withCredentials: true,responseType:'json' as 'json',headers:heads})
+    }
+
+
+
+
+    postDailyTasks(payload:any,heads:any):Observable<any>{
+        let URL = this.tasksUrl();
+        return this.http.post<any>(URL+this.tasksEndpoints.post_daily_tasks,payload,{withCredentials: true,responseType:'json' as 'json',headers:heads})
+    }
+
+    getDailyTasks(heads:any):Observable<any>{
+        let URL = this.tasksUrl();
+        return this.http.get<any>(URL+this.tasksEndpoints.get_tasks_daily_url,{withCredentials: true,responseType:'json' as 'json',headers:heads})  
+    }
+
+    toggleDailyTasks(payload:any,heads:any):Observable<any>{
+        let URL = this.tasksUrl();
+        return this.http.put<any>(URL+this.tasksEndpoints.toggle_the_daily_tasks_url,payload,{withCredentials: true,responseType:'json' as 'json',headers:heads})
+    }
+
+    deleteDailyTasksAPI(payload:any,heads:any,category:any):Observable<any>{
+        let URL = this.tasksUrl();
+        return this.http.put<any>(URL+this.tasksEndpoints.delete_the_daily_tasks_url+"?category="+category,payload,{withCredentials: true,responseType:'json' as 'json',headers:heads})
     }
 
 }
