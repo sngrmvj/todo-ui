@@ -58,6 +58,8 @@ export class PlannersComponent implements OnInit {
     this.dailyTasks();
   }
 
+
+
   // ====================
   // Asynchronous daily task which refreshes every day.
   // ====================
@@ -137,6 +139,8 @@ export class PlannersComponent implements OnInit {
 
 
 
+
+
   // ====================
   // Delete of tasks ... Generic function
   // ====================
@@ -144,22 +148,23 @@ export class PlannersComponent implements OnInit {
   delete(value:string,index:number){
     if (value === 'daily_tasks'){
       let deleted_item = this.daily_tasks.splice(index,1);
-      // Add the APi call to it
+      this.deleteDailyTasks(deleted_item,'daily_tasks')
       this.toastMessage.success("Task deleted successfully!!");
     }
     else if(value === 'general_tasks'){
       let deleted_item = this.general_tasks.splice(index,1);
       this.deleteGeneralTasks(deleted_item,'general_tasks')
-      this.toastMessage.success("General task deleted successfully!!");
+      this.toastMessage.success("Task deleted successfully!!");
     }
     else if(value === 'dailyTasksChecked'){
       let deleted_item = this.dailyTasksChecked.splice(index,1);
-      this.toastMessage.success("Daily task deleted successfully!!");
+      this.deleteDailyTasks(deleted_item,'dailyTasksChecked');
+      this.toastMessage.success("Task deleted successfully!!");
     }
     else if(value === 'generalTasksChecked'){
       let deleted_item = this.generalTasksChecked.splice(index,1);
-      this.deleteGeneralTasks(deleted_item,'generalTasksChecked')
-      this.toastMessage.success("General task deleted successfully!!");
+      this.deleteGeneralTasks(deleted_item,'generalTasksChecked');
+      this.toastMessage.success("Task deleted successfully!!");
     }
   }
 
