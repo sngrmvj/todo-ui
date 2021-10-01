@@ -48,5 +48,6 @@ export const UrlService = {
     get_tasks_daily_url: "/todo/daily/active_tasks",
     toggle_daily_url: "/todo/daily/toggle",
     deleted_daily_url: "/todo/daily/delete",
+    fetch_refreshed_daily_tasks_url : "/todo/daily/refresh"
 
 };

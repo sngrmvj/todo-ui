@@ -46,6 +46,7 @@ export class ProjectService {
         'get_tasks_daily_url': UrlService.get_tasks_daily_url,
         'toggle_the_daily_tasks_url' : UrlService.toggle_daily_url,
         'delete_the_daily_tasks_url' : UrlService.deleted_daily_url,
+        'fetch_refreshed_daily_tasks_url' : UrlService.fetch_refreshed_daily_tasks_url,
     }
 
 
@@ -232,6 +233,11 @@ export class ProjectService {
     getDailyTasks(heads:any):Observable<any>{
         let URL = this.tasksUrl();
         return this.http.get<any>(URL+this.tasksEndpoints.get_tasks_daily_url,{withCredentials: true,responseType:'json' as 'json',headers:heads})  
+    }
+
+    refreshDailyTasksAPI(heads:any):Observable<any>{
+        let URL = this.tasksUrl();
+        return this.http.get<any>(URL+this.tasksEndpoints.fetch_refreshed_daily_tasks_url,{withCredentials: true,responseType:'json' as 'json',headers:heads})  
     }
 
     toggleDailyTasks(payload:any,heads:any):Observable<any>{

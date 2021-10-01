@@ -36,7 +36,7 @@ export class PlannersComponent implements OnInit {
     // It should be possible to delete even after checked.
     // Deletion of item in the daily tasks, daily tasks checked.
     // Need to handle the daily tasks, daily tasks checked during daily refresh.
-    this.cronJob = new CronJob('0 0 * * * *', async () => {
+    this.cronJob = new CronJob('0 0 * * *', async () => {
       try {
         await this.refreshDailyTasks();
         this.shouldNotRefresh = false;
@@ -45,7 +45,6 @@ export class PlannersComponent implements OnInit {
         this.toastMessage.error("Error - "+ e);
       }
     });
-    
     // Start job
     if (!this.cronJob.running) {
       this.cronJob.start();
@@ -57,6 +56,49 @@ export class PlannersComponent implements OnInit {
     this.areYouAuthorized();
     this.generalTasks();
     this.dailyTasks();
+  }
+
+  // ====================
+  // Asynchronous daily task which refreshes every day.
+  // ====================
+  async refreshDailyTasks() {
+    // Need to have an API Call here so that it fetches from the backend and adds up here
+    let baseURL = "";
+    if (location.origin.includes("localhost")){
+      baseURL =  "http://localhost:4200";
+    }
+
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': baseURL,
+      'content-type':'application/json',
+      'Access-Control-Allow-Methods':'GET,HEAD,POST,PUT,DELETE',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    this.projectService.getAccessToken().subscribe((result)=>{
+      if (result.flag === true){
+        this.projectService.refreshDailyTasksAPI(headers).subscribe((result)=>{
+          if ("warning" in result){
+            if("response" in result){
+              this.toastMessage.warning(result.response);
+            }
+          }
+          else{
+            this.daily_tasks = result.response.active;
+            this.dailyTasksChecked = result.response.deactive;
+          }
+        },(error)=>{
+          if(error.status === 404){
+            this.toastMessage.warning(error.error.error);
+          }
+          else{
+            this.toastMessage.error(error.error.error);
+          }
+        })
+      }
+    },(error)=>{
+      this.toastMessage.error("Not able to find the access the task.")
+      this.toastMessage.error("Check with the administrator");
+    })
   }
 
   
@@ -121,9 +163,7 @@ export class PlannersComponent implements OnInit {
     }
   }
 
-  async refreshDailyTasks() {
-    // Need to have an API Call here so that it fetches from the backend and adds up here
-  }
+
 
 
 
