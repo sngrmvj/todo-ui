@@ -223,7 +223,7 @@ export class ProjectService {
 
 
 
-
+    // Daily Tasks
     postDailyTasks(payload:any,heads:any):Observable<any>{
         let URL = this.tasksUrl();
         return this.http.post<any>(URL+this.tasksEndpoints.post_daily_tasks,payload,{withCredentials: true,responseType:'json' as 'json',headers:heads})
