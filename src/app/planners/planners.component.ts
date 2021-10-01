@@ -175,8 +175,8 @@ export class PlannersComponent implements OnInit {
           }
           else{
             this.toastMessage.success("Task successfully added");
-            this.general_tasks = result.response.active;
-            this.generalTasksChecked = result.response.deactive;
+            this.daily_tasks = result.response.active;
+            this.dailyTasksChecked = result.response.deactive;
           }
         }, (error)=>{
           if(error.status === 404){
@@ -193,7 +193,7 @@ export class PlannersComponent implements OnInit {
 
 
   // ===============================
-  // general receive 
+  // Daily receive 
   // ===============================
   dailyTasks(){
     let baseURL = "";
@@ -211,11 +211,13 @@ export class PlannersComponent implements OnInit {
       if (result.flag === true){
         this.projectService.getDailyTasks(headers).subscribe((result) =>{
           if ("warning" in result){
-            this.toastMessage.warning(result.response);
+            if("response" in result){
+              this.toastMessage.warning(result.response);
+            }
           }
           else{
-            this.general_tasks = result.response.active;
-            this.generalTasksChecked = result.response.deactive;
+            this.daily_tasks = result.response.active;
+            this.dailyTasksChecked = result.response.deactive;
           }
         }, (error)=>{
           if(error.status === 404){
@@ -261,8 +263,8 @@ export class PlannersComponent implements OnInit {
         this.toastMessage.warning(result.response);
       }
       else{
-        this.general_tasks = result.response.active;
-        this.generalTasksChecked = result.response.deactive;
+        this.daily_tasks = result.response.active;
+        this.dailyTasksChecked = result.response.deactive;
       }
     }, (error) =>{
       if(error.status === 404){
@@ -275,7 +277,7 @@ export class PlannersComponent implements OnInit {
   }
 
   // ===============================
-  // Delete general tasks
+  // Delete daily tasks
   // ===============================
   deleteDailyTasks(deleted_item:any,category:any){
 
@@ -294,7 +296,13 @@ export class PlannersComponent implements OnInit {
       "value": deleted_item[0],
     }
     this.projectService.deleteDailyTasksAPI(payload,headers,category).subscribe((result)=>{
-      console.log(result)
+      if ("warning" in result){
+        this.toastMessage.warning(result.response);
+      }
+      else{
+        this.daily_tasks = result.response.active;
+        this.dailyTasksChecked = result.response.deactive;
+      }
     }, (error)=>{
       if(error.status === 404){
         this.toastMessage.warning(error.error.error);
@@ -398,9 +406,11 @@ export class PlannersComponent implements OnInit {
       if (result.flag === true){
         this.projectService.getGeneralTasks(headers).subscribe((result) =>{
           if ("warning" in result){
-            this.toastMessage.warning(result.response);
+            if("response" in result){
+              this.toastMessage.warning(result.response);
+            }
           }
-          else{
+          else {
             this.general_tasks = result.response.active;
             this.generalTasksChecked = result.response.deactive;
           }
@@ -482,7 +492,13 @@ export class PlannersComponent implements OnInit {
       "value": deleted_item[0],
     }
     this.projectService.deleteGeneralTasksAPI(payload,headers,category).subscribe((result)=>{
-      console.log(result)
+      if ("warning" in result){
+        this.toastMessage.warning(result.response);
+      }
+      else{
+        this.general_tasks = result.response.active;
+        this.generalTasksChecked = result.response.deactive;
+      }
     }, (error)=>{
       if(error.status === 404){
         this.toastMessage.warning(error.error.error);
