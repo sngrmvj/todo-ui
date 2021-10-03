@@ -24,13 +24,27 @@ To do tasks is normal to do lists with extra feature of tasks getting refreshed 
 ---
 
 ### Technical Features
-- Splash screen
-- View password while typing.
-- Login as it requires to monitor the items based on the user.
+- Views
+    - Splash screen
+    - Introduction page
+    - About
+    - Login
+    - Planners
+    - Profile
+- Password
+    - Password can be viewed while typing
+    - Password strength
+    - Form validation
+- REST APIs are used.
 - Refresh Token and access token stored as http only cookies
-- Page to enter the items for the planner initially. From next time we can use api store the items.
-- Connect to Django application which stores item planners in the database.
-- Once development is done we can deploy to cloud.
+- Two sections of tasks
+    - Daily tasks
+    - General tasks
+- Personal profile view for each individual.
+    - Admins can make the users admin.
+    - Admins can view the submitted feedback.
+- Anybody can submit feedback
+
 
 ---
 
