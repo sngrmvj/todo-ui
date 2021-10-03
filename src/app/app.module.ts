@@ -13,7 +13,6 @@ import { PlannersComponent } from './planners/planners.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { ForgotpwdComponent } from './forgotpwd/forgotpwd.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -25,6 +24,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DialogComponent } from './dialog/dialog.component';
@@ -56,12 +56,12 @@ import { DialogComponent } from './dialog/dialog.component';
     MatButtonModule,
     MatCardModule,
     HttpClientModule,
+    MatPasswordStrengthModule,
     FormsModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
-    BrowserAnimationsModule,
-    MatPasswordStrengthModule.forRoot()
+    BrowserAnimationsModule
   ],
   entryComponents:[DialogComponent],
   providers: [ProjectService,DataService],

@@ -25,6 +25,13 @@
     // background-color: tomato;
 }
 
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #FF6363; /*replace with your color*/
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #f39e9e;  /*replace with your color*/
+}
+
 .create_account{
     padding: 10px;
     position: absolute;

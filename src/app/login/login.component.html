@@ -104,10 +104,19 @@
                     </div><br>
                     <div>
                         <label for="signup-password">Password <b style="color:red">*</b></label><br>
+                        <!-- <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility> -->
                         <div style="display: flex;flex-direction: row;flex-wrap: wrap;width:320px">
                             <input formControlName="password" matInput type="password" minlength="15" [type]="signUpHide ? 'password' : 'text'"  required style="width: 280px !important;" autocomplete="off">
                             <mat-icon matSuffix (click)="signUpHide = !signUpHide" style="cursor: pointer;">{{signUpHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </div><br>
+                        <div style="width:300px">
+                            <mat-slide-toggle style="font-size: 12px;color:#FF6363" (click)="showPasswordStrength()" >Show Password details</mat-slide-toggle><br><br>
+                            <mat-hint align="end" aria-live="polite">{{reactiveForm.value.password.length}} / 25</mat-hint>
+                            <mat-password-strength #passwordComponent class="green" [password]="reactiveForm.value.password"></mat-password-strength>
+                            <mat-password-strength-info *ngIf="showDetails"  [passwordComponent]="passwordComponent"> </mat-password-strength-info>
                         </div>
+
+                        <!-- <app-password-strength [passwordToCheck]="reactiveForm.value.password" [barLabel]="barLabel"></app-password-strength> -->
                     </div><br>
                     <div>
                         <label for="signup-confirm-password">Confirm Password <b style="color:red">*</b></label><br>

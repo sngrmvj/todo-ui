@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder,FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../services/project-service';
 import { Observable, throwError } from 'rxjs';
@@ -17,13 +17,21 @@ export class LoginComponent implements OnInit {
   isPasswordMatch: boolean = false;
   hide:boolean = true;
   signUpHide:boolean = true;
+  showDetails: boolean = false;
   
-  constructor(private router: Router,private toastMessage:ToastrService, private projectService: ProjectService) {
+  constructor(private fb:FormBuilder,private router: Router,private toastMessage:ToastrService, private projectService: ProjectService) {
     // This is function call.
     this.allowLogin()
   }
 
   ngOnInit(): void {
+  }
+
+  onStrengthChanged(strength: number) {
+    console.log('password strength = ', strength);
+  }
+  showPasswordStrength(){
+    this.showDetails = !this.showDetails;
   }
 
 
