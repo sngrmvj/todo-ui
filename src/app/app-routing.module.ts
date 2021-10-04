@@ -16,6 +16,10 @@ const routes: Routes = [
     component: SplashScreenComponent
   },
   {
+    path: 'splash',
+    component: SplashScreenComponent
+  },
+  {
     path: 'authwall',
     component: LoginComponent
   },

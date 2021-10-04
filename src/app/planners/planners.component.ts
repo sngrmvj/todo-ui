@@ -268,6 +268,9 @@ export class PlannersComponent implements OnInit {
           if(error.status === 404){
             this.toastMessage.warning(error.error.error);
           }
+          else if(error.status === 0){
+            console.log("Create some daily tasks");
+          }
           else{
             this.toastMessage.error(error.error.error);
           }
@@ -462,6 +465,9 @@ export class PlannersComponent implements OnInit {
         }, (error)=>{
           if(error.status === 404){
             this.toastMessage.warning(error.error.error);
+          }
+          else if(error.status === 0){
+            console.log("Create some general tasks");
           }
           else{
             this.toastMessage.error(error.error.error);
