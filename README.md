@@ -44,7 +44,12 @@ To do tasks is normal to do lists with extra feature of tasks getting refreshed 
     - Admins can make the users admin.
     - Admins can view the submitted feedback.
 - Anybody can submit feedback
-
+- Local Setup 
+  - Install node and angular
+  - `npm install`
+  - `ng serve`
+  - Note - In services/url.service.ts please provide the hostname and ports of the Authentication server and Task management server.
+        - If mentioned details are similar to yours, you can ignore this.
 
 ---
 
